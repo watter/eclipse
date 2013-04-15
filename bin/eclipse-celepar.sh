@@ -147,17 +147,7 @@ elif [ -z $ORACLE_JAVA ] && [ -z $SUN_JAVA ] ; then
 fi
 
 
-zenity --info --text "Utilizando configurações para o usuário <b> $USUARIO.</b> \n\
-Usando Máquina virtual Java - $JAVA_HOME \n\
-Usando Codificação - $ENCODING \n\
-Eclipse HOME em - $ECLIPSE_HOME \n\
-Maven em - $MVN \n\
-Servidor de Aplicação - $VERSAOJBOSS \n\
-em $JBOSS_HOME $CATALINA_HOME \n\
-Usando <b>Workspace</b> em $WORKSPACE_LOC \n"
 
-
-exit
 
 if [ -d "/usr/lib/jni/" ] ; then
         JAVA_JNI="-Djava.library.path=/usr/lib/jni"
@@ -171,6 +161,7 @@ export JAVA_JNI
 export JAVA_ENCODING_OPTS="-Dfile.encoding=${ENCODING} -Dsun.jnu.encoding=${ENCODING}"
 export JAVA_OPTS="${JAVA_ENCODING_OPTS} ${JAVA_JNI}"
 export PATH=$JAVA_HOME/bin:$PATH
+
 
 
 ## start 768 -- jaguar -- utf8 
@@ -198,4 +189,70 @@ echo MVN=$MVN
 
 
 
-$ECLIPSE_HOME/eclipse -os linux -ws gtk -vmargs -Xms768m -Xmx768m -XX:MaxPermSize=256m $JAVA_OPTS
+### Ainda a verificar as opções 
+
+#We ask GC to pause the application for no more than 10 milliseconds.
+MAXGCPAUSEMILLIS=10 
+
+# página -> http://www.oracle.com/technetwork/java/javase/tech/vmoptions-jsp-140102.html
+
+# -XX:-UseParallelGC 	Use parallel garbage collection for scavenges. 
+# -XX:+AggressiveOpts Turn on point performance compiler optimizations that are expected to be default in upcoming releases. (Introduced in 5.0 update 6.)
+# -XX:MaxHeapFreeRatio=70 	Maximum percentage of heap free after GC to avoid shrinking.
+# -XX:MaxPermSize=64m 	Size of the Permanent Generation.  [5.0 and newer: 64 bit VMs are scaled 30% larger; 1.4 amd64: 96m; 1.3.1 -client: 32m.]
+# -XX:+UseStringCache 	Enables caching of commonly allocated strings.
+# -XX:+UseCompressedStrings 	Use a byte[] for Strings which can be represented as pure ASCII. (Introduced in Java 6 Update 21 Performance Release) 
+# -XX:+OptimizeStringConcat 	Optimize String concatenation operations where possible. (Introduced in Java 6 Update 20)
+# -XX:-UseParallelGC 	Use parallel garbage collection for scavenges. 
+# -XX:+UseParNewGC - for multiprocessor machines, enables multi threaded young generation collection.
+
+NUMPROC=`cat /proc/cpuinfo | grep processor | wc -l`
+
+if [ $NUMPROC -gt 1 ]; then
+	PARGC="-XX:+UseParNewGC"
+else
+	PARGC=""
+fi
+
+JAVASUNUPDATE=`dpkg -l sun-java6-jdk | grep java6  | awk '{print $3}' | cut -f 2 -d . | cut -f 1 -d - `
+if [ $JAVASUNUPDATE -gt 20 ]; then
+ STRINGCONCAT="-XX:+OptimizeStringConcat"
+else
+ STRINGCONCAT=""
+fi
+
+
+XMS=768
+XMX=768
+MAXPERMSIZE=256
+
+echo "================================================================================"
+echo "Xms " $XMS
+echo "Xmx " $XMX
+echo "MaxPermSize " $MAXPERMSIZE
+echo "NumProc " $NUMPROC
+echo "ParGc " $PARGC
+echo "StringConcat " $STRINGCONCAT
+echo "Encoding " $ENCODING
+echo "================================================================================"
+
+VMARGS=" -Xms${XMS}m -Xmx${XMX}m -XX:MaxPermSize=${MAXPERMSIZE}m -XX:MaxGCPauseMillis=${MAXGCPAUSEMILLIS} -XX:-UseParallelGC ${PARGC} ${STRINGCONCAT} -XX:MaxHeapFreeRatio=70 -XX:CompileCommand=exclude,org/eclipse/core/internal/dtree/DataTreeNode,forwardDeltaWith -XX:CompileCommand=exclude,org/eclipse/jdt/internal/compiler/lookup/ParameterizedMethodBinding,<init> "
+
+### fim 
+
+
+zenity --info --text "Utilizando configurações para o usuário <b> $USUARIO.</b> \n\
+Usando Máquina virtual Java - $JAVA_HOME \n\
+Usando Codificação - $ENCODING \n\
+Eclipse HOME em - $ECLIPSE_HOME \n\
+Maven em - $MVN \n\
+Servidor de Aplicação - $VERSAOJBOSS \n\
+em $JBOSS_HOME $CATALINA_HOME \n\
+Usando <b>Workspace</b> em $WORKSPACE_LOC \n\
+JAVA_INI em $JAVA_INI \n
+VMARGS = $VMARGS \n
+JAVA_OPTS = $JAVA_OPTS"
+
+
+
+$ECLIPSE_HOME/eclipse -os linux -ws gtk -vmargs $VMARGS $JAVA_OPTS
