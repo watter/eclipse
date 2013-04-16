@@ -28,6 +28,35 @@ export HOME_SERVERS="/home/desenv/servers/"
 export MVN=$HOME_BIN/ferramentas/maven
 
 
+
+function escolhe_workspace() {
+	declare -a OPCOES=()
+	for i in /home/desenv/workspaces/${USUARIO,,[A-Z]}/${ENCODING,,[A-Z]}/* ; do 
+		OPCOES=("${OPCOES[@]}" "FALSE" "$i" ) ; 
+	done
+	OPCOES[0]="TRUE"
+	zenity  --list --width=600 --height=$((${#OPCOES[@]} * 30)) --text "Selecione o <b>workspace</b> a ser utilizado" --radiolist  --column "Op" --column "Workspace"  ${OPCOES[@]} >/tmp/checklist.tmp.$$ 2>&1
+
+# ${#OPCOES[@]} -- número de elementos do array
+# ${OPCOES[@]}) -- elementos do array
+
+	retval=$?
+	choice=`cat /tmp/checklist.tmp.$$`
+	rm -f /tmp/checklist.tmp.$$
+	case $retval in
+	  0)
+			eval $1=$choice
+	        return 0
+	        ;;
+	  1)
+	  	# caso seja pressionado esc, usa o workspace padrão
+			eval $1="/home/desenv/workspaces/${USUARIO,,[A-Z]}/${ENCODING,,[A-Z]}/workspace"
+	        ;;
+	esac
+	return 0;
+}
+
+
 function limpa_cache_eclipse() {
 zenity --question --text "<b>Limpar Cache Eclipse?</b>" >/tmp/checklist.tmp.$$ 2>&1
 
@@ -165,11 +194,23 @@ export SPLASH="${ECLIPSEDIR}/splash-gic.bmp"
 
 ### limpeza e verificação dos detalhes do workspace
 
-export WORKSPACE_LOC="/home/desenv/workspaces/${USUARIO,,[A-Z]}/${ENCODING,,[A-Z]}/workspace/"
+WORKSPACE_LOC="/home/desenv/workspaces/${USUARIO,,[A-Z]}/${ENCODING,,[A-Z]}/workspace/"
 # testa se existe o diretório para o workspace corretamente
 if ! [ -d $WORKSPACE_LOC ] ; then
 		mkdir -p $WORKSPACE_LOC;
 fi
+
+# verifica se existe mais de um e cria a janela de opções
+WORKS=$(ls /home/desenv/workspaces/${USUARIO,,[A-Z]}/${ENCODING,,[A-Z]}/* -ld1 | wc -l)
+if [ $WORKS -gt 1 ] ; then
+
+CHOSEN_WKS=''
+escolhe_workspace CHOSEN_WKS
+WORKSPACE_LOC=$CHOSEN_WKS
+
+fi 
+
+export WORKSPACE_LOC
 
 # remove arquivo que causa problema de mensagem em branco caso o arquivo exista
 if [ -e ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.resources/.snap ]; then
@@ -280,7 +321,7 @@ elif [ -d "/usr/lib/x86_64-linux-gnu/jni/" ] ; then
 fi
 
 export JAVA_JNI
-export JAVA_ENCODING_OPTS="-Dfile.encoding=${ENCODING} -Dsun.jnu.encoding=${ENCODING}"
+export JAVA_ENCODING_OPTS="-Dfile.encoding=${ENCODING} -Dsun.jnu.encoding=${ENCODING} -Dosgi.console.encoding=${ENCODING}"
 export JAVA_OPTS="${JAVA_ENCODING_OPTS} ${JAVA_JNI}"
 export PATH=$JAVA_HOME/bin:$PATH
 
@@ -364,17 +405,17 @@ echo "StringConcat " $STRINGCONCAT
 echo "Encoding " $ENCODING
 echo "================================================================================"
 
-zenity --info --text "Utilizando configurações para o usuário <b> $USUARIO.</b> \n\
+zenity --info --width 800 --text "Utilizando configurações para o usuário \n<b> $USUARIO.</b> \n\
 Usando Máquina virtual Java \n<b> $JAVA_HOME </b>\n\
-Usando Codificação - $ENCODING \n\
-Eclipse HOME em - $ECLIPSE_HOME \n\
-Maven em - $MVN \n\
-Servidor de Aplicação - $VERSAOJBOSS \n\
-em $JBOSS_HOME $CATALINA_HOME \n\
-Usando <b>Workspace</b> - $WORKSPACE_LOC \n\
-JAVA_JNI - $JAVA_JNI \n\
-JAVA_OPTS - $JAVA_OPTS \n\
-VMARGS - ${VMARGS/</&lt;/} \n"
+Usando Codificação \n<b> $ENCODING </b>\n\
+Eclipse HOME em \n<b> $ECLIPSE_HOME </b>\n\
+Maven em \n<b> $MVN </b>\n\
+Servidor de Aplicação \n<b> $VERSAOJBOSS </b>\n\
+<b> $JBOSS_HOME $CATALINA_HOME </b>\n\
+Usando <b>Workspace</b> \n<b> $WORKSPACE_LOC </b>\n\
+JAVA_JNI \n<b> $JAVA_JNI </b>\n\
+JAVA_OPTS \n<b> $JAVA_OPTS </b>\n\
+VMARGS \n<b> ${VMARGS/</&lt;/} </b>\n"
 
 # ${VMARGS/</&lt;/}  substitui < por &lt; por causa da marcação pango
 
@@ -394,7 +435,6 @@ $DEB exec $ECLIPSE_HOME/eclipse -os linux -ws gtk \
 ${CLEARCACHE} \
 ${CONSOLELOG} \
 -Dosgi.locking=none \
--Dosgi.console.encoding=${ENCODING} \
 -vmargs ${VMARGS} ${JAVA_OPTS}
 
 #
