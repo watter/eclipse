@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x 
+#set -x 
 
 export ECLIPSE_LATIN1="/home/desenv/bin/eclipse"
 export ECLIPSE_UTF8="/home/desenv/bin/jaguar/eclipse"
@@ -115,10 +115,10 @@ case $retval in
         return 0
         ;;
   1)
-		escolhe_codificacao
+		escolhe_codificacao $1
         ;;
   255)
-		escolhe_codificacao
+		escolhe_codificacao $1
         ;;
 esac
 return 0;
@@ -135,7 +135,7 @@ escolhe_codificacao ENCODING
 
 
 function escolhe_server(){
-zenity  --list  --text "Escolha a <b>Versão do Servidor</b> que seu projeto irá usar:" --radiolist  --column "Opção" --column "Versão" TRUE JBoss7  FALSE JBoss4.2.3 FALSE JBoss4.0.5  FALSE Tomcat >/tmp/checklist.tmp.$$ 2>&1
+zenity  --list --height=250 --text "Escolha a <b>Versão do Servidor</b> que seu projeto irá usar:" --radiolist  --column "Opção" --column "Versão" TRUE JBoss7  FALSE JBoss4.2.3 FALSE JBoss4.0.5  FALSE Tomcat >/tmp/checklist.tmp.$$ 2>&1
 
 retval=$?
 choice=`cat /tmp/checklist.tmp.$$`
@@ -146,10 +146,10 @@ case $retval in
         return 0
         ;;
   1)
-		escolhe_server
+		escolhe_server $1
         ;;
   255)
- 		escolhe_server
+ 		escolhe_server $1
         ;;
 esac
 return 0;
@@ -405,7 +405,7 @@ echo "StringConcat " $STRINGCONCAT
 echo "Encoding " $ENCODING
 echo "================================================================================"
 
-zenity --info --width 800 --text "Utilizando configurações para o usuário \n<b> $USUARIO.</b> \n\
+zenity --info --width 800  --timeout=3 --text "Utilizando configurações para o usuário \n<b> $USUARIO.</b> \n\
 Usando Máquina virtual Java \n<b> $JAVA_HOME </b>\n\
 Usando Codificação \n<b> $ENCODING </b>\n\
 Eclipse HOME em \n<b> $ECLIPSE_HOME </b>\n\
@@ -415,7 +415,7 @@ Servidor de Aplicação \n<b> $VERSAOJBOSS </b>\n\
 Usando <b>Workspace</b> \n<b> $WORKSPACE_LOC </b>\n\
 JAVA_JNI \n<b> $JAVA_JNI </b>\n\
 JAVA_OPTS \n<b> $JAVA_OPTS </b>\n\
-VMARGS \n<b> ${VMARGS/</&lt;/} </b>\n"
+VMARGS \n<b> ${VMARGS/</&lt;/} </b>"
 
 # ${VMARGS/</&lt;/}  substitui < por &lt; por causa da marcação pango
 
