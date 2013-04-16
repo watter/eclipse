@@ -10,25 +10,28 @@ export HOME_SERVERS="/home/desenv/servers"
 # independente da seleção de eclipse, iremos utilizar o maven dentro de $HOME_BIN/ferramentas/maven (3.0)
 export MVN=$HOME_BIN/ferramentas/maven
 
-#leslie@ecelepar16853:~$ echo $A
-#WORKA
-#leslie@ecelepar16853:~$ echo ${A,,[A-Z]}
-#worka
-
 export DIALOG=/usr/bin/zenity
 export USUARIO=$USER
 
 export ECLIPSE_LATIN1="/home/desenv/bin/eclipse"
 export ECLIPSE_UTF8="/home/desenv/bin/jaguar/eclipse"
 
-export HOME_BIN="/home/desenv/bin/"
-export HOME_SERVERS="/home/desenv/servers/"
+export PLC_WORKSPACE="/home/desenv/bin/jaguar/workspace"
 
-# independente da seleção de eclipse, iremos utilizar o maven dentro de $HOME_BIN/ferramentas/maven (3.0)
-export MVN=$HOME_BIN/ferramentas/maven
+export JAGUAR_HOME="/home/desenv/bin/jaguar"
+export PLC_HOME=$JAGUAR_HOME
+export HOME_PLC=$JAGUAR_HOME
+export PLC_MEUS_PROJETOS=$PLC_HOME/meus_projetos
+export MEUS_PROJETOS=$PLC_HOME/meus_projetos
+export PLC_JARS_COMPILE=$PLC_MEUS_PROJETOS/jcompany_apoio/compile
+export JMETER_HOME=$HOME_PLC/jcompanyqa/jakarta-jmeter
+export JCP_JBOSS_HOME=$HOME_SERVERS/jboss
+export JCP_JBOSS5_HOME=$HOME_SERVERS/jboss5
 
 
-
+#
+# essa função monta uma lista de radiobutton conforme os workspaces presentes dentro da estrutura workspaces/USUARIO/CODIFICACAO/
+#
 function escolhe_workspace() {
 	declare -a OPCOES=()
 	for i in /home/desenv/workspaces/${USUARIO,,[A-Z]}/${ENCODING,,[A-Z]}/* ; do 
@@ -57,6 +60,9 @@ function escolhe_workspace() {
 }
 
 
+#
+# Atribui o -clean para ser usado na linha de cache do eclipse - Sim == limpa - Esc == não
+#
 function limpa_cache_eclipse() {
 zenity --question --text "<b>Limpar Cache Eclipse?</b>" >/tmp/checklist.tmp.$$ 2>&1
 
@@ -79,7 +85,9 @@ return 0;
 CLEARCACHE=''
 limpa_cache_eclipse CLEARCACHE
 
-
+#
+# Atribui o -consolelog na linha de comando do eclipse
+#
 function log_console_eclipse() {
 zenity --question --text "<b>Habilitar log no Console?</b>" >/tmp/checklist.tmp.$$ 2>&1
 
@@ -103,6 +111,14 @@ CONSOLELOG=''
 log_console_eclipse CONSOLELOG
 
 
+# Uso da função
+# leslieh@ecelepar14743:/home/desenv$ COD=''
+# leslieh@ecelepar14743:/home/desenv$ escolhe_codificacao COD
+# leslieh@ecelepar14743:/home/desenv$ echo $COD
+# UTF-8
+#
+# lista de escolha de codificação - obrigatória a escolha de um item
+#
 function escolhe_codificacao() {
 zenity  --list  --text "Qual a <b>Codificação de Caracteres</b> que seu projeto irá usar/usa?" --radiolist  --column "Opção" --column "Codificação" TRUE "UTF-8"  FALSE "ISO-8859-1" >/tmp/checklist.tmp.$$ 2>&1
 
@@ -124,16 +140,13 @@ esac
 return 0;
 }
 
-# Uso da função
-# leslieh@ecelepar14743:/home/desenv$ COD=''
-# leslieh@ecelepar14743:/home/desenv$ escolhe_codificacao COD
-# leslieh@ecelepar14743:/home/desenv$ echo $COD
-# UTF-8
 
 ENCODING=''
 escolhe_codificacao ENCODING
 
-
+#
+# Escolha de servidor -- escolhe entre os servidores disponíveis - obrigatória escolha
+#
 function escolhe_server(){
 zenity  --list --height=250 --text "Escolha a <b>Versão do Servidor</b> que seu projeto irá usar:" --radiolist  --column "Opção" --column "Versão" TRUE JBoss7  FALSE JBoss4.2.3 FALSE JBoss4.0.5  FALSE Tomcat >/tmp/checklist.tmp.$$ 2>&1
 
@@ -195,21 +208,26 @@ export SPLASH="${ECLIPSEDIR}/splash-gic.bmp"
 ### limpeza e verificação dos detalhes do workspace
 
 WORKSPACE_LOC="/home/desenv/workspaces/${USUARIO,,[A-Z]}/${ENCODING,,[A-Z]}/workspace/"
+WORKSPACE_DATA=""
+
 # testa se existe o diretório para o workspace corretamente
 if ! [ -d $WORKSPACE_LOC ] ; then
+	if [ "${ENCODING}"x == "UTF-8"x ]; then
+		WORKSPACE_DATA="-data ${WORKSPACE_LOC}"
+		# informa o usuário que está "preparando a cópia inicial do workspace"
+		cp -rv $PLC_WORKSPACE $WORKSPACE_LOC  | tee > (zenity --progress --pulsate --no-cancel --text "Preparando versão inicial do workspace"  --timeout 1) >/dev/null
+	elif [ "${ENCODING}"x == "ISO-8859-1"x]; then
 		mkdir -p $WORKSPACE_LOC;
+	fi	
 fi
 
 # verifica se existe mais de um e cria a janela de opções
 WORKS=$(ls /home/desenv/workspaces/${USUARIO,,[A-Z]}/${ENCODING,,[A-Z]}/* -ld1 | wc -l)
 if [ $WORKS -gt 1 ] ; then
-
-CHOSEN_WKS=''
-escolhe_workspace CHOSEN_WKS
-WORKSPACE_LOC=$CHOSEN_WKS
-
+	CHOSEN_WKS=''
+	escolhe_workspace CHOSEN_WKS
+	WORKSPACE_LOC=$CHOSEN_WKS
 fi 
-
 export WORKSPACE_LOC
 
 # remove arquivo que causa problema de mensagem em branco caso o arquivo exista
@@ -221,11 +239,9 @@ fi
 sed "s@RECENT_WORKSPACES=.*@RECENT_WORKSPACES=${WORKSPACE_LOC}@" -i ${ECLIPSEDIR}/configuration/.settings/org.eclipse.ui.ide.prefs
 
 
-export JAGUAR_HOME="/home/desenv/bin/jaguar"
-export PLC_HOME=$JAGUAR_HOME
-
-
+#
 # Configuração da máquina virtual java a ser utilizada 
+#
 
 ORACLE_JAVA=""
 SUN_JAVA=""
@@ -251,26 +267,6 @@ if [ -n "${JAVA_HOME}" ]; then
         fi
 fi
 
-## If the user has not set JAVA_HOME, cycle through our list of compatible VM's
-## and pick the first one that exists.
-#if [ -z "${JAVA_HOME}" -a ! -n "${JAVACMD}" ]; then
-#        echo "searching for compatible vm..."
-#        javahomelist=`cat /etc/eclipse/java_home | grep -v '^#' | grep -v '^$' | while read line ; do echo -n $line ; echo -n ":" ; done`
-#        OFS="$IFS"
-#        IFS=":"
-#        for JAVA_HOME in $javahomelist ; do
-#                echo -n " testing ${JAVA_HOME}..."
-#                if [ -x "${JAVA_HOME}/bin/java" ]; then
-#                        export JAVA_HOME
-#                        echo "found"
-#                        break
-#                else
-#                        echo "not found"
-#                fi
-#        done
-#        IFS="$OFS"
-#fi
-
 # If we don't have a JAVA_HOME yet, we're doomed.
 if [ -z "${JAVA_HOME}" -a ! -n "${JAVACMD}" ]; then
         $DIALOG \
@@ -284,31 +280,6 @@ fi
 if [ -n "${JAVA_HOME}" -a -z "${JAVACMD}" ]; then
         JAVACMD="$JAVA_HOME/bin/java"
 fi
-
-# Set path for the Mozilla SWT binding
-MOZILLA_FIVE_HOME=${MOZILLA_FIVE_HOME%*/}
-if false && [ -n "$MOZILLA_FIVE_HOME" -a -e $MOZILLA_FIVE_HOME/libgtkembedmoz.so ]; then
-        :
-elif [ -e /usr/lib/firefox/libgtkembedmoz.so ]; then
-        export MOZILLA_FIVE_HOME=/usr/lib/firefox
-elif [ -e /usr/lib/firefox/libgtkembedmoz.so ]; then
-        export MOZILLA_FIVE_HOME=/usr/lib/firefox
-elif [ -e /usr/lib/xulrunner/libgtkembedmoz.so ]; then
-        export MOZILLA_FIVE_HOME=/usr/lib/xulrunner
-elif [ -e /usr/lib/mozilla-firefox/libgtkembedmoz.so ]; then
-        export MOZILLA_FIVE_HOME=/usr/lib/mozilla-firefox
-elif [ -e /usr/lib/mozilla/libgtkembedmoz.so ]; then
-        export MOZILLA_FIVE_HOME=/usr/lib/mozilla
-else
-        $DIALOG \
-				--error \
-                --title="Integrated browser support not working" \
-                --text="This Eclipse build doesn't have support for the integrated browser."
-        [ $? -eq 0 ] || exit 1
-fi
-
-# libraries from the mozilla choosen take precedence
-LD_LIBRARY_PATH=$MOZILLA_FIVE_HOME${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
 
 
 if [ -d "/usr/lib/jni/" ] ; then
@@ -326,32 +297,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 
 
-## start 768 -- jaguar -- utf8 
 
-
-export HOME_PLC=$JAGUAR_HOME
-export PLC_MEUS_PROJETOS=$PLC_HOME/meus_projetos
-export MEUS_PROJETOS=$PLC_HOME/meus_projetos
-export PLC_JARS_COMPILE=$PLC_MEUS_PROJETOS/jcompany_apoio/compile
-export JMETER_HOME=$HOME_PLC/jcompanyqa/jakarta-jmeter
-
-
-
-export JCP_JBOSS_HOME=$HOME_SERVERS/jboss
-export JCP_JBOSS5_HOME=$HOME_SERVERS/jboss5
-
-
-echo JAVA_HOME=$JAVA_HOME
-echo PLC_HOME=$PLC_HOME
-echo PLC_MEUS_PROJETOS=$PLC_MEUS_PROJETOS
-echo MEUS_PROJETOS=$MEUS_PROJETOS
-echo CATALINA_HOME=$CATALINA_HOME
-echo ECLIPSE_HOME=$ECLIPSE_HOME
-echo MVN=$MVN
-
-
-
-### Ainda a verificar as opções 
 
 #We ask GC to pause the application for no more than 10 milliseconds.
 MAXGCPAUSEMILLIS=10 
@@ -392,8 +338,6 @@ MAXPERMSIZE=256
 
 VMARGS=" -Xms${XMS}m -Xmx${XMX}m -XX:MaxPermSize=${MAXPERMSIZE}m -XX:MaxGCPauseMillis=${MAXGCPAUSEMILLIS} -XX:-UseParallelGC ${PARGC} ${STRINGCONCAT} -XX:MaxHeapFreeRatio=70 -XX:CompileCommand=exclude,org/eclipse/core/internal/dtree/DataTreeNode,forwardDeltaWith -XX:CompileCommand=exclude,org/eclipse/jdt/internal/compiler/lookup/ParameterizedMethodBinding,<init> "
 
-### fim 
-
 echo "================================================================================"
 echo "Xms " $XMS
 echo "Xmx " $XMX
@@ -402,6 +346,13 @@ echo "NumProc " $NUMPROC
 echo "ParGc " $PARGC
 echo "StringConcat " $STRINGCONCAT
 echo "Encoding " $ENCODING
+echo JAVA_HOME=$JAVA_HOME
+echo PLC_HOME=$PLC_HOME
+echo PLC_MEUS_PROJETOS=$PLC_MEUS_PROJETOS
+echo MEUS_PROJETOS=$MEUS_PROJETOS
+echo CATALINA_HOME=$CATALINA_HOME
+echo ECLIPSE_HOME=$ECLIPSE_HOME
+echo MVN=$MVN
 echo "================================================================================"
 
 zenity --info --width 800  --timeout=3 --text "Utilizando configurações para o usuário \n<b> $USUARIO.</b> \n\
@@ -419,12 +370,8 @@ VMARGS \n<b> ${VMARGS/</&lt;/} </b>"
 # ${VMARGS/</&lt;/}  substitui < por &lt; por causa da marcação pango
 
 
-# $ECLIPSE_HOME/eclipse -os linux -ws gtk -vmargs $VMARGS $JAVA_OPTS
-
-
-
 DEB="echo"
-#DEB=""
+DEB=""
 
 # Do the actual launch of Eclipse with the selected VM.
 $DEB exec $ECLIPSE_HOME/eclipse -os linux -ws gtk \
@@ -433,6 +380,7 @@ $DEB exec $ECLIPSE_HOME/eclipse -os linux -ws gtk \
 -showSplash "${SPLASH}" \
 ${CLEARCACHE} \
 ${CONSOLELOG} \
+${WORKSPACE_DATA}\
 -Dosgi.locking=none \
 -vmargs ${VMARGS} ${JAVA_OPTS}
 
@@ -498,3 +446,7 @@ ${CONSOLELOG} \
 #    a comma separated list of URLs to search for a file called splash.bmp. This
 #    property is overriden by any value set in osgi.splashLocation.
 
+#leslie@ecelepar16853:~$ echo $A
+#WORKA
+#leslie@ecelepar16853:~$ echo ${A,,[A-Z]}
+#worka
