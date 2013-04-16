@@ -242,7 +242,6 @@ fi
 # If the user has specified a custom JAVA, we check it for validity.
 # JAVA defines the virtual machine that Eclipse will use to launch itself.
 if [ -n "${JAVA_HOME}" ]; then
-        echo "using specified vm: ${JAVA_HOME}"
         if [ ! -x "${JAVA_HOME}/bin/java" ]; then
                 $DIALOG \
                         --error \
