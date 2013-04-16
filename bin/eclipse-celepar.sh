@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x 
+
 export ECLIPSE_LATIN1="/home/desenv/bin/eclipse"
 export ECLIPSE_UTF8="/home/desenv/bin/jaguar/eclipse"
 export HOME_BIN="/home/desenv/bin"
@@ -13,13 +15,63 @@ export MVN=$HOME_BIN/ferramentas/maven
 #leslie@ecelepar16853:~$ echo ${A,,[A-Z]}
 #worka
 
+export DIALOG=/usr/bin/zenity
+export USUARIO=$USER
+
 export ECLIPSE_LATIN1="/home/desenv/bin/eclipse"
 export ECLIPSE_UTF8="/home/desenv/bin/jaguar/eclipse"
-export HOME_BIN="/home/desenv/bin"
-export HOME_SERVERS="/home/desenv/servers"
+
+export HOME_BIN="/home/desenv/bin/"
+export HOME_SERVERS="/home/desenv/servers/"
 
 # independente da seleção de eclipse, iremos utilizar o maven dentro de $HOME_BIN/ferramentas/maven (3.0)
 export MVN=$HOME_BIN/ferramentas/maven
+
+
+function limpa_cache_eclipse() {
+zenity --question --text "<b>Limpar Cache Eclipse?</b>" >/tmp/checklist.tmp.$$ 2>&1
+
+retval=$?
+choice=`cat /tmp/checklist.tmp.$$`
+rm -f /tmp/checklist.tmp.$$
+case $retval in
+  0)
+		# sim 
+		eval $1="-clean"
+        ;;
+  1)
+		# não
+		eval $1=""
+        ;;
+esac
+return 0;
+}
+
+CLEARCACHE=''
+limpa_cache_eclipse CLEARCACHE
+
+
+function log_console_eclipse() {
+zenity --question --text "<b>Habilitar log no Console?</b>" >/tmp/checklist.tmp.$$ 2>&1
+
+retval=$?
+choice=`cat /tmp/checklist.tmp.$$`
+rm -f /tmp/checklist.tmp.$$
+case $retval in
+  0)
+        # sim
+        eval $1="-consolelog"
+        ;;
+  1)
+        # não
+        eval $1=""
+        ;;
+esac
+return 0;
+}
+
+CONSOLELOG=''
+log_console_eclipse CONSOLELOG
 
 
 function escolhe_codificacao() {
@@ -104,9 +156,11 @@ export ECLIPSEDIR
 # após selecionado o eclipse correto, atribua o eclipse_home ao diretorio
 export ECLIPSE_HOME=$ECLIPSEDIR
 
+# opções que serão usadas na inicialização do eclipse
 
-USUARIO=$USER
-
+export INSTALL="${ECLIPSEDIR}/"
+export STARTUP="${ECLIPSEDIR}/"
+export SPLASH="${ECLIPSEDIR}/splash-gic.bmp"
 
 
 ### limpeza e verificação dos detalhes do workspace
@@ -124,8 +178,6 @@ fi
 
 # troca o workspace recente pela sugestão do workspace com o nome do usuário
 sed "s@RECENT_WORKSPACES=.*@RECENT_WORKSPACES=${WORKSPACE_LOC}@" -i ${ECLIPSEDIR}/configuration/.settings/org.eclipse.ui.ide.prefs
-
-
 
 
 export JAGUAR_HOME="/home/desenv/bin/jaguar"
@@ -146,7 +198,77 @@ elif [ -z $ORACLE_JAVA ] && [ -z $SUN_JAVA ] ; then
         export JAVA_HOME=$PLC_HOME/java
 fi
 
+# If the user has specified a custom JAVA, we check it for validity.
+# JAVA defines the virtual machine that Eclipse will use to launch itself.
+if [ -n "${JAVA_HOME}" ]; then
+        echo "using specified vm: ${JAVA_HOME}"
+        if [ ! -x "${JAVA_HOME}/bin/java" ]; then
+                $DIALOG \
+                        --error \
+                        --title="Could not launch Eclipse Platform" \
+                        --text="The custom VM you have chosen is not a valid executable."
+                exit 1
+        fi
+fi
 
+## If the user has not set JAVA_HOME, cycle through our list of compatible VM's
+## and pick the first one that exists.
+#if [ -z "${JAVA_HOME}" -a ! -n "${JAVACMD}" ]; then
+#        echo "searching for compatible vm..."
+#        javahomelist=`cat /etc/eclipse/java_home | grep -v '^#' | grep -v '^$' | while read line ; do echo -n $line ; echo -n ":" ; done`
+#        OFS="$IFS"
+#        IFS=":"
+#        for JAVA_HOME in $javahomelist ; do
+#                echo -n " testing ${JAVA_HOME}..."
+#                if [ -x "${JAVA_HOME}/bin/java" ]; then
+#                        export JAVA_HOME
+#                        echo "found"
+#                        break
+#                else
+#                        echo "not found"
+#                fi
+#        done
+#        IFS="$OFS"
+#fi
+
+# If we don't have a JAVA_HOME yet, we're doomed.
+if [ -z "${JAVA_HOME}" -a ! -n "${JAVACMD}" ]; then
+        $DIALOG \
+                --error \
+                --title="Could not launch Eclipse Platform" \
+                --text="A suitable Java Virtual Machine for running the Eclipse Platform could not be located."
+        exit 1
+fi
+
+# Set JAVACMD from JAVA_HOME
+if [ -n "${JAVA_HOME}" -a -z "${JAVACMD}" ]; then
+        JAVACMD="$JAVA_HOME/bin/java"
+fi
+
+# Set path for the Mozilla SWT binding
+MOZILLA_FIVE_HOME=${MOZILLA_FIVE_HOME%*/}
+if false && [ -n "$MOZILLA_FIVE_HOME" -a -e $MOZILLA_FIVE_HOME/libgtkembedmoz.so ]; then
+        :
+elif [ -e /usr/lib/firefox/libgtkembedmoz.so ]; then
+        export MOZILLA_FIVE_HOME=/usr/lib/firefox
+elif [ -e /usr/lib/firefox/libgtkembedmoz.so ]; then
+        export MOZILLA_FIVE_HOME=/usr/lib/firefox
+elif [ -e /usr/lib/xulrunner/libgtkembedmoz.so ]; then
+        export MOZILLA_FIVE_HOME=/usr/lib/xulrunner
+elif [ -e /usr/lib/mozilla-firefox/libgtkembedmoz.so ]; then
+        export MOZILLA_FIVE_HOME=/usr/lib/mozilla-firefox
+elif [ -e /usr/lib/mozilla/libgtkembedmoz.so ]; then
+        export MOZILLA_FIVE_HOME=/usr/lib/mozilla
+else
+        $DIALOG \
+				--error \
+                --title="Integrated browser support not working" \
+                --text="This Eclipse build doesn't have support for the integrated browser."
+        [ $? -eq 0 ] || exit 1
+fi
+
+# libraries from the mozilla choosen take precedence
+LD_LIBRARY_PATH=$MOZILLA_FIVE_HOME${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
 
 
 if [ -d "/usr/lib/jni/" ] ; then
@@ -214,17 +336,23 @@ else
 	PARGC=""
 fi
 
-JAVASUNUPDATE=`dpkg -l sun-java6-jdk | grep java6  | awk '{print $3}' | cut -f 2 -d . | cut -f 1 -d - `
-if [ $JAVASUNUPDATE -gt 20 ]; then
+# independente do jdk instalado ser sun ou oracle, os nomes são sun-java6-jdk | oracle-java6-jdk
+
+JAVAUPDATE=$(dpkg -l *java6-jdk | grep ^ii |  grep java6  | awk '{print $3}' | cut -f 2 -d . | cut -f 1 -d -)
+if [ $JAVAUPDATE -gt 20 ]; then
  STRINGCONCAT="-XX:+OptimizeStringConcat"
 else
  STRINGCONCAT=""
 fi
 
-
 XMS=768
 XMX=768
 MAXPERMSIZE=256
+
+
+VMARGS=" -Xms${XMS}m -Xmx${XMX}m -XX:MaxPermSize=${MAXPERMSIZE}m -XX:MaxGCPauseMillis=${MAXGCPAUSEMILLIS} -XX:-UseParallelGC ${PARGC} ${STRINGCONCAT} -XX:MaxHeapFreeRatio=70 -XX:CompileCommand=exclude,org/eclipse/core/internal/dtree/DataTreeNode,forwardDeltaWith -XX:CompileCommand=exclude,org/eclipse/jdt/internal/compiler/lookup/ParameterizedMethodBinding,<init> "
+
+### fim 
 
 echo "================================================================================"
 echo "Xms " $XMS
@@ -236,23 +364,98 @@ echo "StringConcat " $STRINGCONCAT
 echo "Encoding " $ENCODING
 echo "================================================================================"
 
-VMARGS=" -Xms${XMS}m -Xmx${XMX}m -XX:MaxPermSize=${MAXPERMSIZE}m -XX:MaxGCPauseMillis=${MAXGCPAUSEMILLIS} -XX:-UseParallelGC ${PARGC} ${STRINGCONCAT} -XX:MaxHeapFreeRatio=70 -XX:CompileCommand=exclude,org/eclipse/core/internal/dtree/DataTreeNode,forwardDeltaWith -XX:CompileCommand=exclude,org/eclipse/jdt/internal/compiler/lookup/ParameterizedMethodBinding,<init> "
-
-### fim 
-
-
 zenity --info --text "Utilizando configurações para o usuário <b> $USUARIO.</b> \n\
-Usando Máquina virtual Java - $JAVA_HOME \n\
+Usando Máquina virtual Java \n<b> $JAVA_HOME </b>\n\
 Usando Codificação - $ENCODING \n\
 Eclipse HOME em - $ECLIPSE_HOME \n\
 Maven em - $MVN \n\
 Servidor de Aplicação - $VERSAOJBOSS \n\
 em $JBOSS_HOME $CATALINA_HOME \n\
-Usando <b>Workspace</b> em $WORKSPACE_LOC \n\
-JAVA_INI em $JAVA_INI \n
-VMARGS = $VMARGS \n
-JAVA_OPTS = $JAVA_OPTS"
+Usando <b>Workspace</b> - $WORKSPACE_LOC \n\
+JAVA_JNI - $JAVA_JNI \n\
+JAVA_OPTS - $JAVA_OPTS \n\
+VMARGS - ${VMARGS/</&lt;/} \n"
+
+# ${VMARGS/</&lt;/}  substitui < por &lt; por causa da marcação pango
+
+
+# $ECLIPSE_HOME/eclipse -os linux -ws gtk -vmargs $VMARGS $JAVA_OPTS
 
 
 
-$ECLIPSE_HOME/eclipse -os linux -ws gtk -vmargs $VMARGS $JAVA_OPTS
+DEB="echo"
+#DEB=""
+
+# Do the actual launch of Eclipse with the selected VM.
+$DEB exec $ECLIPSE_HOME/eclipse -os linux -ws gtk \
+-vm "${JAVACMD}" \
+-install "${INSTALL}" \
+-showSplash "${SPLASH}" \
+${CLEARCACHE} \
+${CONSOLELOG} \
+-Dosgi.locking=none \
+-Dosgi.console.encoding=${ENCODING} \
+-vmargs ${VMARGS} ${JAVA_OPTS}
+
+#
+# configurações para o runtime
+# http://help.eclipse.org/helios/index.jsp?topic=/org.eclipse.platform.doc.isv/reference/misc/runtime-options.html
+
+
+# opções úteis
+
+# -clean
+# -consolelog
+# -showSplash <bitmap>
+# -user $HOME
+# -vm <path to java vm>
+# -ws gtk
+# -vmargs [ ]
+
+# use -DpropName=propValue as a VM argument to the Java VM
+# eclipse.log.level
+#    sets the level used when logging messages to the eclipse log.
+#
+#        * ERROR - enables logging only ERROR messages.
+#        * WARNING - enables logging of ERROR and WARNING messages.
+#        * INFO - enables logging of ERROR, WARNING and INFO messages.
+#        * ALL - enables logging of all messages (default value)
+
+# osgi.console.encoding
+#    if set then the specified value is used as the encoding for the console
+#    (see osgi.console). If not set then the value of the file.encoding property
+#    is used. If file.encoding is not set then iso8859-1 is used as the default.
+
+# osgi.install.area {-install}
+#    the install location of the platform. This
+#    setting indicates the location of the basic Eclipse plug-ins and is useful
+#    if the Eclipse install is disjoint. See the section on locations for more
+#    details.
+
+# Install (-install) {osgi.install.area} [@user.home, @user.dir, filepath, url]
+
+#    An install location is where Eclipse itself is installed. In practice this
+#    location is the directory (typically "eclipse") which is the parent of the
+#    eclipse.exe being run or the plugins directory containing the
+#    org.eclipse.equinox.launcher bundle. This location should be considered
+#    read-only to normal users as an install may be shared by many users. It is
+#    possible to set the install location and decouple eclipse.exe from the rest
+#    of Eclipse.
+
+# osgi.instance.area {-data}
+#    the instance data location for this
+#    session. Plug-ins use this location to store their data. For example, the
+#    Resources plug-in uses this as the default location for projects (aka the
+#    workspace). See the section on locations for more details.
+
+# osgi.requiredJavaVersion
+#    The minimum java version that is required to launch Eclipse. The default value is "1.4.1".
+
+# osgi.splashLocation
+#    the absolute URL location of the splash screen (.bmp file) to to show while
+#    starting Eclipse. This property overrides any value set in osgi.splashPath.
+
+# osgi.splashPath
+#    a comma separated list of URLs to search for a file called splash.bmp. This
+#    property is overriden by any value set in osgi.splashLocation.
+
