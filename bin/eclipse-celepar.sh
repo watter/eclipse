@@ -225,7 +225,7 @@ if ! [ -d $WORKSPACE_LOC ] ; then
 		cp -rv $PLC_WORKSPACE $WORKSPACE_LOC  | tee >(zenity --progress --pulsate --no-cancel --text "Preparando versão inicial do workspace"  --timeout 1) >/dev/null
 #		WORKSPACE_LOC="/home/desenv/bin/jaguar/workspace/"
 		WORKSPACE_DATA="-data ${WORKSPACE_LOC}"
-	elif [ "${ENCODING}"x == "ISO-8859-1"x]; then
+	elif [ "${ENCODING}"x == "ISO-8859-1"x ]; then
 		mkdir -p $WORKSPACE_LOC;
 	fi	
 fi
@@ -345,7 +345,7 @@ XMX=768
 MAXPERMSIZE=256
 
 
-VMARGS=" -Xms${XMS}m -Xmx${XMX}m -XX:MaxPermSize=${MAXPERMSIZE}m -XX:MaxGCPauseMillis=${MAXGCPAUSEMILLIS} -XX:-UseParallelGC ${PARGC} ${STRINGCONCAT} -XX:MaxHeapFreeRatio=70 -XX:CompileCommand=exclude,org/eclipse/core/internal/dtree/DataTreeNode,forwardDeltaWith -XX:CompileCommand=exclude,org/eclipse/jdt/internal/compiler/lookup/ParameterizedMethodBinding,<init> "
+VMARGS=" -Xms${XMS}m -Xmx${XMX}m -XX:MaxPermSize=${MAXPERMSIZE}m -XX:MaxGCPauseMillis=${MAXGCPAUSEMILLIS} -XX:-UseParallelGC ${PARGC} ${STRINGCONCAT} -XX:MaxHeapFreeRatio=70 -XX:CompileCommand=exclude,org/eclipse/core/internal/dtree/DataTreeNode,forwardDeltaWith -XX:CompileCommand=exclude,org/eclipse/jdt/internal/compiler/lookup/ParameterizedMethodBinding,<init> -Dosgi.locking=none " 
 
 echo "================================================================================"
 echo "Xms " $XMS
@@ -391,11 +391,10 @@ $DEB exec $ECLIPSE_HOME/eclipse -os linux -ws gtk \
 ${CLEARCACHE} \
 ${CONSOLELOG} \
 ${WORKSPACE_DATA}\
--Dosgi.locking=none \
 -vmargs ${VMARGS} ${JAVA_OPTS}
 
-#-install "${INSTALL}" \
 #
+#-Dosgi.locking=none \
 # configurações para o runtime
 # http://help.eclipse.org/helios/index.jsp?topic=/org.eclipse.platform.doc.isv/reference/misc/runtime-options.html
 
