@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Nota:
+# Para mover o repositorio do jaguar para o /home/desenv/repositorio usei
+# home/desenv$ grep -lri '/desenv/jaguar/repositorio' * | xargs -I{} -L1  sed "s@/desenv/jaguar/repositorio/@/desenv/repositorio/@g" -i {}
+#
+
 #set -x 
 
 export ECLIPSE_LATIN1="/home/desenv/bin/eclipse"
@@ -180,8 +185,10 @@ elif [ "$VERSAOJBOSS"x == "JBoss4.2.3"x  ] ; then
 elif [ "$VERSAOJBOSS"x == "JBoss4.0.5"x  ] ; then 
 	JBOSS_HOME="${HOME_SERVERS}/jboss4.0.5"
 elif [ "$VERSAOJBOSS"x == "Tomcat"x  ] ; then 
-	export CATALINA_HOME=$HOME_SERVERS/tomcat
+	CATALINA_HOME=$HOME_SERVERS/tomcat
 fi
+
+export CATALINA_HOME=$HOME_SERVERS/tomcat
 
 if [ -n $JBOSS_HOME ] ; then  # -n = true if non-zero
 	export JBOSS_HOME
@@ -201,7 +208,6 @@ export ECLIPSE_HOME=$ECLIPSEDIR
 # opções que serão usadas na inicialização do eclipse
 
 export INSTALL="${ECLIPSEDIR}/"
-export STARTUP="${ECLIPSEDIR}/"
 export SPLASH="${ECLIPSEDIR}/splash-gic.bmp"
 
 
@@ -213,9 +219,12 @@ WORKSPACE_DATA=""
 # testa se existe o diretório para o workspace corretamente
 if ! [ -d $WORKSPACE_LOC ] ; then
 	if [ "${ENCODING}"x == "UTF-8"x ]; then
-		WORKSPACE_DATA="-data ${WORKSPACE_LOC}"
+		# cria a estrutura anterior parcial
+		mkdir -p ${WORKSPACE_LOC%/workspace/};
 		# informa o usuário que está "preparando a cópia inicial do workspace"
-		cp -rv $PLC_WORKSPACE $WORKSPACE_LOC  | tee > (zenity --progress --pulsate --no-cancel --text "Preparando versão inicial do workspace"  --timeout 1) >/dev/null
+		cp -rv $PLC_WORKSPACE $WORKSPACE_LOC  | tee >(zenity --progress --pulsate --no-cancel --text "Preparando versão inicial do workspace"  --timeout 1) >/dev/null
+#		WORKSPACE_LOC="/home/desenv/bin/jaguar/workspace/"
+		WORKSPACE_DATA="-data ${WORKSPACE_LOC}"
 	elif [ "${ENCODING}"x == "ISO-8859-1"x]; then
 		mkdir -p $WORKSPACE_LOC;
 	fi	
@@ -351,6 +360,8 @@ echo PLC_HOME=$PLC_HOME
 echo PLC_MEUS_PROJETOS=$PLC_MEUS_PROJETOS
 echo MEUS_PROJETOS=$MEUS_PROJETOS
 echo CATALINA_HOME=$CATALINA_HOME
+echo INSTALL=$INSTALL
+echo WORKSPACE_DATA=$WORKSPACE_DATA
 echo ECLIPSE_HOME=$ECLIPSE_HOME
 echo MVN=$MVN
 echo "================================================================================"
@@ -376,7 +387,6 @@ DEB=""
 # Do the actual launch of Eclipse with the selected VM.
 $DEB exec $ECLIPSE_HOME/eclipse -os linux -ws gtk \
 -vm "${JAVACMD}" \
--install "${INSTALL}" \
 -showSplash "${SPLASH}" \
 ${CLEARCACHE} \
 ${CONSOLELOG} \
@@ -384,6 +394,7 @@ ${WORKSPACE_DATA}\
 -Dosgi.locking=none \
 -vmargs ${VMARGS} ${JAVA_OPTS}
 
+#-install "${INSTALL}" \
 #
 # configurações para o runtime
 # http://help.eclipse.org/helios/index.jsp?topic=/org.eclipse.platform.doc.isv/reference/misc/runtime-options.html
