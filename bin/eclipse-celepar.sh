@@ -33,6 +33,7 @@ export JMETER_HOME=$HOME_PLC/jcompanyqa/jakarta-jmeter
 export JCP_JBOSS_HOME=$HOME_SERVERS/jboss
 export JCP_JBOSS5_HOME=$HOME_SERVERS/jboss5
 
+export CONFIGFILE="/home/desenv/workspaces/$USUARIO/.eclipse-celepar-config"
 
 #
 # essa função monta uma lista de radiobutton conforme os workspaces presentes dentro da estrutura workspaces/USUARIO/CODIFICACAO/
@@ -87,9 +88,6 @@ esac
 return 0;
 }
 
-CLEARCACHE=''
-limpa_cache_eclipse CLEARCACHE
-
 #
 # Atribui o -consolelog na linha de comando do eclipse
 #
@@ -112,9 +110,27 @@ esac
 return 0;
 }
 
-CONSOLELOG=''
-log_console_eclipse CONSOLELOG
+#
+# Pergunta se armazena configuração - Sim == SIM - Esc == não
+#
+function carrega_salva_configuracoes() {
+zenity --question --text "<b>$1 configurações?</b>" >/tmp/checklist.tmp.$$ 2>&1
 
+retval=$?
+choice=`cat /tmp/checklist.tmp.$$`
+rm -f /tmp/checklist.tmp.$$
+case $retval in
+  0)
+		# sim 
+		eval $2="SIM"
+        ;;
+  1)
+		# não
+		eval $2="NAO"
+        ;;
+esac
+return 0;
+}
 
 # Uso da função
 # leslieh@ecelepar14743:/home/desenv$ COD=''
@@ -146,9 +162,6 @@ return 0;
 }
 
 
-ENCODING=''
-escolhe_codificacao ENCODING
-
 #
 # Escolha de servidor -- escolhe entre os servidores disponíveis - obrigatória escolha
 #
@@ -173,9 +186,41 @@ esac
 return 0;
 }
 
-JBOSS_HOME=''
-VERSAOJBOSS=''
-escolhe_server VERSAOJBOSS
+LOADCONFIG=''
+if [ -e ${CONFIGFILE} ] ; then
+	carrega_salva_configuracoes "CARREGAR" LOADCONFIG
+	if [ "$LOADCONFIG"x == "SIM"x ]; then
+		. ${CONFIGFILE}
+
+# testar se valores lidos são corretos
+
+# remover apos ler os valores
+#LOADCONFIG=''
+	else	
+		LOADCONFIG=''
+	fi
+fi	
+
+# Não existe configuração preexistente 
+if [ -z $LOADCONFIG ] ; then 
+	# o arquivo de configuração existia e foi feita uma nova config
+	if [ -e ${CONFIGFILE} ] ; then
+		rm -f ${CONFIGFILE} 2>/dev/null
+	fi
+
+	CLEARCACHE=''
+	limpa_cache_eclipse CLEARCACHE
+	
+	CONSOLELOG=''
+	log_console_eclipse CONSOLELOG
+	
+	ENCODING=''
+	escolhe_codificacao ENCODING
+	
+	JBOSS_HOME=''
+	VERSAOJBOSS=''
+	escolhe_server VERSAOJBOSS
+fi
 
 # seção de configurações dos servidores a serem utilizados - só é liberado 1 tomcat
 if [ "$VERSAOJBOSS"x == "JBoss7"x  ]; then 
@@ -380,6 +425,16 @@ VMARGS \n<b> ${VMARGS/</&lt;/} </b>"
 
 # ${VMARGS/</&lt;/}  substitui < por &lt; por causa da marcação pango
 
+SAVECONFIG=''
+if ! [ -s ${CONFIGFILE} ] ; then  # -s true if file exists and has a size greater than zero
+	carrega_salva_configuracoes "SALVAR" SAVECONFIG
+	if [ "$SAVECONFIG"x == "SIM"x ]; then
+		echo "ENCODING="${ENCODING} > ${CONFIGFILE}
+		echo "CLEARCACHE="${CLEARCACHE} >> ${CONFIGFILE}
+		echo "CONSOLELOG="$CONSOLELOG >> ${CONFIGFILE}
+		echo "VERSAOJBOSS="${VERSAOJBOSS} >> ${CONFIGFILE}
+	fi
+fi	
 
 DEB="echo"
 DEB=""
