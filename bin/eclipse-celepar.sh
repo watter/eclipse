@@ -255,6 +255,8 @@ fi
 function eclipse-preferences-heapstatus() {
 
 # workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.prefs:1:SHOW_MEMORY_MONITOR=true
+# workspace/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs:1:SHOW_MEMORY_MONITOR=true
+
 
 cat > /tmp/show-heap-status.tmp.$$  << EOF
 SHOW_MEMORY_MONITOR=true
@@ -266,18 +268,43 @@ local WORKSPACE=$1
 
 if ! [ -e ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs ] ; then 
 	mkdir -p  ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/ 
-	mv /tmp/show-heap-status.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs
-
+	cp -f /tmp/show-heap-status.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs
+	cp -f /tmp/show-heap-status.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.prefs
+	rm /tmp/show-heap-status.tmp.$$
 else
 	if [ -e ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs ] ; then 
+
+		# se um dos arquivos existir teste os 2 
+		# .metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs
 		CONFDIFFERS=$(diff --brief ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs /tmp/show-heap-status.tmp.$$ )
 		if [ $? -gt 0 ] ; then # os arquivos são diferentes
 			cp ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs.bck-`date +%Y-%m-%d-%H_%M`
-			rm -f {WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs
-			mv /tmp/show-heap-status.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs
+			rm -f ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs
+			cp -f /tmp/show-heap-status.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs
+		fi 
+
+		# .metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs
+		CONFDIFFERS=$(diff --brief ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.prefs /tmp/show-heap-status.tmp.$$ )
+		if [ $? -gt 0 ] ; then # os arqcore.runtimevos são diferentes
+			cp ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.prefs ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.prefs.bck-`date +%Y-%m-%d-%H_%M`
+			rm -f ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs
+			cp -f /tmp/show-heap-status.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.prefs
 		fi 
 	else
-		mv /tmp/show-heap-status.tmp$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs
+		cp -f /tmp/show-heap-status.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs
+	    cp -f /tmp/show-heap-status.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.prefs
+		rm /tmp/show-heap-status.tmp.$$
+	fi
+
+# manda mostrar o heap status - somente vai aparecer na 2a execução a partir do script
+# o arquivo ${WORKSPACE}/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi é que contém a configuração 
+# de renderização ou não da barra. Segue linha de exemplo:
+
+# -      <children xsi:type="menu:ToolControl" xmi:id="_kS03wKklEeKBl_YUtvAnOw" elementId="org.eclipse.ui.HeapStatus" toBeRendered="false" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.StandardTrim"/>
+# remover o toBeRendered="false"
+
+	if [ -e ${WORKSPACE}/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi ]; then
+		sed  's/elementId="org.eclipse.ui.HeapStatus" toBeRendered="false"/elementId="org.eclipse.ui.HeapStatus"/' -i  ${WORKSPACE}/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi
 	fi
 fi
 
