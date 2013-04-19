@@ -254,6 +254,7 @@ fi
 #
 function eclipse-preferences-heapstatus() {
 
+
 # workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.prefs:1:SHOW_MEMORY_MONITOR=true
 # workspace/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs:1:SHOW_MEMORY_MONITOR=true
 
@@ -303,9 +304,24 @@ else
 # -      <children xsi:type="menu:ToolControl" xmi:id="_kS03wKklEeKBl_YUtvAnOw" elementId="org.eclipse.ui.HeapStatus" toBeRendered="false" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.StandardTrim"/>
 # remover o toBeRendered="false"
 
+
+# para o eclipse JUNO
 	if [ -e ${WORKSPACE}/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi ]; then
 		sed  's/elementId="org.eclipse.ui.HeapStatus" toBeRendered="false"/elementId="org.eclipse.ui.HeapStatus"/' -i  ${WORKSPACE}/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi
 	fi
+
+# para o eclipse INDIGO
+# adicionar a linha do heap status abaixo da progress region
+# <trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
+# +<trimItem IMemento.internal.id="org.eclipse.ui.internal.HeapStatus"/>
+
+	if [ -e  ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui.workbench/workbench.xml ]; then 
+		HEAPSTAT=$(grep -c '<trimItem IMemento.internal.id="org.eclipse.ui.internal.HeapStatus"/>' ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui.workbench/workbench.xml )
+		if [ "${HEAPSTAT}"x == "0"x ] ; then # não existe a string no arquivo, adicione
+			sed 's@<trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>@<trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>\n<trimItem IMemento.internal.id="org.eclipse.ui.internal.HeapStatus"/>@' -i ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui.workbench/workbench.xml
+		fi
+	fi
+
 fi
 
 }
