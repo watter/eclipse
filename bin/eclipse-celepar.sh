@@ -36,6 +36,170 @@ export JCP_JBOSS5_HOME=$HOME_SERVERS/jboss5
 export CONFIGFILE="/home/desenv/workspaces/$USUARIO/.eclipse-celepar-config"
 
 #
+# verifica se a configuração do svn está "correta"
+#
+function verifica_config_svn() {
+
+cat > /tmp/svnconfig.tmp.$$  << EOF
+### This file configures various client-side behaviors.
+###
+### The commented-out examples below are intended to demonstrate
+### how to use this file.
+
+### Section for authentication and authorization customizations.
+[auth]
+password-stores = 
+
+
+[helpers]
+### Set editor to the command used to invoke your text editor.
+###   This will override the environment variables that Subversion
+###   examines by default to find this information ($EDITOR, 
+###   et al).
+# editor-cmd = editor (vi, emacs, notepad, etc.)
+### Set diff-cmd to the absolute path of your 'diff' program.
+###   This will override the compile-time default, which is to use
+###   Subversion's internal diff implementation.
+# diff-cmd = diff_program (diff, gdiff, etc.)
+### Set diff3-cmd to the absolute path of your 'diff3' program.
+###   This will override the compile-time default, which is to use
+###   Subversion's internal diff3 implementation.
+# diff3-cmd = diff3_program (diff3, gdiff3, etc.)
+### Set diff3-has-program-arg to 'true' or 'yes' if your 'diff3'
+###   program accepts the '--diff-program' option.
+# diff3-has-program-arg = [true | false]
+
+### Section for configuring tunnel agents.
+[tunnels]
+### Configure svn protocol tunnel schemes here.  By default, only
+### the 'ssh' scheme is defined.  You can define other schemes to
+### be used with 'svn+scheme://hostname/path' URLs.  A scheme
+### definition is simply a command, optionally prefixed by an
+### environment variable name which can override the command if it
+### is defined.  The command (or environment variable) may contain
+### arguments, using standard shell quoting for arguments with
+### spaces.  The command will be invoked as:
+###   <command> <hostname> svnserve -t
+### (If the URL includes a username, then the hostname will be
+### passed to the tunnel agent as <user>@<hostname>.)  If the
+### built-in ssh scheme were not predefined, it could be defined
+### as:
+# ssh = $SVN_SSH ssh
+### If you wanted to define a new 'rsh' scheme, to be used with
+### 'svn+rsh:' URLs, you could do so as follows:
+# rsh = rsh
+### Or, if you wanted to specify a full path and arguments:
+# rsh = /path/to/rsh -l myusername
+### On Windows, if you are specifying a full path to a command,
+### use a forward slash (/) or a paired backslash (\\) as the
+### path separator.  A single backslash will be treated as an
+### escape for the following character.
+
+### Section for configuring miscelleneous Subversion options.
+[miscellany]
+### which Subversion will ignore in its 'status' output, and
+### while importing or adding files and directories.
+log-encoding = UTF8
+
+### Set use-commit-times to make checkout/update/switch/revert
+### put last-committed timestamps on every file touched.
+# use-commit-times = yes
+### Set no-unlock to prevent 'svn commit' from automatically
+### releasing locks on files.
+# no-unlock = yes
+### Set enable-auto-props to 'yes' to enable automatic properties
+### for 'svn add' and 'svn import', it defaults to 'no'.
+### Automatic properties are defined in the section 'auto-props'.
+enable-auto-props = yes
+global-ignores = *.o *.lo *.la #*# .*.rej *.rej .*~ *~ .#* .DS_Store target/*
+
+
+### Section for configuring automatic properties.
+[auto-props]
+*.gif  = svn:mime-type=image/gif
+*.jpeg = svn:mime-type=image/jpeg
+*.jpg  = svn:mime-type=image/jpeg
+*.bmp  = svn:mime-type=image/bmp
+*.ico  = svn:mime-type=image/vnd.microsoft.icon
+*.png  = svn:mime-type=image/png
+*.tif  = svn:mime-type=image/tiff
+*.tiff = svn:mime-type=image/tiff
+*.xcf  = svn:mime-type=image/xcf
+# http://filext.com/file-extension/XCF
+*.svg  = svn:mime-type=image/svg+xml
+*.ttf  = svn:mime-type=application/x-font-ttf
+*.sh   = svn:executable;svn:eol-style=native
+*.txt  = svn:mime-type=text/plain;svn:eol-style=native
+*.MF   = svn:mime-type=text/plain;svn:eol-style=native
+*.prefs   = svn:mime-type=text/plain;svn:eol-style=native
+*.project = svn:eol-style=native
+*.htm  = svn:mime-type=text/html;svn:eol-style=native
+*.html = svn:mime-type=text/html;svn:eol-style=native
+*.xhtml = svn:mime-type=text/xhtml+xml;svn:eol-style=native
+# http://en.wikipedia.org/wiki/XHTML
+*.xml  = svn:mime-type=text/xml;svn:eol-style=native
+# http://en.wikipedia.org/wiki/XML
+*.tld  = svn:mime-type=text/xml;svn:eol-style=native
+*.java = svn:eol-style=native;svn:mime-type=text/x-java
+*.css  = svn:eol-style=native;svn:mime-type=text/css
+*.js   = svn:mime-type=text/javascript;svn:eol-style=native
+# http://annevankesteren.nl/2005/02/javascript-mime-type
+*.jsp  = svn:eol-style=native
+*.sql  = svn:eol-style=native;svn:mime-type=text/x-sql
+*.properties = svn:mime-type=text/plain;svn:eol-style=native
+*.pdf = svn:mime-type=application/pdf
+*.xsd = svn:mime-type=text/xml;svn:eol-style=native
+*.xsl = svn:mime-type=text/xml;svn:eol-style=native
+*.dtd = svn:mime-type=text/plain;svn:eol-style=native
+*.doc = svn:mime-type=application/msword
+*.gz  = svn:mime-type=application/x-gzip
+*.jar = svn:mime-type=application/java-archive
+
+
+### The format of the entries is:
+###   file-name-pattern = propname[=value][;propname[=value]...]
+### The file-name-pattern can contain wildcards (such as '*' and
+### '?').  All entries which match will be applied to the file.
+### Note that auto-props functionality must be enabled, which
+### is typically done by setting the 'enable-auto-props' option.
+# *.c = svn:eol-style=native
+# *.cpp = svn:eol-style=native
+# *.h = svn:eol-style=native
+# *.dsp = svn:eol-style=CRLF
+# *.dsw = svn:eol-style=CRLF
+# *.sh = svn:eol-style=native;svn:executable
+# *.txt = svn:eol-style=native
+# *.png = svn:mime-type=image/png
+# *.jpg = svn:mime-type=image/jpeg
+# Makefile = svn:eol-style=native
+
+EOF
+
+# garante que a configuração do subversion seja a informada acima antes de inicializar o eclipse. Evita problemas com passwordstore
+
+if ! [ -d /home/${USUARIO}/.subversion ] ; then 
+	mkdir /home/${USUARIO}/.subversion 
+else
+	if [ -e /home/${USUARIO}/.subversion/config ] ; then 
+		SVNCONFDIFFERS=$(diff --brief /home/${USUARIO}/.subversion/config /tmp/svnconfig.tmp.$$ )
+		if [ $? -gt 0 ] ; then # os arquivos são diferentes
+			cp /home/${USUARIO}/.subversion/config /home/${USUARIO}/.subversion/config.bck-`date +%Y-%m-%d-%H_%M`
+			rm -f /home/${USUARIO}/.subversion/config
+			mv /tmp/svnconfig.tmp.$$ /home/${USUARIO}/.subversion/config
+		fi 
+	else
+		mv /tmp/svnconfig.tmp.$$ /home/${USUARIO}/.subversion/config
+	fi
+fi
+
+echo "arrumando permissão do arquivo de configuração do subversion"
+chown ${USUARIO}\: /home/${USUARIO}/.subversion
+chown ${USUARIO}\: /home/${USUARIO}/.subversion/config 
+
+}
+
+
+#
 # essa função monta uma lista de radiobutton conforme os workspaces presentes dentro da estrutura workspaces/USUARIO/CODIFICACAO/
 #
 function escolhe_workspace() {
@@ -44,7 +208,7 @@ function escolhe_workspace() {
 		OPCOES=("${OPCOES[@]}" "FALSE" "$i" ) ; 
 	done
 	OPCOES[0]="TRUE"
-	zenity  --list --width=600 --height=$((${#OPCOES[@]} * 30)) --text "Selecione o <b>workspace</b> a ser utilizado" --radiolist  --column "Op" --column "Workspace"  ${OPCOES[@]} >/tmp/checklist.tmp.$$ 2>&1
+	zenity  --list --width=600 --height=200 --text "Selecione o <b>workspace</b> a ser utilizado" --radiolist  --column "Op" --column "Workspace"  ${OPCOES[@]} >/tmp/checklist.tmp.$$ 2>&1
 
 # ${#OPCOES[@]} -- número de elementos do array
 # ${OPCOES[@]}) -- elementos do array
@@ -220,6 +384,9 @@ if [ -z $LOADCONFIG ] ; then
 	JBOSS_HOME=''
 	VERSAOJBOSS=''
 	escolhe_server VERSAOJBOSS
+
+	# verifica a configuração do svn no diretório do usuário
+	verifica_config_svn
 fi
 
 # seção de configurações dos servidores a serem utilizados - só é liberado 1 tomcat
@@ -436,6 +603,11 @@ if ! [ -s ${CONFIGFILE} ] ; then  # -s true if file exists and has a size greate
 	fi
 fi	
 
+
+#Nao mostra o jboss Central
+JBOSSCENTRAL="-Dorg.jboss.tools.central.donotshow=true"
+
+
 DEB="echo"
 DEB=""
 
@@ -446,7 +618,8 @@ $DEB exec $ECLIPSE_HOME/eclipse -os linux -ws gtk \
 ${CLEARCACHE} \
 ${CONSOLELOG} \
 ${WORKSPACE_DATA}\
--vmargs ${VMARGS} ${JAVA_OPTS}
+${JBOSSCENTRAL} \
+-vmargs ${VMARGS} ${JAVA_OPTS} 
 
 #
 #-Dosgi.locking=none \
@@ -515,3 +688,90 @@ ${WORKSPACE_DATA}\
 #WORKA
 #leslie@ecelepar16853:~$ echo ${A,,[A-Z]}
 #worka
+
+
+
+
+
+#
+# verifica se a configuração do svn está "correta"
+#
+function eclipse-encoding_latin() {
+
+# iso-8859-1/workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs
+
+cat > /tmp/encoding-latin.tmp.$$  << EOF
+content-types/org.eclipse.birt.report.designer.ui.editors.reportdesign/charset=ISO-8859-1
+content-types/org.eclipse.birt.report.designer.ui.editors.reportdocument/charset=ISO-8859-1
+content-types/org.eclipse.birt.report.designer.ui.editors.reportlibrary/charset=ISO-8859-1
+content-types/org.eclipse.birt.report.designer.ui.editors.reporttemplate/charset=ISO-8859-1
+content-types/org.eclipse.core.runtime.text/charset=ISO-8859-1
+content-types/org.eclipse.core.runtime.xml/charset=ISO-8859-1
+content-types/org.eclipse.jdt.core.JARManifest/charset=ISO-8859-1
+content-types/org.eclipse.jst.jsp.core.tldsource/charset=ISO-8859-1
+content-types/org.eclipse.jst.ws.axis.consumption.core.wsddsource/charset=ISO-8859-1
+content-types/org.eclipse.ltk.core.refactoring.refactoringHistory/charset=ISO-8859-1
+content-types/org.eclipse.ltk.core.refactoring.refactoringIndex/charset=ISO-8859-1
+content-types/org.eclipse.wst.dtd.core.dtdsource/charset=ISO-8859-1
+content-types/org.eclipse.wst.ws.wsilsource/charset=ISO-8859-1
+content-types/org.eclipse.wst.wsdl.wsdlsource/charset=ISO-8859-1
+content-types/org.eclipse.wst.xml.core.xslsource/charset=ISO-8859-1
+content-types/org.eclipse.wst.xsd.core.xsdsource/charset=ISO-8859-1
+eclipse.preferences.version=1
+EOF
+
+# garante que a configuração do subversion seja a informada acima antes de inicializar o eclipse. Evita problemas com passwordstore
+local WORKSPACE=$1
+if ! [ -e ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs ] ; then 
+	mkdir ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/
+	mv /tmp/encoding-latin.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs
+
+else
+	if [ -e ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs ] ; then 
+		SVNCONFDIFFERS=$(diff --brief ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs /tmp/encoding-latin.tmp.$$ )
+		if [ $? -gt 0 ] ; then # os arquivos são diferentes
+			cp ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs.bck-`date +%Y-%m-%d-%H_%M`
+			rm -f {WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs
+			mv /tmp/encoding-latin.tmp.$$ {WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs
+		fi 
+	else
+		mv /tmp/encoding-latin.tmp$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs
+	fi
+fi
+
+}
+
+#
+# mostra heap status na barra
+#
+function eclipse-preferences-heapstatus() {
+
+# workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.prefs:1:SHOW_MEMORY_MONITOR=true
+
+cat > /tmp/show-heap-status.tmp.$$  << EOF
+SHOW_MEMORY_MONITOR=true
+eclipse.preferences.version=1
+showIntro=false
+EOF
+
+local WORKSPACE=$1
+
+if ! [ -e ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs ] ; then 
+	mkdir ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/
+	mv /tmp/show-heap-status.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs
+
+else
+	if [ -e ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs ] ; then 
+		SVNCONFDIFFERS=$(diff --brief ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs /tmp/show-heap-status.tmp.$$ )
+		if [ $? -gt 0 ] ; then # os arquivos são diferentes
+			cp ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs.bck-`date +%Y-%m-%d-%H_%M`
+			rm -f {WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs
+			mv /tmp/show-heap-status.tmp.$$ {WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs
+		fi 
+	else
+		mv /tmp/show-heap-status.tmp$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs
+	fi
+fi
+
+}
+
