@@ -178,7 +178,7 @@ EOF
 # garante que a configuração do subversion seja a informada acima antes de inicializar o eclipse. Evita problemas com passwordstore
 
 if ! [ -d /home/${USUARIO}/.subversion ] ; then 
-	mkdir /home/${USUARIO}/.subversion 
+	mkdir -p /home/${USUARIO}/.subversion 
 else
 	if [ -e /home/${USUARIO}/.subversion/config ] ; then 
 		SVNCONFDIFFERS=$(diff --brief /home/${USUARIO}/.subversion/config /tmp/svnconfig.tmp.$$ )
@@ -195,6 +195,91 @@ fi
 echo "arrumando permissão do arquivo de configuração do subversion"
 chown ${USUARIO}\: /home/${USUARIO}/.subversion
 chown ${USUARIO}\: /home/${USUARIO}/.subversion/config 
+
+}
+
+
+#
+# verifica se a configuração da codificação de caracteres está ok
+#
+function eclipse-encoding_latin() {
+
+# iso-8859-1/workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs
+
+cat > /tmp/encoding-latin.tmp.$$  << EOF
+content-types/org.eclipse.birt.report.designer.ui.editors.reportdesign/charset=ISO-8859-1
+content-types/org.eclipse.birt.report.designer.ui.editors.reportdocument/charset=ISO-8859-1
+content-types/org.eclipse.birt.report.designer.ui.editors.reportlibrary/charset=ISO-8859-1
+content-types/org.eclipse.birt.report.designer.ui.editors.reporttemplate/charset=ISO-8859-1
+content-types/org.eclipse.core.runtime.text/charset=ISO-8859-1
+content-types/org.eclipse.core.runtime.xml/charset=ISO-8859-1
+content-types/org.eclipse.jdt.core.JARManifest/charset=ISO-8859-1
+content-types/org.eclipse.jst.jsp.core.tldsource/charset=ISO-8859-1
+content-types/org.eclipse.jst.ws.axis.consumption.core.wsddsource/charset=ISO-8859-1
+content-types/org.eclipse.ltk.core.refactoring.refactoringHistory/charset=ISO-8859-1
+content-types/org.eclipse.ltk.core.refactoring.refactoringIndex/charset=ISO-8859-1
+content-types/org.eclipse.m2e.core.pomFile/charset=ISO-8859-1
+content-types/org.eclipse.wst.dtd.core.dtdsource/charset=ISO-8859-1
+content-types/org.eclipse.wst.ws.wsilsource/charset=ISO-8859-1
+content-types/org.eclipse.wst.wsdl.wsdlsource/charset=ISO-8859-1
+content-types/org.eclipse.wst.xml.core.xmlsource/charset=ISO-8859-1
+content-types/org.eclipse.wst.xml.core.xslsource/charset=ISO-8859-1
+content-types/org.eclipse.wst.xsd.core.xsdsource/charset=ISO-8859-1
+eclipse.preferences.version=1
+EOF
+
+# garante que a configuração do subversion seja a informada acima antes de inicializar o eclipse. Evita problemas com passwordstore
+local WORKSPACE=$1
+if ! [ -e ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs ] ; then 
+	mkdir -p ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/
+	mv /tmp/encoding-latin.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs
+
+else
+	if [ -e ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs ] ; then 
+		CONFDIFFERS=$(diff --brief ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs /tmp/encoding-latin.tmp.$$ )
+		if [ $? -gt 0 ] ; then # os arquivos são diferentes
+			cp ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs.bck-`date +%Y-%m-%d-%H_%M`
+			rm -f ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs
+			mv /tmp/encoding-latin.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs
+		fi 
+	else
+		mv /tmp/encoding-latin.tmp$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs
+	fi
+fi
+
+}
+
+#
+# mostra heap status na barra
+#
+function eclipse-preferences-heapstatus() {
+
+# workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.prefs:1:SHOW_MEMORY_MONITOR=true
+
+cat > /tmp/show-heap-status.tmp.$$  << EOF
+SHOW_MEMORY_MONITOR=true
+eclipse.preferences.version=1
+showIntro=false
+EOF
+
+local WORKSPACE=$1
+
+if ! [ -e ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs ] ; then 
+	mkdir -p  ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/ 
+	mv /tmp/show-heap-status.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs
+
+else
+	if [ -e ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs ] ; then 
+		CONFDIFFERS=$(diff --brief ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs /tmp/show-heap-status.tmp.$$ )
+		if [ $? -gt 0 ] ; then # os arquivos são diferentes
+			cp ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs.bck-`date +%Y-%m-%d-%H_%M`
+			rm -f {WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs
+			mv /tmp/show-heap-status.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs
+		fi 
+	else
+		mv /tmp/show-heap-status.tmp$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs
+	fi
+fi
 
 }
 
@@ -428,6 +513,7 @@ export SPLASH="${ECLIPSEDIR}/splash-gic.bmp"
 WORKSPACE_LOC="/home/desenv/workspaces/${USUARIO,,[A-Z]}/${ENCODING,,[A-Z]}/workspace/"
 WORKSPACE_DATA=""
 
+
 # testa se existe o diretório para o workspace corretamente
 if ! [ -d $WORKSPACE_LOC ] ; then
 	if [ "${ENCODING}"x == "UTF-8"x ]; then
@@ -450,6 +536,19 @@ if [ $WORKS -gt 1 ] ; then
 	WORKSPACE_LOC=$CHOSEN_WKS
 fi 
 export WORKSPACE_LOC
+
+
+set -x
+
+# coloca configuração para mostrar heap status bar
+eclipse-preferences-heapstatus $WORKSPACE_LOC
+
+
+if [ "${ECLIPSEDIR}"x == "${ECLIPSE_LATIN1}"x ]; then
+	eclipse-encoding_latin $WORKSPACE_LOC
+fi
+
+set +x
 
 # remove arquivo que causa problema de mensagem em branco caso o arquivo exista
 if [ -e ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.resources/.snap ]; then
@@ -692,86 +791,4 @@ ${JBOSSCENTRAL} \
 
 
 
-
-#
-# verifica se a configuração do svn está "correta"
-#
-function eclipse-encoding_latin() {
-
-# iso-8859-1/workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs
-
-cat > /tmp/encoding-latin.tmp.$$  << EOF
-content-types/org.eclipse.birt.report.designer.ui.editors.reportdesign/charset=ISO-8859-1
-content-types/org.eclipse.birt.report.designer.ui.editors.reportdocument/charset=ISO-8859-1
-content-types/org.eclipse.birt.report.designer.ui.editors.reportlibrary/charset=ISO-8859-1
-content-types/org.eclipse.birt.report.designer.ui.editors.reporttemplate/charset=ISO-8859-1
-content-types/org.eclipse.core.runtime.text/charset=ISO-8859-1
-content-types/org.eclipse.core.runtime.xml/charset=ISO-8859-1
-content-types/org.eclipse.jdt.core.JARManifest/charset=ISO-8859-1
-content-types/org.eclipse.jst.jsp.core.tldsource/charset=ISO-8859-1
-content-types/org.eclipse.jst.ws.axis.consumption.core.wsddsource/charset=ISO-8859-1
-content-types/org.eclipse.ltk.core.refactoring.refactoringHistory/charset=ISO-8859-1
-content-types/org.eclipse.ltk.core.refactoring.refactoringIndex/charset=ISO-8859-1
-content-types/org.eclipse.wst.dtd.core.dtdsource/charset=ISO-8859-1
-content-types/org.eclipse.wst.ws.wsilsource/charset=ISO-8859-1
-content-types/org.eclipse.wst.wsdl.wsdlsource/charset=ISO-8859-1
-content-types/org.eclipse.wst.xml.core.xslsource/charset=ISO-8859-1
-content-types/org.eclipse.wst.xsd.core.xsdsource/charset=ISO-8859-1
-eclipse.preferences.version=1
-EOF
-
-# garante que a configuração do subversion seja a informada acima antes de inicializar o eclipse. Evita problemas com passwordstore
-local WORKSPACE=$1
-if ! [ -e ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs ] ; then 
-	mkdir ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/
-	mv /tmp/encoding-latin.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs
-
-else
-	if [ -e ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs ] ; then 
-		SVNCONFDIFFERS=$(diff --brief ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs /tmp/encoding-latin.tmp.$$ )
-		if [ $? -gt 0 ] ; then # os arquivos são diferentes
-			cp ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs.bck-`date +%Y-%m-%d-%H_%M`
-			rm -f {WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs
-			mv /tmp/encoding-latin.tmp.$$ {WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs
-		fi 
-	else
-		mv /tmp/encoding-latin.tmp$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs
-	fi
-fi
-
-}
-
-#
-# mostra heap status na barra
-#
-function eclipse-preferences-heapstatus() {
-
-# workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.prefs:1:SHOW_MEMORY_MONITOR=true
-
-cat > /tmp/show-heap-status.tmp.$$  << EOF
-SHOW_MEMORY_MONITOR=true
-eclipse.preferences.version=1
-showIntro=false
-EOF
-
-local WORKSPACE=$1
-
-if ! [ -e ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs ] ; then 
-	mkdir ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/
-	mv /tmp/show-heap-status.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs
-
-else
-	if [ -e ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs ] ; then 
-		SVNCONFDIFFERS=$(diff --brief ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs /tmp/show-heap-status.tmp.$$ )
-		if [ $? -gt 0 ] ; then # os arquivos são diferentes
-			cp ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs.bck-`date +%Y-%m-%d-%H_%M`
-			rm -f {WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs
-			mv /tmp/show-heap-status.tmp.$$ {WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs
-		fi 
-	else
-		mv /tmp/show-heap-status.tmp$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs
-	fi
-fi
-
-}
 
