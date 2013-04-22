@@ -659,10 +659,11 @@ if ! [ -d $WORKSPACE_LOC ] ; then
 		# informa o usuário que está "preparando a cópia inicial do workspace"
 		cp -dRv $PLC_WORKSPACE $WORKSPACE_LOC  | tee >(zenity --progress --pulsate --no-cancel --text "Preparando versão inicial do workspace"  --timeout 1) >/dev/null
 #		WORKSPACE_LOC="/home/desenv/bin/jaguar/workspace/"
-		WORKSPACE_DATA="-data ${WORKSPACE_LOC}"
+# não esquecer do espaço ao final da variável " "
+		WORKSPACE_DATA="-data ${WORKSPACE_LOC} "
 	elif [ "${ENCODING}"x == "ISO-8859-1"x ]; then
 		mkdir -p $WORKSPACE_LOC;
-		WORKSPACE_DATA="-data ${WORKSPACE_LOC}"
+		WORKSPACE_DATA="-data ${WORKSPACE_LOC} "
 	fi	
 fi
 
@@ -853,8 +854,8 @@ $DEB exec $ECLIPSE_HOME/eclipse -os linux -ws gtk \
 -showSplash "${SPLASH}" \
 ${CLEARCACHE} \
 ${CONSOLELOG} \
-${WORKSPACE_DATA}\
--vmargs ${VMARGS} ${JAVA_OPTS} ${JBOSSCENTRAL} 
+${WORKSPACE_DATA} \
+ -vmargs ${VMARGS} ${JAVA_OPTS} ${JBOSSCENTRAL}
 
 
 # verificar a situação de 2 launchers separados
