@@ -402,6 +402,38 @@ esac
 return 0;
 }
 
+
+#
+# Cria link para inclusão no launcher do sistema
+#
+function doLink() {
+echo -e "
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=Eclipse - GIC
+Type=Application
+Terminal=false
+Name[pt_BR]=Eclipse-GIC
+Exec=/home/desenv/bin/eclipse-celepar.sh
+Icon[pt_BR]=/home/desenv/bin/icon/icon.xpm
+Icon=/home/desenv/bin/icon/icon.xpm
+GenericName[pt_BR]=Eclipse-GIC
+Categories=X-Debian-Apps-Programming" > "$param/Eclipse-GIC.desktop"
+xdg-desktop-icon install --novendor "$param/Eclipse-GIC.desktop"
+xdg-desktop-menu install --novendor "$param/Eclipse-GIC.desktop"
+chmod 644 "$param/Eclipse-GIC.desktop"
+}
+
+if ! [ -d "/home/$USUARIO/.local/share/applications/" ]; then
+    mkdir -p "/home/$USUARIO/.local/share/applications/"
+fi
+
+if ! [ -e "/home/$USUARIO/.local/share/applications/Eclipse-GIC.desktop" ]; then
+	param="/home/$USUARIO/.local/share/applications/"
+	doLink
+fi
+
 #
 # Pergunta se armazena configuração - Sim == SIM - Esc == não
 #
@@ -830,8 +862,6 @@ ${JBOSSCENTRAL} \
 #WORKA
 #leslie@ecelepar16853:~$ echo ${A,,[A-Z]}
 #worka
-
-
 
 
 
