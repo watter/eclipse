@@ -20,6 +20,7 @@ export USUARIO=$USER
 
 export ECLIPSE_LATIN1="/home/desenv/bin/eclipse"
 export ECLIPSE_UTF8="/home/desenv/bin/jaguar/eclipse"
+export ECLIPSE_ICON="/home/desenv/bin/icon"
 
 export PLC_WORKSPACE="/home/desenv/bin/jaguar/workspace"
 
@@ -584,7 +585,7 @@ export ECLIPSE_HOME=$ECLIPSEDIR
 # opções que serão usadas na inicialização do eclipse
 
 export INSTALL="${ECLIPSEDIR}/"
-export SPLASH="${ECLIPSEDIR}/splash-gic.bmp"
+export SPLASH="${ECLIPSE_ICON}/splash-${ENCODING,,[A-Z]}.bmp"
 
 
 ### limpeza e verificação dos detalhes do workspace
@@ -618,8 +619,6 @@ fi
 export WORKSPACE_LOC
 
 
-set -x
-
 # coloca configuração para mostrar heap status bar
 eclipse-preferences-heapstatus $WORKSPACE_LOC
 
@@ -627,8 +626,6 @@ eclipse-preferences-heapstatus $WORKSPACE_LOC
 if [ "${ECLIPSEDIR}"x == "${ECLIPSE_LATIN1}"x ]; then
 	eclipse-encoding_latin $WORKSPACE_LOC
 fi
-
-set +x
 
 # remove arquivo que causa problema de mensagem em branco caso o arquivo exista
 if [ -e ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.resources/.snap ]; then
@@ -779,6 +776,7 @@ if ! [ -s ${CONFIGFILE} ] ; then  # -s true if file exists and has a size greate
 		echo "CLEARCACHE="${CLEARCACHE} >> ${CONFIGFILE}
 		echo "CONSOLELOG="$CONSOLELOG >> ${CONFIGFILE}
 		echo "VERSAOJBOSS="${VERSAOJBOSS} >> ${CONFIGFILE}
+		echo "WORKSPACE_LOC="${WORKSPACE_LOC} >> ${CONFIGFILE}
 	fi
 fi	
 
