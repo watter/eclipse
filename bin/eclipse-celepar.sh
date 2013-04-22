@@ -5,7 +5,7 @@
 # home/desenv$ grep -lri '/desenv/jaguar/repositorio' * | xargs -I{} -L1  sed "s@/desenv/jaguar/repositorio/@/desenv/repositorio/@g" -i {}
 #
 
-#set -x 
+set -x 
 
 export ECLIPSE_LATIN1="/home/desenv/bin/eclipse"
 export ECLIPSE_UTF8="/home/desenv/bin/jaguar/eclipse"
@@ -329,6 +329,63 @@ fi
 
 
 #
+# desabilita plugin egit 
+#
+function eclipse-preferences-egit() {
+
+#/workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings$ ls *egit*
+# org.eclipse.egit.core.prefs  org.eclipse.egit.ui.prefs
+
+
+cat > /tmp/egit-core.tmp.$$  << EOF
+core_autoIgnoreDerivedResources=false
+core_autoShareProjects=false
+eclipse.preferences.version=1
+EOF
+
+cat > /tmp/egit-ui.tmp.$$  << EOF
+eclipse.preferences.version=1
+merge_mode=0
+restore_projects_on_checkout=false
+EOF
+
+local WORKSPACE=$1
+
+if ! [ -d ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings ] ; then 
+	mkdir -p ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings 
+	cp -f /tmp/egit-core.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.egit.core.prefs
+	cp -f /tmp/egit-ui.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.egit.ui.prefs
+	rm /tmp/egit-{core,ui}.tmp.$$
+else
+	if [ -e ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.egit.core.prefs ] ; then 
+
+		# se um dos arquivos existir teste os 2 
+		# .metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs
+		CONFDIFFERS=$(diff --brief /tmp/egit-ui.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.egit.ui.prefs )
+		if [ $? -gt 0 ] ; then # os arquivos são diferentes
+			cp ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.egit.ui.prefs ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.egit.ui.prefs.bck-`date +%Y-%m-%d-%H_%M`
+			rm -f ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.egit.ui.prefs
+			cp -f /tmp/egit-ui.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.egit.ui.prefs
+		fi 
+
+		# .metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.runtime.prefs
+		CONFDIFFERS=$(diff --brief /tmp/egit-core.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.egit.core.prefs )
+		if [ $? -gt 0 ] ; then # os arqcore.runtimevos são diferentes
+			cp  ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.egit.core.prefs ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.egit.core.prefs.bck-`date +%Y-%m-%d-%H_%M`
+			rm -f ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.egit.core.prefs
+			cp -f /tmp/egit-core.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.egit.core.prefs
+		fi 
+	else
+	    cp -f /tmp/egit-core.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.egit.core.prefs
+	    cp -f /tmp/egit-ui.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.egit.ui.prefs
+		rm /tmp/egit-{core,ui}.tmp.$$
+	fi
+fi
+
+}
+
+
+#
 # essa função monta uma lista de radiobutton conforme os workspaces presentes dentro da estrutura workspaces/USUARIO/CODIFICACAO/
 #
 function escolhe_workspace() {
@@ -600,7 +657,7 @@ if ! [ -d $WORKSPACE_LOC ] ; then
 		# cria a estrutura anterior parcial
 		mkdir -p ${WORKSPACE_LOC%/workspace/};
 		# informa o usuário que está "preparando a cópia inicial do workspace"
-		cp -rv $PLC_WORKSPACE $WORKSPACE_LOC  | tee >(zenity --progress --pulsate --no-cancel --text "Preparando versão inicial do workspace"  --timeout 1) >/dev/null
+		cp -dRv $PLC_WORKSPACE $WORKSPACE_LOC  | tee >(zenity --progress --pulsate --no-cancel --text "Preparando versão inicial do workspace"  --timeout 1) >/dev/null
 #		WORKSPACE_LOC="/home/desenv/bin/jaguar/workspace/"
 		WORKSPACE_DATA="-data ${WORKSPACE_LOC}"
 	elif [ "${ENCODING}"x == "ISO-8859-1"x ]; then
@@ -622,6 +679,8 @@ export WORKSPACE_LOC
 # coloca configuração para mostrar heap status bar
 eclipse-preferences-heapstatus $WORKSPACE_LOC
 
+# desabilita auto-share de projetos git no eclipse
+eclipse-preferences-egit $WORKSPACE_LOC
 
 if [ "${ECLIPSEDIR}"x == "${ECLIPSE_LATIN1}"x ]; then
 	eclipse-encoding_latin $WORKSPACE_LOC
@@ -797,6 +856,12 @@ ${CONSOLELOG} \
 ${WORKSPACE_DATA}\
 -vmargs ${VMARGS} ${JAVA_OPTS} ${JBOSSCENTRAL} 
 
+
+# verificar a situação de 2 launchers separados
+#export ECLIPSE_INIFILE="/home/desenv/bin/icon/eclipse.ini"
+#--launcher.ini ${ECLIPSE_INIFILE} \
+
+
 #
 #-Dosgi.locking=none \
 # configurações para o runtime
@@ -864,6 +929,4 @@ ${WORKSPACE_DATA}\
 #WORKA
 #leslie@ecelepar16853:~$ echo ${A,,[A-Z]}
 #worka
-
-
 
