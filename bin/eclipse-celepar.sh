@@ -604,6 +604,7 @@ if ! [ -d $WORKSPACE_LOC ] ; then
 		WORKSPACE_DATA="-data ${WORKSPACE_LOC}"
 	elif [ "${ENCODING}"x == "ISO-8859-1"x ]; then
 		mkdir -p $WORKSPACE_LOC;
+		WORKSPACE_DATA="-data ${WORKSPACE_LOC}"
 	fi	
 fi
 
@@ -796,8 +797,7 @@ $DEB exec $ECLIPSE_HOME/eclipse -os linux -ws gtk \
 ${CLEARCACHE} \
 ${CONSOLELOG} \
 ${WORKSPACE_DATA}\
-${JBOSSCENTRAL} \
--vmargs ${VMARGS} ${JAVA_OPTS} 
+-vmargs ${VMARGS} ${JAVA_OPTS} ${JBOSSCENTRAL} 
 
 #
 #-Dosgi.locking=none \
