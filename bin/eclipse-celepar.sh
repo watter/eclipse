@@ -5,7 +5,7 @@
 # home/desenv$ grep -lri '/desenv/jaguar/repositorio' * | xargs -I{} -L1  sed "s@/desenv/jaguar/repositorio/@/desenv/repositorio/@g" -i {}
 #
 
-set -x 
+# set -x 
 
 export ECLIPSE_LATIN1="/home/desenv/bin/eclipse"
 export ECLIPSE_UTF8="/home/desenv/bin/jaguar/eclipse"
@@ -793,7 +793,7 @@ XMX=768
 MAXPERMSIZE=256
 
 
-VMARGS=" -Xms${XMS}m -Xmx${XMX}m -XX:MaxPermSize=${MAXPERMSIZE}m -XX:MaxGCPauseMillis=${MAXGCPAUSEMILLIS} -XX:-UseParallelGC ${PARGC} ${STRINGCONCAT} -XX:MaxHeapFreeRatio=70 -XX:CompileCommand=exclude,org/eclipse/core/internal/dtree/DataTreeNode,forwardDeltaWith -XX:CompileCommand=exclude,org/eclipse/jdt/internal/compiler/lookup/ParameterizedMethodBinding,<init> -Dosgi.locking=none " 
+VMARGS=" -Xms${XMS}m -Xmx${XMX}m -XX:MaxPermSize=${MAXPERMSIZE}m -XX:MaxGCPauseMillis=${MAXGCPAUSEMILLIS} -XX:-UseParallelGC ${PARGC} ${STRINGCONCAT} -XX:MaxHeapFreeRatio=70 -XX:CompileCommand=exclude,org/eclipse/core/internal/dtree/DataTreeNode,forwardDeltaWith -XX:CompileCommand=exclude,org/eclipse/jdt/internal/compiler/lookup/ParameterizedMethodBinding,<init> -Dosgi.locking=none -Dosgi.splashLocation=${SPLASH} " 
 
 echo "================================================================================"
 echo "Xms " $XMS
@@ -851,7 +851,7 @@ DEB=""
 # Do the actual launch of Eclipse with the selected VM.
 $DEB exec $ECLIPSE_HOME/eclipse -os linux -ws gtk \
 -vm "${JAVACMD}" \
--showSplash "${SPLASH}" \
+-showSplash ${SPLASH} \
 ${CLEARCACHE} \
 ${CONSOLELOG} \
 ${WORKSPACE_DATA} \
