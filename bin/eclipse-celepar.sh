@@ -658,8 +658,22 @@ if ! [ -d $WORKSPACE_LOC ] ; then
 		mkdir -p ${WORKSPACE_LOC%/workspace/};
 		# informa o usuário que está "preparando a cópia inicial do workspace"
 		cp -drRv $PLC_WORKSPACE $WORKSPACE_LOC  | tee >(zenity --progress --pulsate --no-cancel --text "Preparando versão inicial do workspace"  --timeout 1) >/dev/null
-#		WORKSPACE_LOC="/home/desenv/bin/jaguar/workspace/"
-# não esquecer do espaço ao final da variável " "
+
+		# /home/desenv/jaguar/servers/jboss /home/desenv/servers/jboss
+		# corrigindo localização dos servidores 
+		sed "s@/home/desenv/jaguar/servers/@/home/desenv/servers/@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.debug.core/.launches/Tomcat.launch
+		sed "s@/home/desenv/jaguar/servers/@/home/desenv/servers/@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jst.server.tomcat.core.prefs
+		sed "s@/home/desenv/jaguar/servers/@/home/desenv/servers/@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.wst.server.core.prefs
+		sed "s@/home/desenv/jaguar/servers/@/home/desenv/servers/@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.core.prefs
+
+		# corrige outras informações sobre o jaguar
+
+   		sed "s@M2_REPO=/home/desenv/jaguar/repositorio@M2_REPO=/home/desenv/repositorio@" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.core.prefs
+   		sed "s@/home/desenv/jaguar/workspace@${WORKSPACE_LOC}@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.core.prefs
+		# /home/desenv/jaguar/ por /home/desenv/bin/jaguar/
+   		sed "s@/home/desenv/jaguar/@/home/desenv/bin/jaguar@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.core.prefs
+
+		# não esquecer do espaço ao final da variável " "
 		WORKSPACE_DATA="-data ${WORKSPACE_LOC} "
 	elif [ "${ENCODING}"x == "ISO-8859-1"x ]; then
 		mkdir -p $WORKSPACE_LOC;
