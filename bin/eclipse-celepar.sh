@@ -266,6 +266,7 @@ eclipse.preferences.version=1
 showIntro=false
 EOF
 
+
 local WORKSPACE=$1
 
 if ! [ -e ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs ] ; then 
@@ -660,7 +661,6 @@ if ! [ -d $WORKSPACE_LOC ] ; then
 		OLDPWD=$PWD
 		cd ${PLC_WORKSPACE%/workspace} ; tar cf -  workspace | (cd ${WORKSPACE_LOC%/workspace/}; tar xvf - ) | tee >(zenity --progress --pulsate --no-cancel --text "Preparando versão inicial do workspace"  --timeout 1) >/dev/null
 		cd $OLDPWD
-set -x
 
 		# /home/desenv/jaguar/servers/jboss /home/desenv/servers/jboss
 		# corrigindo localização dos servidores 
@@ -698,8 +698,6 @@ set -x
 		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.variables.prefs
 
 
-set +x
-
 		# não esquecer do espaço ao final da variável " "
 		WORKSPACE_DATA="-data ${WORKSPACE_LOC} "
 	elif [ "${ENCODING}"x == "ISO-8859-1"x ]; then
@@ -710,12 +708,13 @@ fi
 
 # verifica se existe mais de um e cria a janela de opções
 WORKS=$(ls /home/desenv/workspaces/${USUARIO,,[A-Z]}/${ENCODING,,[A-Z]}/* -ld1 | wc -l)
-if [ $WORKS -gt 1 ] ; then
+if [ $WORKS -gt 0 ] ; then
 	CHOSEN_WKS=''
 	escolhe_workspace CHOSEN_WKS
 	WORKSPACE_LOC=$CHOSEN_WKS
 fi 
 export WORKSPACE_LOC
+export WORKSPACE_DATA="-data ${WORKSPACE_LOC} "
 
 
 # coloca configuração para mostrar heap status bar
