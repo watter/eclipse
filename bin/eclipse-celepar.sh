@@ -657,7 +657,7 @@ if ! [ -d $WORKSPACE_LOC ] ; then
 		# cria a estrutura anterior parcial
 		mkdir -p ${WORKSPACE_LOC%/workspace/};
 		# informa o usuário que está "preparando a cópia inicial do workspace"
-		cp -dRv $PLC_WORKSPACE $WORKSPACE_LOC  | tee >(zenity --progress --pulsate --no-cancel --text "Preparando versão inicial do workspace"  --timeout 1) >/dev/null
+		cp -drRv $PLC_WORKSPACE $WORKSPACE_LOC  | tee >(zenity --progress --pulsate --no-cancel --text "Preparando versão inicial do workspace"  --timeout 1) >/dev/null
 #		WORKSPACE_LOC="/home/desenv/bin/jaguar/workspace/"
 # não esquecer do espaço ao final da variável " "
 		WORKSPACE_DATA="-data ${WORKSPACE_LOC} "
