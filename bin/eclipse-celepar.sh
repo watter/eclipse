@@ -619,10 +619,10 @@ elif [ "$VERSAOJBOSS"x == "JBoss4.2.3"x  ] ; then
 elif [ "$VERSAOJBOSS"x == "JBoss4.0.5"x  ] ; then 
 	JBOSS_HOME="${HOME_SERVERS}/jboss4.0.5"
 elif [ "$VERSAOJBOSS"x == "Tomcat"x  ] ; then 
-	CATALINA_HOME=$HOME_SERVERS/tomcat
+	CATALINA_HOME="$HOME_SERVERS/tomcat/"
 fi
 
-export CATALINA_HOME=$HOME_SERVERS/tomcat
+export CATALINA_HOME="$HOME_SERVERS/tomcat/"
 
 if [ -n $JBOSS_HOME ] ; then  # -n = true if non-zero
 	export JBOSS_HOME
@@ -657,7 +657,10 @@ if ! [ -d $WORKSPACE_LOC ] ; then
 		# cria a estrutura anterior parcial
 		mkdir -p ${WORKSPACE_LOC%/workspace/};
 		# informa o usuário que está "preparando a cópia inicial do workspace"
-		cp -drRv $PLC_WORKSPACE $WORKSPACE_LOC  | tee >(zenity --progress --pulsate --no-cancel --text "Preparando versão inicial do workspace"  --timeout 1) >/dev/null
+		OLDPWD=$PWD
+		cd ${PLC_WORKSPACE%/workspace} ; tar cf -  workspace | (cd ${WORKSPACE_LOC%/workspace/}; tar xvf - ) | tee >(zenity --progress --pulsate --no-cancel --text "Preparando versão inicial do workspace"  --timeout 1) >/dev/null
+		cd $OLDPWD
+set -x
 
 		# /home/desenv/jaguar/servers/jboss /home/desenv/servers/jboss
 		# corrigindo localização dos servidores 
@@ -671,7 +674,31 @@ if ! [ -d $WORKSPACE_LOC ] ; then
    		sed "s@M2_REPO=/home/desenv/jaguar/repositorio@M2_REPO=/home/desenv/repositorio@" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.core.prefs
    		sed "s@/home/desenv/jaguar/workspace@${WORKSPACE_LOC}@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.core.prefs
 		# /home/desenv/jaguar/ por /home/desenv/bin/jaguar/
-   		sed "s@/home/desenv/jaguar/@/home/desenv/bin/jaguar@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.core.prefs
+   		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.core.prefs
+
+		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i "$WORKSPACE_LOC/.metadata/.plugins/org.eclipse.debug.core/.launches/M2Eclipse - Liberacao Para Tomcat Rapida Com Reinicio.launch"
+		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i "$WORKSPACE_LOC/.metadata/.plugins/org.eclipse.debug.core/.launches/M2Eclipse - Liberacao Para Tomcat Rapida.launch"
+		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i "$WORKSPACE_LOC/.metadata/.plugins/org.eclipse.debug.core/.launches/M2Eclipse - Liberacao Para Tomcat Completa Producao.launch"
+		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i "$WORKSPACE_LOC/.metadata/.plugins/org.eclipse.debug.core/.launches/Tomcat.launch"
+		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i "$WORKSPACE_LOC/.metadata/.plugins/org.eclipse.debug.core/.launches/M2Eclipse - Liberacao Para Tomcat Completa Desenvolvimento.launch"
+		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.tptp.test.tools.junit.plugin/config/pluginconfig.xml
+		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.tptp.platform.logging.events/config/pluginconfig.xml
+		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.hyades.test.tools.core/config/pluginconfig.xml
+		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.hyades.logging.core/config/pluginconfig.xml
+		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.jdt.launching/libraryInfos.xml
+		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.datatools.connectivity/driverStorage.xml
+		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ant.core.prefs
+		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.maven.ide.eclipse.prefs
+		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jst.server.tomcat.core.prefs
+		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.wst.server.core.prefs
+		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.launching.prefs
+		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.pde.core.prefs
+		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.core.prefs
+		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.m2e.core.prefs
+		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.variables.prefs
+
+
+set +x
 
 		# não esquecer do espaço ao final da variável " "
 		WORKSPACE_DATA="-data ${WORKSPACE_LOC} "
