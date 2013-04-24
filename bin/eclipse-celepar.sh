@@ -271,8 +271,17 @@ EOF
 
 local WORKSPACE=$1
 
+# se os diretórios não existirem, crie-os, porque os arquivos serão copiados lá 
+if ! [ -d ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings ] ; then 
+	mkdir -p  ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings
+fi
+
+if ! [ -d ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings ] ; then 
+	mkdir -p  ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings
+fi
+
+# teste se o arquivo existe
 if ! [ -e ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs ] ; then 
-	mkdir -p  ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/ 
 	cp -f /tmp/show-heap-status.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.ui/.settings/org.eclipse.ui.prefs
 	cp -f /tmp/show-heap-status.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.prefs
 	rm /tmp/show-heap-status.tmp.$$
@@ -354,8 +363,12 @@ EOF
 
 local WORKSPACE=$1
 
+# se os diretórios não existirem, crie-os, porque os arquivos serão copiados lá 
 if ! [ -d ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings ] ; then 
-	mkdir -p ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings 
+	mkdir -p  ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings
+fi
+
+if ! [ -d ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings ] ; then 
 	cp -f /tmp/egit-core.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.egit.core.prefs
 	cp -f /tmp/egit-ui.tmp.$$ ${WORKSPACE}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.egit.ui.prefs
 	rm /tmp/egit-{core,ui}.tmp.$$
