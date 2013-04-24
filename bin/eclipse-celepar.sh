@@ -765,8 +765,11 @@ ARQ[18]="Liberacao Para Tomcat Completa Producao.launch"
 ARQ[19]="Limpar Modulos.launch"
 ARQ[20]="Liberacao Para Tomcat Rapida Com Reinicio.launch"
 
+# o 1o sed remove a opção offline do maven
+# o 2o sed muda a variável de ${MVN} para ${env_var:MVN} que é a variável que indica onde está o executável do maven
+
 for i in $(seq 1 20); do 
-	sed 's/-o"/"/' -i "${WORKSPACE_LOC}"/.metadata/.plugins/org.eclipse.debug.core/.launches/"${ARQ[i]}"
+	sed 's/-o"/"/;s/${MVN}/${env_var:MVN}/g' -i "${WORKSPACE_LOC}"/.metadata/.plugins/org.eclipse.debug.core/.launches/"${ARQ[i]}"
 done
 
 # remove arquivo que causa problema de mensagem em branco caso o arquivo exista
