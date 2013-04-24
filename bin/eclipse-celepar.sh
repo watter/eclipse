@@ -705,6 +705,39 @@ if ! [ -d $WORKSPACE_LOC ] ; then
 			cp -f $WORKSPACE_PLC/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.powerlogic.jcompany.ambiente.prefs $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.powerlogic.jcompany.ambiente.prefs
 		fi
 
+		#
+		# Corrige arquivos de launch somente na criação do workspace
+		#
+
+		declare -a ARQ=();
+		ARQ[1]="M2Eclipse - Liberacao Para Tomcat Rapida Com Reinicio.launch"
+		ARQ[2]="Liberacao Para Tomcat Completa Desenvolvimento com Teste.launch"
+		ARQ[3]="Instalar Projeto No Repositorio LOCAL com Teste.launch"
+		ARQ[4]="Liberacao Para jBoss Completa Desenvolvimento com Testes.launch"
+		ARQ[5]="Instalar Projeto No Repositorio CENTRAL com Teste.launch"
+		ARQ[6]="M2Eclipse - Liberacao Para Tomcat Rapida.launch"
+		ARQ[7]="Liberacao Para jBoss Completa Desenvolvimento.launch"
+		ARQ[8]="Instalar Projeto No Repositorio CENTRAL.launch"
+		ARQ[9]="M2Eclipse - Liberacao Para Tomcat Completa Producao.launch"
+		ARQ[10]="Liberacao Para Tomcat Completa Desenvolvimento.launch"
+		ARQ[11]="Tomcat.launch"
+		ARQ[12]="M2Eclipse - Liberacao Para Tomcat Completa Desenvolvimento.launch"
+		ARQ[13]="Liberacao Para jBoss Rapida com Reinicio.launch"
+		ARQ[14]="Liberacao Para Tomcat Rapida.launch"
+		ARQ[15]="Instalar Projeto No Repositorio LOCAL.launch"
+		ARQ[16]="Liberacao Sonar.launch"
+		ARQ[17]="Liberacao Para jBoss Rapida.launch"
+		ARQ[18]="Liberacao Para Tomcat Completa Producao.launch"
+		ARQ[19]="Limpar Modulos.launch"
+		ARQ[20]="Liberacao Para Tomcat Rapida Com Reinicio.launch"
+		
+		# o 1o sed remove a opção offline do maven
+		# o 2o sed muda a variável de ${MVN} para ${env_var:MVN} que é a variável que indica onde está o executável do maven
+		
+		for i in $(seq 1 20); do 
+			sed 's/-o"/"/;s/${MVN}/${env_var:MVN}/g' -i "${WORKSPACE_LOC}"/.metadata/.plugins/org.eclipse.debug.core/.launches/"${ARQ[i]}"
+		done
+	
 		# não esquecer do espaço ao final da variável " "
 		WORKSPACE_DATA="-data ${WORKSPACE_LOC} "
 	elif [ "${ENCODING}"x == "ISO-8859-1"x ]; then
@@ -735,42 +768,17 @@ if [ "${ECLIPSEDIR}"x == "${ECLIPSE_LATIN1}"x ]; then
 fi
 
 
-
 #
 # Configuração MAVEN para online
 #
 
 # habilitando a opção online do maven
-sed "s@eclipse.m2.offline=true@@g" -i ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.m2e.core.prefs
 
-declare -a ARQ=();
-ARQ[1]="M2Eclipse - Liberacao Para Tomcat Rapida Com Reinicio.launch"
-ARQ[2]="Liberacao Para Tomcat Completa Desenvolvimento com Teste.launch"
-ARQ[3]="Instalar Projeto No Repositorio LOCAL com Teste.launch"
-ARQ[4]="Liberacao Para jBoss Completa Desenvolvimento com Testes.launch"
-ARQ[5]="Instalar Projeto No Repositorio CENTRAL com Teste.launch"
-ARQ[6]="M2Eclipse - Liberacao Para Tomcat Rapida.launch"
-ARQ[7]="Liberacao Para jBoss Completa Desenvolvimento.launch"
-ARQ[8]="Instalar Projeto No Repositorio CENTRAL.launch"
-ARQ[9]="M2Eclipse - Liberacao Para Tomcat Completa Producao.launch"
-ARQ[10]="Liberacao Para Tomcat Completa Desenvolvimento.launch"
-ARQ[11]="Tomcat.launch"
-ARQ[12]="M2Eclipse - Liberacao Para Tomcat Completa Desenvolvimento.launch"
-ARQ[13]="Liberacao Para jBoss Rapida com Reinicio.launch"
-ARQ[14]="Liberacao Para Tomcat Rapida.launch"
-ARQ[15]="Instalar Projeto No Repositorio LOCAL.launch"
-ARQ[16]="Liberacao Sonar.launch"
-ARQ[17]="Liberacao Para jBoss Rapida.launch"
-ARQ[18]="Liberacao Para Tomcat Completa Producao.launch"
-ARQ[19]="Limpar Modulos.launch"
-ARQ[20]="Liberacao Para Tomcat Rapida Com Reinicio.launch"
+MAVENONLINE=$( grep -c 'eclipse.m2.offline=true' ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.m2e.core.prefs )
+if [ $MAVENONLINE != 0 ] ; then 
+	sed "s@eclipse.m2.offline=true@@g" -i ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.m2e.core.prefs
+fi
 
-# o 1o sed remove a opção offline do maven
-# o 2o sed muda a variável de ${MVN} para ${env_var:MVN} que é a variável que indica onde está o executável do maven
-
-for i in $(seq 1 20); do 
-	sed 's/-o"/"/;s/${MVN}/${env_var:MVN}/g' -i "${WORKSPACE_LOC}"/.metadata/.plugins/org.eclipse.debug.core/.launches/"${ARQ[i]}"
-done
 
 # remove arquivo que causa problema de mensagem em branco caso o arquivo exista
 if [ -e ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.resources/.snap ]; then
