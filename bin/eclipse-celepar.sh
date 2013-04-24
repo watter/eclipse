@@ -674,7 +674,8 @@ if ! [ -d $WORKSPACE_LOC ] ; then
 		mkdir -p ${WORKSPACE_LOC%/workspace/};
 		# informa o usuário que está "preparando a cópia inicial do workspace"
 		OLDPWD=$PWD
-		cd ${PLC_WORKSPACE%/workspace} ; tar cf -  workspace | (cd ${WORKSPACE_LOC%/workspace/}; tar xvf - ) | tee >(zenity --progress --pulsate --no-cancel --text "Preparando versão inicial do workspace"  --timeout 3) >/dev/null
+		cd ${WORKSPACE_LOC%/workspace/}
+		tar xvfz ${PLC_WORKSPACE}.tgz | tee >(zenity --progress --pulsate --no-cancel --text "Preparando versão inicial do workspace"  --timeout 3) >/dev/null
 		cd $OLDPWD
 
 		sync
