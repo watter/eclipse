@@ -659,8 +659,10 @@ if ! [ -d $WORKSPACE_LOC ] ; then
 		mkdir -p ${WORKSPACE_LOC%/workspace/};
 		# informa o usuário que está "preparando a cópia inicial do workspace"
 		OLDPWD=$PWD
-		cd ${PLC_WORKSPACE%/workspace} ; tar cf -  workspace | (cd ${WORKSPACE_LOC%/workspace/}; tar xvf - ) | tee >(zenity --progress --pulsate --no-cancel --text "Preparando versão inicial do workspace"  --timeout 1) >/dev/null
+		cd ${PLC_WORKSPACE%/workspace} ; tar cf -  workspace | (cd ${WORKSPACE_LOC%/workspace/}; tar xvf - ) | tee >(zenity --progress --pulsate --no-cancel --text "Preparando versão inicial do workspace"  --timeout 3) >/dev/null
 		cd $OLDPWD
+
+		sync
 
 		# /home/desenv/jaguar/servers/jboss /home/desenv/servers/jboss
 		# corrigindo localização dos servidores 
@@ -697,6 +699,9 @@ if ! [ -d $WORKSPACE_LOC ] ; then
 		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.m2e.core.prefs
 		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.variables.prefs
 
+		if ! [ -e $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.powerlogic.jcompany.ambiente.prefs ] ; then 
+			cp -f $WORKSPACE_PLC/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.powerlogic.jcompany.ambiente.prefs $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.powerlogic.jcompany.ambiente.prefs
+		fi
 
 		# não esquecer do espaço ao final da variável " "
 		WORKSPACE_DATA="-data ${WORKSPACE_LOC} "
