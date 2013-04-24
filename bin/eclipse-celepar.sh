@@ -787,11 +787,12 @@ fi
 
 # habilitando a opção online do maven
 
-MAVENONLINE=$( grep -c 'eclipse.m2.offline=true' ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.m2e.core.prefs )
-if [ $MAVENONLINE != 0 ] ; then 
-	sed "s@eclipse.m2.offline=true@@g" -i ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.m2e.core.prefs
-fi
-
+if [ -e ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.m2e.core.prefs ] ; then 
+	MAVENONLINE=$( grep -c 'eclipse.m2.offline=true' ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.m2e.core.prefs )
+	if [ $MAVENONLINE != 0 ] ; then 
+		sed "s@eclipse.m2.offline=true@@g" -i ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.m2e.core.prefs
+	fi
+fi 
 
 # remove arquivo que causa problema de mensagem em branco caso o arquivo exista
 if [ -e ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.resources/.snap ]; then
