@@ -7,6 +7,8 @@
 
 # set -x 
 
+
+export http_proxy="http://proxy0.celepar.parana:8080"
 export ECLIPSE_LATIN1="/home/desenv/bin/eclipse"
 export ECLIPSE_UTF8="/home/desenv/bin/jaguar/eclipse"
 export HOME_BIN="/home/desenv/bin"
