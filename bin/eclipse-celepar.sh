@@ -13,7 +13,7 @@ export HOME_BIN="/home/desenv/bin"
 export HOME_SERVERS="/home/desenv/servers"
 
 # independente da seleção de eclipse, iremos utilizar o maven dentro de $HOME_BIN/ferramentas/maven (3.0)
-export MVN=$HOME_BIN/ferramentas/maven
+export MVN="${HOME_BIN}/ferramentas/maven/bin/mvn"
 
 export DIALOG=/usr/bin/zenity
 export USUARIO=$USER
@@ -732,6 +732,41 @@ if [ "${ECLIPSEDIR}"x == "${ECLIPSE_LATIN1}"x ]; then
 	eclipse-encoding_latin $WORKSPACE_LOC
 fi
 
+
+
+#
+# Configuração MAVEN para online
+#
+
+# habilitando a opção online do maven
+sed "s@eclipse.m2.offline=true@@g" -i ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.m2e.core.prefs
+
+declare -a ARQ=();
+ARQ[1]="M2Eclipse - Liberacao Para Tomcat Rapida Com Reinicio.launch"
+ARQ[2]="Liberacao Para Tomcat Completa Desenvolvimento com Teste.launch"
+ARQ[3]="Instalar Projeto No Repositorio LOCAL com Teste.launch"
+ARQ[4]="Liberacao Para jBoss Completa Desenvolvimento com Testes.launch"
+ARQ[5]="Instalar Projeto No Repositorio CENTRAL com Teste.launch"
+ARQ[6]="M2Eclipse - Liberacao Para Tomcat Rapida.launch"
+ARQ[7]="Liberacao Para jBoss Completa Desenvolvimento.launch"
+ARQ[8]="Instalar Projeto No Repositorio CENTRAL.launch"
+ARQ[9]="M2Eclipse - Liberacao Para Tomcat Completa Producao.launch"
+ARQ[10]="Liberacao Para Tomcat Completa Desenvolvimento.launch"
+ARQ[11]="Tomcat.launch"
+ARQ[12]="M2Eclipse - Liberacao Para Tomcat Completa Desenvolvimento.launch"
+ARQ[13]="Liberacao Para jBoss Rapida com Reinicio.launch"
+ARQ[14]="Liberacao Para Tomcat Rapida.launch"
+ARQ[15]="Instalar Projeto No Repositorio LOCAL.launch"
+ARQ[16]="Liberacao Sonar.launch"
+ARQ[17]="Liberacao Para jBoss Rapida.launch"
+ARQ[18]="Liberacao Para Tomcat Completa Producao.launch"
+ARQ[19]="Limpar Modulos.launch"
+ARQ[20]="Liberacao Para Tomcat Rapida Com Reinicio.launch"
+
+for i in $(seq 1 20); do 
+	sed 's/-o"/"/' -i "${WORKSPACE_LOC}"/.metadata/.plugins/org.eclipse.debug.core/.launches/"${ARQ[i]}"
+done
+
 # remove arquivo que causa problema de mensagem em branco caso o arquivo exista
 if [ -e ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.resources/.snap ]; then
         rm ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.resources/.snap
@@ -859,7 +894,7 @@ echo ECLIPSE_HOME=$ECLIPSE_HOME
 echo MVN=$MVN
 echo "================================================================================"
 
-zenity --info --width 800  --timeout=3 --text "Utilizando configurações para o usuário \n<b> $USUARIO.</b> \n\
+zenity --info --width 800  --timeout=5 --text "Utilizando configurações para o usuário \n<b> $USUARIO.</b> \n\
 Usando Máquina virtual Java \n<b> $JAVA_HOME </b>\n\
 Usando Codificação \n<b> $ENCODING </b>\n\
 Eclipse HOME em \n<b> $ECLIPSE_HOME </b>\n\
