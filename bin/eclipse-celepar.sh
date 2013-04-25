@@ -208,7 +208,7 @@ chown ${USUARIO}\: /home/${USUARIO}/.subversion/config
 
 function notas_versao(){
 
-zenity --info --width 800 --timeout 10 --title "Novidades da Versão" \
+zenity --info --width 900 --timeout 10 --title "Novidades da Versão" \
 --text "<span size='xx-large' foreground='blue'><b>LEIA-ME ;-)</b></span> \n\n\
 <span font_desc='Arial Black' size='x-large' style='italic' foreground='red'> \
 <b><u>Novidades</u></b>\n\
