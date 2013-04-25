@@ -208,7 +208,14 @@ chown ${USUARIO}\: /home/${USUARIO}/.subversion/config
 
 function notas_versao(){
 
-zenity --info --width 900 --timeout 10 --title "Novidades da Versão" \
+ATUALIZA=""
+UPDT=$(w3m -dump http://trac.gic.celepar.parana/trac/pinhao/wiki/FaqEclipse | grep Modifica -A 2 | grep '/' | sed 's/ //g')
+
+if [ "$UPDT"x != ""x ] ; then
+    ATUALIZA="<span font_desc='Arial' style='italic' foreground='red' size='large'>  Atualizado em ${UPDT:3:2}/${UPDT:0:2} </span>\n"
+fi
+
+zenity --info --width 800 --timeout 10 --title "Novidades da Versão" \
 --text "<span size='xx-large' foreground='blue'><b>LEIA-ME ;-)</b></span> \n\n\
 <span font_desc='Arial Black' size='x-large' style='italic' foreground='red'> \
 <b><u>Novidades</u></b>\n\
@@ -226,6 +233,7 @@ zenity --info --width 900 --timeout 10 --title "Novidades da Versão" \
 \t<b>Abertura de OS: </b>\n \t\thttp://trac.gic.celepar.parana/trac/pinhao/wiki/FaqEclipse#ProblemascomEclipse \n \
 \t<b>Sugestões de melhoria: </b>\n \t\thttp://trac.gic.celepar.parana/trac/pinhao/wiki/FaqEclipse#Melhorias \n \
 </span> \n\
+${ATUALIZA}
 "
 }
 
