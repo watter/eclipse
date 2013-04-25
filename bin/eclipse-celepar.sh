@@ -951,18 +951,18 @@ echo ECLIPSE_HOME=$ECLIPSE_HOME
 echo MVN=$MVN
 echo "================================================================================"
 
-zenity --info --width 800  --timeout=5 --text "Utilizando configurações para o usuário \n<b> $USUARIO.</b> \n\
-Usando Máquina virtual Java \n<b> $JAVA_HOME </b>\n\
-Usando Codificação \n<b> $ENCODING </b>\n\
-Eclipse HOME em \n<b> $ECLIPSE_HOME </b>\n\
-Maven em \n<b> $MVN </b>\n\
-Servidor de Aplicação \n<b> $VERSAOJBOSS </b>\n\
-<b> $JBOSS_HOME $CATALINA_HOME </b>\n\
-Usando <b>Workspace</b> \n<b> $WORKSPACE_LOC </b>\n\
-JAVA_JNI \n<b> $JAVA_JNI </b>\n\
-JAVA_OPTS \n<b> $JAVA_OPTS </b>\n\
-VMARGS \n<b> ${VMARGS/</&lt;/} </b>"
-
+# zenity --info --width 800 --timeout=3 --text "Utilizando configurações para o usuário \n<b> $USUARIO.</b> \n\
+# Usando Máquina virtual Java \n<b> $JAVA_HOME </b>\n\
+# Usando Codificação \n<b> $ENCODING </b>\n\
+# Eclipse HOME em \n<b> $ECLIPSE_HOME </b>\n\
+# Maven em \n<b> $MVN </b>\n\
+# Servidor de Aplicação \n<b> $VERSAOJBOSS </b>\n\
+# <b> $JBOSS_HOME $CATALINA_HOME </b>\n\
+# Usando <b>Workspace</b> \n<b> $WORKSPACE_LOC </b>\n\
+# JAVA_JNI \n<b> $JAVA_JNI </b>\n\
+# JAVA_OPTS \n<b> $JAVA_OPTS </b>\n\
+# VMARGS \n<b> ${VMARGS/</&lt;/} </b>"
+# 
 # ${VMARGS/</&lt;/}  substitui < por &lt; por causa da marcação pango
 
 SAVECONFIG=''
