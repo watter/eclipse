@@ -203,6 +203,35 @@ chown ${USUARIO}\: /home/${USUARIO}/.subversion/config
 
 
 #
+# Mostra janela de novidades e notas da Versão com links para o TRAC
+#
+
+function notas_versao(){
+
+zenity --info --width 800 --timeout 10 --title "Novidades da Versão" \
+--text "<span size='xx-large' foreground='blue'><b>LEIA-ME ;-)</b></span> \n\n\
+<span font_desc='Arial Black' size='x-large' style='italic' foreground='red'> \
+<b><u>Novidades</u></b>\n\
+</span>\
+<span font_desc='Arial Black' style='italic' foreground='darkgreen' size='x-large'> \
+\thttp://trac.gic.celepar.parana/trac/pinhao/wiki/FaqEclipse#Novidades \n \n\
+</span>\
+<span font_desc='Arial Black' size='x-large' style='italic'> \
+<b><u>Perguntas Frequentes</u></b> \n\thttp://trac.gic.celepar.parana/trac/pinhao/wiki/FaqEclipse  \n\
+</span> \n\
+<span font_desc='Arial Black' size='x-large' style='italic'> \
+<u>Informações de Contato</u>\n\
+</span>\
+<span font_desc='Arial' style='italic' foreground='darkblue' size='large'> \
+\t<b>Abertura de OS: </b>\n \t\thttp://trac.gic.celepar.parana/trac/pinhao/wiki/FaqEclipse#ProblemascomEclipse \n \
+\t<b>Sugestões de melhoria: </b>\n \t\thttp://trac.gic.celepar.parana/trac/pinhao/wiki/FaqEclipse#Melhorias \n \
+</span> \n\
+"
+}
+
+
+
+#
 # verifica se a configuração da codificação de caracteres está ok
 #
 function eclipse-encoding_latin() {
@@ -953,6 +982,12 @@ fi
 JBOSSCENTRAL="-Dorg.jboss.tools.central.donotshow=true"
 
 
+#
+# mostre as notas da versão
+#
+
+notas_versao
+
 DEB="echo"
 DEB=""
 
@@ -1038,4 +1073,3 @@ ${WORKSPACE_DATA} \
 #WORKA
 #leslie@ecelepar16853:~$ echo ${A,,[A-Z]}
 #worka
-
