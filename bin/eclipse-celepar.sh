@@ -752,6 +752,15 @@ if ! [ -d $WORKSPACE_LOC ] ; then
 		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.m2e.core.prefs
 		sed "s@/home/desenv/jaguar@/home/desenv/bin/jaguar@g" -i $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.variables.prefs
 
+		# corrige uso da JVM do servidor JBOSS e Tomcat  para a JVM instalada / preferencial
+
+		sed "s@/home/desenv/bin/jaguar/java/lib@${JAVA_HOME}/jre/lib@g" -i ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.debug.core/.launches/Tomcat.launch
+		sed "s@/home/desenv/bin/jaguar/java@${JAVA_HOME}@g" -i ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.jdt.launching/libraryInfos.xml
+		sed "s@/home/desenv/bin/jaguar/java/jre@${JAVA_HOME}/jre@g" -i ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.jdt.launching/libraryInfos.xml
+		sed "s@/home/desenv/bin/jaguar/java@${JAVA_HOME}@g" -i ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.launching.prefs
+		sed "s@/home/desenv/bin/jaguar/java@${JAVA_HOME}@g" -i ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.core.prefs
+
+
 		if ! [ -e $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.powerlogic.jcompany.ambiente.prefs ] ; then 
 			cp -f $WORKSPACE_PLC/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.powerlogic.jcompany.ambiente.prefs $WORKSPACE_LOC/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.powerlogic.jcompany.ambiente.prefs
 		fi
