@@ -8,7 +8,7 @@
 # set -x 
 
 
-export http_proxy="http://proxy0.celepar.parana:8080"
+#export http_proxy="http://proxy0.celepar.parana:8080"
 export ECLIPSE_LATIN1="/home/desenv/bin/eclipse"
 export ECLIPSE_UTF8="/home/desenv/bin/jaguar/eclipse"
 export HOME_BIN="/home/desenv/bin"
@@ -16,7 +16,7 @@ export HOME_SERVERS="/home/desenv/servers"
 
 # independente da seleção de eclipse, iremos utilizar o maven dentro de $HOME_BIN/ferramentas/maven (3.0)
 export MVN="${HOME_BIN}/ferramentas/maven/bin/mvn"
-
+export MVN_HOME="${HOME_BIN}/ferramentas/maven/"
 export DIALOG=/usr/bin/zenity
 export USUARIO=$USER
 
@@ -215,7 +215,7 @@ if [ "$UPDT"x != ""x ] ; then
     ATUALIZA="<span font_desc='Arial' style='italic' foreground='red' size='large'>  Atualizado em ${UPDT:3:2}/${UPDT:0:2} </span>\n"
 fi
 
-zenity --info --width 800 --timeout 10 --title "Novidades da Versão" \
+zenity --info --width 800 --timeout 30 --title "Novidades da Versão" \
 --text "<span size='xx-large' foreground='blue'><b>LEIA-ME ;-)</b></span> \n\n\
 <span font_desc='Arial Black' size='x-large' style='italic' foreground='red'> \
 <b><u>Novidades</u></b>\n\
@@ -839,7 +839,23 @@ if [ -e ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.runtime/.settings/o
 	if [ $MAVENONLINE != 0 ] ; then 
 		sed "s@eclipse.m2.offline=true@@g" -i ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.m2e.core.prefs
 	fi
+	# configura o userSettingsFile para o settings.xml correto
+	echo "eclipse.m2.userSettingsFile=${MVN_HOME}/conf/settings.xml" >> ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.m2e.core.prefs
+
 fi 
+
+
+# pre-configurando settings de usuario
+
+if ! [ -d ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.runtime/.settings ] ; then 
+	mkdir -p ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.runtime/.settings ;
+	chown -R ${USUARIO}\: -p ${WORKSPACE_LOC}/.metadata
+fi 
+if ! [ -e ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.m2e.core.prefs ] ; then 
+	echo "eclipse.m2.userSettingsFile=${MVN_HOME}/conf/settings.xml" >> ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.m2e.core.prefs
+fi
+
+
 
 # remove arquivo que causa problema de mensagem em branco caso o arquivo exista
 if [ -e ${WORKSPACE_LOC}/.metadata/.plugins/org.eclipse.core.resources/.snap ]; then
@@ -1003,7 +1019,7 @@ JBOSSCENTRAL="-Dorg.jboss.tools.central.donotshow=true"
 # mostre as notas da versão
 #
 
-notas_versao
+notas_versao &
 
 DEB="echo"
 DEB=""
