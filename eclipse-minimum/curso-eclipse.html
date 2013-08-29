@@ -1,0 +1,4951 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><title>(Eclipse Crash Course)</title>
+<meta name="author" content="(Presented by Leslie H. Watter)"/>
+<link rel="stylesheet" href="./reveal.js/css/reveal.min.css">
+    <link rel="stylesheet" href="./reveal.js/css/theme/night.css" id="theme">
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section>
+<h1>Eclipse Crash Course</h1>
+<h2>Presented by Leslie H. Watter</h2>
+<h2><a href="mailto:leslieh@celepar.pr.gov.br">leslieh@celepar.pr.gov.br</a></h2>
+<h2></h2></section>
+
+
+<section>
+
+<h2>Eclipse</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>1. What is Eclipse?
+</li>
+<li>2. Eclipse Foundation
+</li>
+<li>3. Eclipse Public License
+</li>
+<li>4. Eclipse Installation
+</li>
+<li>&#x2026;
+</li>
+</ul>
+</div>
+
+
+</section>
+<section>
+
+<h3>1. What is Eclipse?</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Most people know Eclipse as an integrated development environment (IDE) for
+Java. Today it is the leading development environment for Java with a market
+share of approximately 65%.
+</p>
+
+&nbsp;
+
+<p>
+Eclipse is created by an Open Source community and is used in several different
+areas, e.g. as a development environment for Java or Android applications. The
+roots of Eclipses go back to 2001.
+</p>
+</div>
+</section>
+<section>
+
+<h3>1. What is Eclipse?</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+The Eclipse Open Source community has over 200 Open Source projects covering
+different aspects of software development.
+</p>
+
+&nbsp;
+
+<p>
+The Eclipse IDE can be extended with additional software components. Eclipse
+calls these software components plug-ins. Several Open Source projects and
+companies have extended the Eclipse IDE or created standalone applications
+(Eclipse RCP) on top of the Eclipse framework.
+</p>
+</div>
+</section>
+<section>
+
+<h3>2. Eclipse Foundation</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+The Eclipse projects are governed by the Eclipse Foundation. The Eclipse Foundation is a non-profit, member supported corporation that hosts the Eclipse Open Source projects and helps to cultivate both an Open Source community and an ecosystem of complementary products and services.
+</p>
+</div>
+</section>
+<section>
+
+<h3>3. Eclipse Public License</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+The Eclipse Public License (EPL) is an Open Source software license used by the
+Eclipse Foundation for its software. The EPL is designed to be
+business-friendly. EPL licensed programs can be used, modified, copied and
+distributed free of charge. The consumer of EPL-licensed software can choose to
+use this software in closed source programs. Only modifications in the original
+EPL code must also be released as EPL code. 
+</p>
+
+&nbsp;
+
+<p>
+The Eclipse Foundation also validates that source code contributed to Eclipse
+projects is free of Intellectual Property (IP) issues. This process is known as
+IP cleansing. 
+</p>
+
+&nbsp;
+
+<p>
+The permissive EPL and the IP cleansing effort of the Eclipse Foundation makes
+reusing the source code of Eclipse projects attractive for business companies. 
+</p>
+</div>
+</section>
+<section>
+
+<h3>4. Eclipse Installation</h3>
+<div class="outline-text-3" id="text-1-5">
+<ul class="org-ul">
+<li>4.1. Java requirements of Eclipse
+</li>
+<li>4.2. Download Eclipse
+</li>
+<li>4.3. Install Eclipse
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>4.1. Java requirements of Eclipse</h4>
+<div class="outline-text-4" id="text-1-5-1">
+<p>
+Eclipse requires an installed Java runtime. Eclipse 4.2 requires at least Java 5 to run.
+</p>
+
+&nbsp;
+
+<p class="fragment highlight-green">
+Inside Celepar you should use Java in version 6. It'll be provided by the
+company's machine installation, don't worry.
+</p>
+
+&nbsp;
+
+<p>
+The Eclipse IDE contains its own Java compiler hence a JRE is sufficient for
+most tasks with Eclipse.
+</p>
+
+&nbsp;
+
+<p>
+The JDK version of Java is required if you compile Java source code on the
+command line and for advanced development scenarios, for example if you use
+automatic builds or if you develop Java web application.
+</p>
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>4.2. Download Eclipse</h4>
+<div class="outline-text-4" id="text-1-5-2">
+<p>
+The Eclipse IDE consists out of several components. The Eclipse.org website
+provides pre-packaged Eclipse distributions to provide downloads for typical use
+cases. The Eclipse IDE for Java Developers distribution is specifically designed
+for standard Java development. 
+</p>
+
+&nbsp;
+
+<p>
+Download the Eclipse IDE for Java Developers package from the following
+URL. Ensure that you download the right version for your Java version (32 bit
+vs. 64 bit).
+</p>
+
+&nbsp;
+
+<p>
+<a href="http://www.eclipse.org/downloads">http://www.eclipse.org/downloads</a> 
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>4.2. Download Eclipse</h4>
+<div class="outline-text-4" id="text-1-5-3">
+<p>
+The following screenshot shows the Eclipse download website for a Linux system,
+press on the link beside the package description, e,g, Linux 64 Bit to start the
+download. 
+</p>
+
+<img src="./images/xeclipsedownload10.png.pagespeed.ic.9Vdr62QU-z.png" alt="Eclipse Download page">
+
+<p>
+The download is a .zip file.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>4.3. Install Eclipse</h4>
+<div class="outline-text-4" id="text-1-5-4">
+<p>
+After you downloaded the .zip file with the Eclipse distribution you unpack it
+to a local directory.
+</p>
+
+&nbsp;
+
+<p>
+Most operating systems can extract zip files in their file browser, e.g. Windows
+7 with a right mouse click on the file and selecting "Extract all&#x2026;".
+</p>
+
+&nbsp;
+
+<p class="fragment highlight-blue">
+Warning 
+</p>
+<blockquote>
+<p>
+Extract Eclipse to a directory without spaces in its path and do not use a mapped network drive (Windows). Eclipse sometimes has problems with such a setup.
+</p>
+</blockquote>
+
+<p>
+After unpacking the zip file, Eclipse is ready to be used; no additional installation procedure is required.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>Celepar Environment</h4>
+<div class="outline-text-4" id="text-1-5-5">
+<p class="fragment highlight-green">
+In Celepar's environment you'll receive a ready machine with a specially
+prepared package of Eclipse's installation.
+</p>
+
+&nbsp;
+
+<p>
+Take in account that you'll receive some instructions howto look at the
+Company's development patterns (they're still changing).
+</p>
+
+&nbsp;
+
+<p>
+In short, you'll receive a machine with Eclipse, maven, and other develpment
+tools installed. 
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>Celepar Environment</h4>
+<div class="outline-text-4" id="text-1-5-6">
+<p>
+Where to look at? 
+</p>
+
+<ul class="org-ul">
+<li>Directories:
+<ul class="org-ul">
+<li>Old System Defaults to:
+<ul class="org-ul">
+<li>/usr/lib/eclipse
+</li>
+<li>/usr/lib/jboss4
+</li>
+</ul>
+</li>
+<li>New Systems - Ubuntu
+<ul class="org-ul">
+<li><i>home/desenv</i> or <i>usr/lib/desenv</i>
+<ul class="org-ul">
+<li>bin
+</li>
+<li>repositorio
+</li>
+<li>servers
+<ul class="org-ul">
+<li>jboss
+</li>
+<li>jboss4.0.5
+</li>
+<li>jboss4.2.3
+</li>
+<li>jboss7 -&gt; jboss
+</li>
+<li>tomcat
+</li>
+</ul>
+</li>
+<li>workspaces or $HOME/workspace
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>Celepar Environment</h4>
+<div class="outline-text-4" id="text-1-5-7">
+<p>
+The latest news from Celepar's Eclipse's package / environment can be found at: 
+</p>
+
+<ul class="org-ul">
+<li>Sites:
+<ul class="org-ul">
+<li><a href="http://trac.gic.celepar.parana/trac/pinhao/wiki/FaqEclipse">http://trac.gic.celepar.parana/trac/pinhao/wiki/FaqEclipse</a>
+</li>
+</ul>
+</li>
+<li>Persons:
+<ul class="org-ul">
+<li>Leslie :)
+</li>
+<li>GGA folks
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+<section>
+
+<h3>5. Getting started</h3>
+<div class="outline-text-3" id="text-1-6">
+<ul class="org-ul">
+<li>5.1. Starting Eclipse
+</li>
+<li>5.2. Appearance
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>5.1. Starting Eclipse</h4>
+<div class="outline-text-4" id="text-1-6-1">
+<p>
+To start Eclipse click on the eclipse icon at your launcher bar.
+</p>
+
+&nbsp;
+
+<p class="fragment highlight-red">
+The system will prompt you for a workspace. The workspace is the place in which
+you work. 
+</p>
+
+&nbsp;
+
+<p>
+Select an empty directory and press the OK button.
+</p>
+
+<img src="./images/xstarteclipse10.png.pagespeed.ic.KsOi67Vnq_.png" alt="Selecting the Workspace">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>5.1. Starting Eclipse</h4>
+<div class="outline-text-4" id="text-1-6-2">
+<p>
+Eclipse starts and shows the Welcome page. Close this page by pressing the X beside Welcome.
+</p>
+
+<img src="./images/xstarteclipse20.png.pagespeed.ic.29Vipz6hfY.png" alt="Closing the Eclipse welcome screen">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>5.1. Starting Eclipse</h4>
+<div class="outline-text-4" id="text-1-6-3">
+<p>
+After closing the welcome screen you see a screen similar to the following screenshot.
+</p>
+
+<img src="./images/xstarteclipse30.png.pagespeed.ic.Rxcj1VKw4Y.png" alt="Closing the Eclipse welcome screen">
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>5.2. Appearance</h4>
+<div class="outline-text-4" id="text-1-6-4">
+<p>
+The appearance of Eclipse can be configured. By default Eclipse ships with a few
+themes but you can also extend Eclipse with new themes. The appendix of this
+tutorial lists popular themes.
+</p>
+&nbsp;
+
+<p class="fragment highlight-green">
+To change the appearance, select from the menu Window → Preferences → General → Appearance.
+</p>
+
+&nbsp;
+<p>
+The Theme selection allows you to change the appearance of your Eclipse IDE. Disabling the animations will make your Eclipse run faster.
+</p>
+
+<img src="./images/xstarteclipse40.png.pagespeed.ic.d7n8YJLloZ.png" alt="Changing the theme">
+
+<p class="fragment highlight-blue">
+Please note that you need to restart Eclipse to apply a new theme completely.
+</p>
+</div>
+</section>
+
+</section>
+<section>
+
+<h3>6. Important Eclipse terminology</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+Eclipse provides Perspectives, Views and Editors. Views and Editors are grouped
+into Perspectives.
+</p>
+
+<ul class="org-ul">
+<li>6.1. Workspace
+</li>
+<li>6.2. Eclipse projects
+</li>
+<li>6.3. Views and editors - parts
+</li>
+<li>6.4. Perspective
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>6.1. Workspace</h4>
+<div class="outline-text-4" id="text-1-7-1">
+<p>
+The workspace is the physical location (file path) you are working in. Your
+projects, source files, images and other artifacts can be stored and saved in
+your workspace. The workspace also contains preferences settings, plug-in
+specific meta data, logs etc.
+</p>
+&nbsp;
+
+<p>
+You typically use different workspaces if you require different settings for
+your project or if you want to divide your projects into separate directories.
+</p>
+&nbsp;
+
+<p class="fragment highlight-blue">
+Note
+</p>
+<blockquote>
+<p>
+Your projects must not reside within the workspace directory. It is possible to
+refer to external resources, e.g. projects, from the workspace. 
+</p>
+</blockquote>
+
+<p>
+You can choose the workspace during startup of Eclipse or via the menu (File →
+Switch Workspace → Others) .
+</p>
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>6.2. Eclipse projects</h4>
+<div class="outline-text-4" id="text-1-7-2">
+<p>
+An Eclipse project contains source, configuration and binary files related to a
+certain task and groups them into buildable and reusable units.
+</p>
+&nbsp;
+<p class="fragment highlight-blue">
+An Eclipse project can have natures assigned to it which describe the purpose of this
+project.
+</p>
+&nbsp;
+<p>
+For example the Java nature defines a project as Java project. Projects
+can have multiple natures combined to model different technical aspects.
+</p>
+&nbsp;
+<p>
+Natures for a project are defined via the .project file in the project directory.
+</p>
+&nbsp;
+
+<p class="fragment highlight-red">
+Projects in Eclipse cannot contain other projects. (This is only valid if
+you're not using maven, which supports nested projects/modules!)
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>6.3. Views and editors - parts</h4>
+<div class="outline-text-4" id="text-1-7-3">
+<p>
+Parts are user interface components which allow you to navigate and modify
+data. A part can have a dropdown menu, context menus and a toolbar. Parts are
+typically divided into views and editors.
+</p>
+&nbsp;
+
+<p>
+The distinction into views and editors is not based on technical differences,
+but on a different concept of using and arranging these parts.
+</p>
+&nbsp;
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>6.3. Views and editors - parts</h4>
+<div class="outline-text-4" id="text-1-7-4">
+<p>
+A view is typically used to work on a set of data, which might be a hierarchical
+structure. If data is changed via the view , this change is typically directly
+applied to the underlying data structure. A view sometimes allows us to open an
+editor for a selected set of data.
+</p>
+&nbsp;
+
+<p>
+An example for a view is the Package Explorer, which allows you to browse the
+files of Eclipse projects. If you change data in the Package Explorer,
+e.g. renaming a file, the file name is directly changed on the file system.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>6.3. Views and editors - parts</h4>
+<div class="outline-text-4" id="text-1-7-5">
+<p>
+Editors are typically used to modify a single data element, e.g. a file or a
+data object. To apply the changes made in an editor to the data structure, the
+user has to explicitly save the editor content.
+</p>
+&nbsp;
+
+<p>
+Editors and views can be freely positioned in the user interface.
+</p>
+
+&nbsp;
+<p>
+For example the Java editor is used to modify Java source files. Changes to the
+source file are applied once the user selects the Save command. A dirty editor
+is marked with an asterisk.
+</p>
+
+<img src="./images/xdirtyeditor10.png.pagespeed.ic.zpeGuSuRAc.png" alt="Editor marked as dirty">
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>6.4. Perspective</h4>
+<div class="outline-text-4" id="text-1-7-6">
+<p>
+A Perspective is a visual container for a set of parts. 
+</p>
+
+&nbsp;
+<p>
+The Eclipse IDE uses perspectives to arrange parts and configure the menu and the toolbar for
+different development tasks. 
+</p>
+
+&nbsp;
+<p>
+Open editors are shared between perspectives, i.e. if you have an editor open in
+the Java perspective for a certain class and switch to the Debug perspective, this editor stays open.
+</p>
+
+&nbsp;
+<p class="fragment highlight-blue">
+You can switch Perspectives via the Window → Open Perspective → Other&#x2026; menu entry.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>6.4. Perspective</h4>
+<div class="outline-text-4" id="text-1-7-7">
+<p>
+The main perspectives used for Java development are the Java perspective and the Debug perspective.
+</p>
+
+<img src="./images/xeclipseide_perspective10.png.pagespeed.ic.SF6GAn2OQN.png" alt="Switching perspectives in the Eclipse IDE">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>6.4. Perspective</h4>
+<div class="outline-text-4" id="text-1-7-8">
+<p>
+You can change the layout and content within a Perspective by opening or closing parts and by re-arranging them.
+</p>
+
+&nbsp;
+<p class="fragment highlight-blue">
+To open a new part in your current Perspective use the Window → Show View → Other&#x2026; menu entry. The following Show View dialog allows you to search for certain parts.
+</p>
+
+<img src="./images/xide_showview10.png.pagespeed.ic.31ofPLoBu8.png" alt="Show View dialog">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>6.4. Perspective</h4>
+<div class="outline-text-4" id="text-1-7-9">
+<p>
+If you want to reset your current perspective to its default, use the Window → Reset Perspective menu entry.
+</p>
+
+<p>
+You can save the currently selected perspective via Window → Save Perspective As&#x2026;.
+</p>
+
+<img src="./images/xeclipseide_saveperspective10.png.pagespeed.ic.-jFB-a_wPS.png" alt="Save your perspective configuration">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>6.4. Perspective</h4>
+<div class="outline-text-4" id="text-1-7-10">
+<p>
+The Window → Customize Perspective&#x2026; menu entry allows you to adjust the selected perspective. For example you can hide or show toolbar and menu entries.
+</p>
+
+<img src="./images/xperspective_customize10.png.pagespeed.ic.W9M8KNbb1r.png" alt="Customize Perspective">
+</div>
+</section>
+</section>
+<section>
+
+<h3>7. Eclipse Java development user interface</h3>
+<div class="outline-text-3" id="text-1-8">
+<ul class="org-ul">
+<li>7.1. Perspectives in Eclipse
+</li>
+<li>7.2. Resetting a perspective
+</li>
+<li>7.3. Java perspective and Package Explorer
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>7.1. Perspectives in Eclipse</h4>
+<div class="outline-text-4" id="text-1-8-1">
+<p>
+Eclipse provides different perspectives for different tasks. The available perspectives depend on your installation.
+</p>
+&nbsp;
+
+<p>
+For Java development you usually use the Java Perspective, but Eclipse has much more predefined perspectives, e.g. the Debug perspective.
+</p>
+
+&nbsp;
+<p>
+Eclipse allows you to switch to another perspective via the Window → Open Perspective → Other&#x2026; menu entry.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>7.2. Resetting a perspective</h4>
+<div class="outline-text-4" id="text-1-8-2">
+<p>
+A common problem is that you changed the arrangement of views and editors in your perspective and you want to restore Eclipse to its original state. For example you might have closed a view .
+</p>
+&nbsp;
+<p>
+You can reset a perspective to its original state via the Window → Reset Perspective menu entry.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>7.3. Java perspective and Package Explorer</h4>
+<div class="outline-text-4" id="text-1-8-3">
+<p>
+The default perspective for Java development can be opened via Window → Open Perspective → Java.
+</p>
+&nbsp;
+<p>
+On the left hand side, this perspective shows the Package Explorer view, which
+allows you to browse your projects and to select the components you want to open
+in an editor via a double-click.
+</p>
+
+&nbsp;
+<p>
+For example to open a Java source file, open the tree under src, select the
+corresponding .java file and double-click it. This will open the file in the
+default Java editor.
+</p>
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>7.3. Java perspective and Package Explorer</h4>
+<div class="outline-text-4" id="text-1-8-4">
+<p>
+The following picture shows the Eclipse IDE in its standard Java
+perspective. 
+</p>
+<img src="./images/xeclipse_java.png.pagespeed.ic.INseARLDoL.png" alt="Eclipse Java Perspective">
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>7.3. Java perspective and Package Explorer</h4>
+<div class="outline-text-4" id="text-1-8-5">
+<p>
+The Package Explorer view is on the left. In the middle you see the
+open editors. 
+</p>
+&nbsp;
+<img src="./images/xeclipse_java.png.pagespeed.ic.INseARLDoL.png" alt="Eclipse Java Perspective">
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>7.3. Java perspective and Package Explorer</h4>
+<div class="outline-text-4" id="text-1-8-6">
+<p>
+Several editors are stacked in the same container and you can switch between
+them by clicking on the corresponding tab. 
+</p>
+&nbsp;
+
+<p class="fragment highlight-blue">
+Via drag and drop you can move an editor to a new position in the Eclipse IDE.
+</p>
+
+<img src="./images/xeclipse_java.png.pagespeed.ic.INseARLDoL.png" alt="Eclipse Java Perspective">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>7.3. Java perspective and Package Explorer</h4>
+<div class="outline-text-4" id="text-1-8-7">
+<p>
+To the right and below the editor area you find more views which were considered
+useful by the developer of the perspective. For example the Javadoc view shows
+the Javadoc of the selected class or method.
+</p>
+
+<img src="./images/xeclipse_java.png.pagespeed.ic.INseARLDoL.png" alt="Eclipse Java Perspective">
+</div>
+</section>
+</section>
+<section>
+
+<h3>8. Eclipse Java perspective</h3>
+<div class="outline-text-3" id="text-1-9">
+<ul class="org-ul">
+<li>8.1. Toolbar
+</li>
+<li>8.2. Useful views
+</li>
+<li>8.3. Package Explorer view
+</li>
+<li>8.4. Outline view
+</li>
+<li>8.5. Problems view
+</li>
+<li>8.6. Javadoc view
+</li>
+<li>8.7. Java editor
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>8.1. Toolbar</h4>
+<div class="outline-text-4" id="text-1-9-1">
+<p>
+The application toolbar contains actions which you typically perform, e.g. creating Java resources or running Java projects. It also allows you to switch between perspectives.
+</p>
+
+<img src="./images/xjavaperspectivetoolbar10.png.pagespeed.ic.p9wbgnmT2X.png" alt="Java Perspective toolbar">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>8.2. Useful views</h4>
+<div class="outline-text-4" id="text-1-9-2">
+<p>
+The Java perspective contains useful views for working with your Java project. The following description explains the most important ones.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>8.3. Package Explorer view</h4>
+<div class="outline-text-4" id="text-1-9-3">
+<p>
+The Package Explorer view allows you to browse the structure of your projects and to open files in an editor via a double-click on the file.
+</p>
+
+<img src="./images/xpackageexplorerview20.png.pagespeed.ic.VVq3LMMkK1.png" alt="Package Explorer"
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>8.3. Package Explorer view</h4>
+<div class="outline-text-4" id="text-1-9-4">
+<p>
+It is also used to change the structure of your project. For example you can rename files or move files and folders via drag and drop. A right-click on a file or folder shows you the available options.
+</p>
+
+<img src="./images/xpackageexplorerview20.png.pagespeed.ic.VVq3LMMkK1.png" alt="Package Explorer"
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>8.4. Outline view</h4>
+<div class="outline-text-4" id="text-1-9-5">
+<p>
+The Outline view shows the structure of the currently selected source file.
+</p>
+
+<img src="./images/xoutlineview10.png.pagespeed.ic.5zX1PB11bj.png" alt="Outline View">
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>8.5. Problems view</h4>
+<div class="outline-text-4" id="text-1-9-6">
+<p>
+The Problems view shows errors and warning messages. Sooner or later you will run into problems with your code or your project setup. To view the problems in your project you can use the Problems view which is part of the standard Java perspective. If this view is closed you can open it via Window → Show View → Problems.
+</p>
+
+<img src="./images/xproblemsview10.png.pagespeed.ic.aCCnT6KfTc.png" alt="Errors in the problem view">
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>8.5. Problems view</h4>
+<div class="outline-text-4" id="text-1-9-7">
+<p>
+The messages which are displayed in the Problems view can be configured via the drop-down menu of the view . For example, to display the problems from the currently selected project, select Configure Contents and set the Scope to On any element in the same project.
+</p>
+
+<img src="./images/xproblemsview20.png.pagespeed.ic.ZpsomPJ2_2.png" alt="Drop-down menu of the problems view">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>8.5. Problems view</h4>
+<div class="outline-text-4" id="text-1-9-8">
+<img src="./images/xproblemsview30.png.pagespeed.ic.OaGeh9tsjz.png" alt="Customizing">
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>8.5. Problems view</h4>
+<div class="outline-text-4" id="text-1-9-9">
+<p>
+The Problems view also allows you to trigger a Quick fix via a right mouse-click on several selected messages. See Section 15.2, “Quick Fix” for details on the Quick fix functionality.
+</p>
+
+<img src="./images/xproblemsview40.png.pagespeed.ic.pH6dEfPKMH.png" alt="Customizing">
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>8.6. Javadoc view</h4>
+<div class="outline-text-4" id="text-1-9-10">
+<p>
+The Javadoc view shows the documentation of the selected element in the Java editor.
+</p>
+
+<img src="./images/xjavadocview12.png.pagespeed.ic.yMfNJRdkGa.png" alt="Javadoc View">
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>8.7. Java editor</h4>
+<div class="outline-text-4" id="text-1-9-11">
+<p>
+The Java editor is used to modify the Java source code. Each Java source file is opened in a separate editor.
+</p>
+
+<img src="./images/xjavaeditorintro10.png.pagespeed.ic.m35WWUEcPN.png" alt="Java editor">
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>8.7. Java editor</h4>
+<div class="outline-text-4" id="text-1-9-12">
+<p>
+If you click in left column of the editor you can configure its properties for example that line number should be displayed.
+</p>
+
+<img src="./images/xjavaeditorintro20.png.pagespeed.ic.QuaBlohEzF.png" alt="Java editor">
+</div>
+</section>
+</section>
+<section>
+
+<h3>9. Create your first Java program</h3>
+<div class="outline-text-3" id="text-1-10">
+<ul class="org-ul">
+<li>9.1. Target of this exercise
+</li>
+<li>9.2. Create project
+</li>
+<li>9.3. Create package
+</li>
+<li>9.4. Create Java class
+</li>
+<li>9.5. Run your project in Eclipse
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>9.1. Target of this exercise</h4>
+<div class="outline-text-4" id="text-1-10-1">
+<p>
+The following section describes how to create a minimal Java application using
+Eclipse. It is tradition in the programming world to create a small program
+which writes "Hello World" to the console. We will adapt this tradition and will
+write "Hello Eclipse!" to the console.
+</p>
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>9.2. Create project</h4>
+<div class="outline-text-4" id="text-1-10-2">
+<p>
+This tutorial uses the naming convention that the project is named the same as
+the top-level package in the project.
+</p>
+
+&nbsp;
+<p>
+Just as an example we will follow the convention used by voegella listed here. 
+</p>
+
+&nbsp;
+<p class="fragment highlight-red">
+At Celepar we use: br.gov.pr.celepar
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>9.2. Create project</h4>
+<div class="outline-text-4" id="text-1-10-3">
+<p>
+Select File → New → Java project from the menu.
+</p>
+&nbsp;
+<p>
+Enter de.vogella.eclipse.ide.first as the project name. Select the Create
+separate folders for sources and class files flag.
+</p>
+
+<img src="./images/xfirstgany10.gif.pagespeed.ic.quKmtb4yZP.png" alt="New Java Project Wizard">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>9.2. Create project</h4>
+<div class="outline-text-4" id="text-1-10-4">
+<p>
+Press the Finish button to create the project. A new project is created and
+displayed as a folder. Open the de.vogella.eclipse.ide.first folder and explore
+the content of this folder.
+</p>
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>9.3. Create package</h4>
+<div class="outline-text-4" id="text-1-10-5">
+<p>
+In the following step you create a new package. A good convention for the
+project and package name is to use the same name for the top level package and
+the project. For example if you name your project com.example.javaproject you
+should also use com.example.javaproject as top level package name.
+</p>
+
+&nbsp;
+
+<p>
+To create the de.vogella.eclipse.ide.first package, select the src folder , right-click on it and select New → Package.
+</p>
+
+<img src="./images/xfirstgany30.gif.pagespeed.ic.CZAzCf2anS.png" alt="Right mouse click to create a package">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>9.3. Create package</h4>
+<div class="outline-text-4" id="text-1-10-6">
+<p class="fragment highlight-green">
+Tip
+</p>
+<blockquote>
+<p>
+Reverse domain names should be used for packages to prevent name clashes. It is relatively unlikely that another company defines a class called test in the com.vogella package because this is the reverse URL of the vogella GmbH company.
+</p>
+</blockquote>
+
+&nbsp;
+<p>
+Just as an example we will follow the convention used by voegella listed here. 
+</p>
+
+&nbsp;
+<p class="fragment highlight-red">
+At Celepar we use: br.gov.pr.celepar
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>9.3. Create package</h4>
+<div class="outline-text-4" id="text-1-10-7">
+<p>
+Enter the name of your new package in the dialog and press the Finish button.
+</p>
+<img src="./images/xfirstgany40.gif.pagespeed.ic.xWbO5Sfvj8.png" alt="Create a package Dialog">
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>9.4. Create Java class</h4>
+<div class="outline-text-4" id="text-1-10-8">
+<p>
+Create a Java class. Right-click on your package and select New → Class.
+</p>
+
+<img src="./images/xfirstgany50.gif.pagespeed.ic.htBDKtUOST.png" alt="Create a new class selection">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>9.4. Create Java class</h4>
+<div class="outline-text-4" id="text-1-10-9">
+<p>
+Enter MyFirstClass as the class name and select the public static void main (String[] args) flag.
+</p>
+
+<img src="./images/xfirstgany60.gif.pagespeed.ic.v45ZBNaCsw.png" alt="Create a new class selection">
+
+<p>
+Press the Finish button.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>9.4. Create Java class</h4>
+<div class="outline-text-4" id="text-1-10-10">
+<p>
+This creates a new file and opens the Java editor. Change the class based on the following listing.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-java"><span style="color: #00ffff;">package</span> de.vogella.eclipse.ide.<span style="color: #7fffd4;">first</span>;
+
+<span style="color: #00ffff;">public</span> <span style="color: #00ffff;">class</span> <span style="color: #98fb98;">MyFirstClass</span> {
+
+  <span style="color: #00ffff;">public</span> <span style="color: #00ffff;">static</span> <span style="color: #98fb98;">void</span> <span style="color: #87cefa;">main</span>(<span style="color: #98fb98;">String</span>[] <span style="color: #eedd82;">args</span>) {
+    System.out.println(<span style="color: #ffa07a;">"Hello Eclipse!"</span>);
+  }
+
+}
+</pre>
+</div>
+<p>
+You could also directly create new packages via this dialog. If you enter a new package in this dialog, it is created automatically.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>9.5. Run your project in Eclipse</h4>
+<div class="outline-text-4" id="text-1-10-11">
+<p>
+Now run your code. Either right-click on your Java class in the Package Explorer
+or right-click in the Java class and select Run-as → Java application.
+</p>
+
+<img src="./images/xfirstgany70.gif.pagespeed.ic.TgkwA6Gett.png" alt="Run project">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>9.5. Run your project in Eclipse</h4>
+<div class="outline-text-4" id="text-1-10-12">
+<p>
+Eclipse will run your Java program. You should see the output in the Console view .
+</p>
+
+<img src="./images/xfirstgany80.gif.pagespeed.ic.rJLtqhf5RF.png" alt="Result of the running application">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>9.5. Run your project in Eclipse</h4>
+<div class="outline-text-4" id="text-1-10-13">
+<p>
+Congratulations! You created your first Java project, a package, a Java class and you ran this program inside Eclipse.
+</p>
+</div>
+</section>
+</section>
+<section>
+
+<h3>10. Run Java program outside Eclipse</h3>
+<div class="outline-text-3" id="text-1-11">
+<ul class="org-ul">
+<li>10.1. Create JAR file
+</li>
+<li>10.2. Run your program outside Eclipse
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>10.1. Create JAR file</h4>
+<div class="outline-text-4" id="text-1-11-1">
+<p>
+To run the Java program outside of the Eclipse IDE you need to export it as a JAR file. A JAR file is the standard distribution format for Java applications.
+</p>
+
+<p>
+Select your project, right-click it and select the Export menu entry.
+</p>
+
+<img src="./images/xfirstgany90.gif.pagespeed.ic.RY3mW6QfGP.png" alt="Export wizard for Java project">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>10.1. Create JAR file</h4>
+<div class="outline-text-4" id="text-1-11-2">
+<p>
+Select JAR file and select the Next button. Select your project and enter the export destination and a name for the JAR file. I named it myprogram.jar.
+</p>
+
+<img src="./images/xfirstgany100.gif.pagespeed.ic.ttr8vVdJMq.png" alt="Export wizard for Java project, Part II">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>10.1. Create JAR file</h4>
+<div class="outline-text-4" id="text-1-11-3">
+<img src="./images/xfirstgany110.gif.pagespeed.ic.U8kmE1_HZp.png" alt="Export wizard for Java project, Part III">
+
+<p>
+Press The Finish button. This creates a JAR file in your selected output directory.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>10.2. Run your program outside Eclipse</h4>
+<div class="outline-text-4" id="text-1-11-4">
+<p>
+Open a command shell, e.g. under Microsoft Windows select Start → Run and type cmd and press enter. This should open a console.
+</p>
+
+<p>
+Switch to the directory which contains the JAR file , by typing cd path. For example if your jar is located in c:\temp use the following command.
+</p>
+
+<p class="fragment highlight-green">
+cd c:\temp 
+</p>
+
+&nbsp;
+<p>
+or 
+</p>
+&nbsp;
+
+<p class="fragment highlight-green">
+cd <i>tmp</i>
+</p>
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>10.2. Run your program outside Eclipse</h4>
+<div class="outline-text-4" id="text-1-11-5">
+<p>
+To run this program include the JAR file into your classpath. The classpath defines which Java classes are available to the Java runtime. You can add a jar file to the classpath with the -classpath option.
+</p>
+
+&nbsp;
+<pre class="example">
+java -classpath myprogram.jar de.vogella.eclipse.ide.first.MyFirstClass
+</pre>
+
+&nbsp;
+<p>
+Type the above command in the directory you used for the export and you see the "Hello Eclipse!" output in your command shell.
+</p>
+</div>
+</section>
+</section>
+<section>
+
+<h3>11. Exporting and importing projects</h3>
+<div class="outline-text-3" id="text-1-12">
+<ul class="org-ul">
+<li>11.1. Exporting projects
+</li>
+<li>11.2. Importing projects
+</li>
+</ul>
+</div>
+
+
+</section>
+<section>
+<section>
+
+<h4>11.1. Exporting projects</h4>
+<div class="outline-text-4" id="text-1-12-1">
+<p>
+You can export and import Eclipse projects. This allows you to share projects with other people and to import existing projects.
+</p>
+
+<p>
+To export Eclipse projects, select File → Export → General → Archive File and select the projects you want to export.
+</p>
+
+<img src="./images/xexportprojects10.png.pagespeed.ic.d-xjFAq4Bq.png" alt="Exporting project">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>11.1. Exporting projects</h4>
+<div class="outline-text-4" id="text-1-12-2">
+<img src="./images/xexportprojects20.png.pagespeed.ic.JhnwiBkQIc.png" alt="Exporting projects part 2">
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>11.2. Importing projects</h4>
+<div class="outline-text-4" id="text-1-12-3">
+<p>
+To import projects, select File → Import → Existing Projects into Workspace. You can import from an archive file, i.e. zip file or directly import the projects in case you have extracted the zip file.
+</p>
+
+<img src="./images/ximportprojects10.png.pagespeed.ic.oMcVFk2vh8.png" alt="Importing projects">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>11.2. Importing projects</h4>
+<div class="outline-text-4" id="text-1-12-4">
+<img src="./images/ximportprojects20.png.pagespeed.ic.kA_AXRtpaB.png" alt="Importing projects from archive file">
+</div>
+</section>
+</section>
+<section>
+
+<h3>12. Navigating the Java source code</h3>
+<div class="outline-text-3" id="text-1-13">
+<ul class="org-ul">
+<li>12.1. Package Explorer
+</li>
+<li>12.2. Filter resources in the Package Explorer
+</li>
+<li>12.3. Closing and opening projects
+</li>
+<li>12.4. Link Package Explorer with editor
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>12.1. Package Explorer</h4>
+<div class="outline-text-4" id="text-1-13-1">
+<p>
+The primary way of navigating through your project is the Package Explorer. You can open nodes in the tree and open a file in an editor by double-clicking on the corresponding entry in the Package Explorer.
+</p>
+
+<img src="./images/xpackageexplorer10_display.png.pagespeed.ic.egR_KBjfJp.png" alt="Package Explorer display">
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>12.2. Filter resources in the Package Explorer</h4>
+<div class="outline-text-4" id="text-1-13-2">
+<p>
+The drop-down menu in the Package Explorer allows you to filter the resources which should be displayed or hidden.
+</p>
+
+<img src="./images/xpackageexplorer20_filter.png.pagespeed.ic.bctUi0X01R.png" alt="Filter in the package explorer">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>12.2. Filter resources in the Package Explorer</h4>
+<div class="outline-text-4" id="text-1-13-3">
+<img src="./images/xpackageexplorer22_filter.png.pagespeed.ic.Xzxu2viPGu.png" alt="Filter in the package explorer">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>12.3. Closing and opening projects</h4>
+<div class="outline-text-4" id="text-1-13-4">
+<p>
+You can close projects via right-click and by selecting the Close Project menu entry. Alternatively if you work on a project you can close all unrelated projects via right-click and by selecting the Close Unrelated Projects menu entry.
+</p>
+
+&nbsp;
+
+<p>
+Closing projects saves memory in Eclipse and can reduce the build time. To open a closed project double-click on it, or right-click it and select Open Project.
+</p>
+&nbsp;
+
+<p>
+Eclipse ignores closed projects, e.g. the Problems view does only show errors of closed projects. This typically helps to focus your attention on the project.
+</p>
+
+<p class="fragment highlight-green">
+Tip
+</p>
+<blockquote>
+<p>
+You can use the filter functionality for the Package Explorer view to hide the closed projects.
+</p>
+</blockquote>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>12.4. Link Package Explorer with editor</h4>
+<div class="outline-text-4" id="text-1-13-5">
+<p>
+The Package Explorer view allows you to display the associated file from the currently selected editor. For example if you are working on the Foo.java file in the Java editor and switch to the Java editor of the Var.java file, then the corresponding file will be selected in the Package Explorer view.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>12.4. Link Package Explorer with editor</h4>
+<div class="outline-text-4" id="text-1-13-6">
+<p>
+To activate this behavior, press the Link with Editor button in the Package explorer view as depicted in the following screenshot.
+</p>
+
+<img src="./images/xeditorsyncpackage10.png.pagespeed.ic.KwsxqJhxG1.png" alt="Synchronize the package explorer selectioni with the current selected editor">
+</div>
+</section>
+</section>
+<section>
+
+<h3>13. Navigate in the Java source code</h3>
+<div class="outline-text-3" id="text-1-14">
+<p>
+You can also use other means than the Package Explorer to navigate your source
+code. The following description lists the most important ones.
+</p>
+
+<ul class="org-ul">
+<li>13.1. Opening a class
+</li>
+<li>13.2. Mouse and keyboard navigation
+</li>
+<li>13.3. Quick Outline
+</li>
+<li>13.4. Open Type Hierarchy
+</li>
+<li>13.5. Search dialog
+</li>
+<li>13.6. Incremental find
+</li>
+<li>13.7. Find element based on current selection
+</li>
+<li>13.8. Annotation navigations
+</li>
+<li>13.9. Show in Breadcrumb
+</li>
+<li>13.10. Shortcuts
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>13.1. Opening a class</h4>
+<div class="outline-text-4" id="text-1-14-1">
+<p>
+You can navigate between the classes in your project via the Package Explorer
+view as described before. You can navigate the tree and open a file via
+double-click.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.1. Opening a class</h4>
+<div class="outline-text-4" id="text-1-14-2">
+<p>
+In addition you can open any class by positioning the cursor on the class in an
+editor and pressing F3. Alternatively, you can press Ctrl+Shift+T. This shows
+the following dialog in which you can enter the class name to open it.
+</p>
+
+<img src="./images/xclassopen10.png.pagespeed.ic.SWQkLOwXdr.png" alt="Opening a class">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.1. Opening a class</h4>
+<div class="outline-text-4" id="text-1-14-3">
+<p>
+You can also search for package names. Each part of the package name must end
+with a . (the dot character) so that the Open Type Dialog can identify it as
+package.
+</p>
+
+<p class="fragment highlight-green">
+Tip
+</p>
+<blockquote>
+<p>
+You only need to specify part of each segment of the package name. Assume for
+example that you search for the org.eclipse.swt.widgets.Button class. To find
+this class you can use the search term org.eclipse.swt.widgets.Button or
+o.e.s.w.Button or o.Button.
+</p>
+</blockquote>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.1. Opening a class</h4>
+<div class="outline-text-4" id="text-1-14-4">
+<img src="./images/xclassopen20.png.pagespeed.ic.Nj_NdmmKG9.png" alt="Opening a class with package name">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.1. Opening a class</h4>
+<div class="outline-text-4" id="text-1-14-5">
+<p>
+The Open Type Dialog also supports camel-case like search, e.g. it matches capital letters in the class name. For example if you would search for the OnTouchListener class you could use OTL or OToList as search term.
+</p>
+
+<img src="./images/xclassopen30.png.pagespeed.ic.E7GKFBhIsL.png" alt="Opening a class with camel-case">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.1. Opening a class</h4>
+<div class="outline-text-4" id="text-1-14-6">
+<p class="fragment highlight-green">
+Tip
+</p>
+<blockquote>
+<p>
+To avoid suffix matching you can add a space after the class name. For example
+you can type Selection (there is a space after selection) to match the Selection
+class but not the SelectionListener class. Wildcards like * are also supported.
+</p>
+</blockquote>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.2. Mouse and keyboard navigation</h4>
+<div class="outline-text-4" id="text-1-14-7">
+<p>
+In lot of cases you can also use the mouse to navigate to or into an element if
+you press the Ctrl key. For example press the Ctrl key and (left) click with the
+mouse on the name of a class to jump into the class declaration.
+</p>
+
+&nbsp;
+
+<p>
+Similar to the left mouse click combined with the Ctrl, you can use the F3 key
+to go into a class.
+</p>
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>13.3. Quick Outline</h4>
+<div class="outline-text-4" id="text-1-14-8">
+<p>
+If you right-click in your Java editor, you can select the Quick Outline option
+which shows you an outline of your Java class with the option to filter.
+</p>
+
+
+<img src="./images/xquickoutline10.png.pagespeed.ic.YUsAohO9WS.png" alt="Quickoutline">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.3. Quick Outline</h4>
+<div class="outline-text-4" id="text-1-14-9">
+<p>
+The shortcut for opening the Quick Outline is Ctrl+O. By default Quick Outline
+shows only the direct members and fields of the class. Press Ctrl+O again to
+show also the inherited members and fields.
+</p>
+
+&nbsp;
+
+<p>
+The default look of the Quick Outline option is similiar to the Quick Outline view of the Java perspective.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.4. Open Type Hierarchy</h4>
+<div class="outline-text-4" id="text-1-14-10">
+<p>
+The type hierarchy of a class shows you which classes it extends and which interfaces it implements. You can use the type hierarchy to navigate to one of these elements.
+</p>
+
+<p>
+To open the type hierarchy of the selected class, right-click in the editor and select Open Type Hierarchy (Shortcut: F4) or Quick Type Hierarchy (Shortcut: Ctrl+T).
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.5. Search dialog</h4>
+<div class="outline-text-4" id="text-1-14-11">
+<p>
+Via the Search → Search menu (Shortcut: Ctrl+H) you can open the search dialog of Eclipse.
+</p>
+
+<p>
+Use the Java Search tab to search for Java elements, e.g. methods.
+</p>
+
+<img src="./images/xjavasearchdialog10.png.pagespeed.ic.q_mUea3stV.png" alt="Text search">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.5. Search dialog</h4>
+<div class="outline-text-4" id="text-1-14-12">
+<p>
+The Search view shows the search results for the selected scope. You can double-click on a search entry to navigate to the corresponding position in the editor. The currently selected search result is also indicated via an arrow in the left border of the editor.
+</p>
+
+<img src="./images/xjavasearchdialog20.png.pagespeed.ic.ZiufIVfn1q.png" alt="Text search">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.5. Search dialog</h4>
+<div class="outline-text-4" id="text-1-14-13">
+<p>
+Use the File Search tab to search for text.
+</p>
+
+<img src="./images/xjavasearchdialog30.png.pagespeed.ic.ZswUcLONbA.png" alt="Text search">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.5. Search dialog</h4>
+<div class="outline-text-4" id="text-1-14-14">
+<p>
+Eclipse associates file extensions with the default tab. You can customize the available search tabs via the Customize button in the Search dialog. Via the Remenber the last used page you can configure Eclipse to use your last tab as default.
+</p>
+
+<img src="./images/xcustomizesearch10.png.pagespeed.ic.FpCKX0aDQH.png" alt="Customize search">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.5. Search dialog</h4>
+<div class="outline-text-4" id="text-1-14-15">
+<img src="./images/xcustomizesearch20.png.pagespeed.ic.5Mv1XlTr0d.png" alt="Customize search">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.5. Search dialog</h4>
+<div class="outline-text-4" id="text-1-14-16">
+<p class="fragment highlight-green">
+Tip
+</p>
+<blockquote>
+<p>
+The Search view allows you to delete search results via the Delete key.
+</p>
+</blockquote>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.6. Incremental find</h4>
+<div class="outline-text-4" id="text-1-14-17">
+<p>
+You can use the Ctrl+J shortcut to activate Incremental Find. 
+</p>
+
+<img src="./images/xincrementalsearch10.png.pagespeed.ic.0YmDyyP_Vf.png" alt="Incrementation search">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.6. Incremental find</h4>
+<div class="outline-text-4" id="text-1-14-18">
+<p>
+This allows you to search in the current active editor for a text which is displayed in the status
+line as depicted by the following screenshot.
+</p>
+
+&nbsp;
+<p>
+Repeat Ctrl+J in order to move to the next occurrences of the current search term.
+</p>
+
+<img src="./images/xincrementalsearch10.png.pagespeed.ic.0YmDyyP_Vf.png" alt="Incrementation search">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.6. Incremental find</h4>
+<div class="outline-text-4" id="text-1-14-19">
+<p>
+The advantage of this search is that no pop-up dialog is opened which blocks other elements in the Eclipse IDE.
+</p>
+
+<img src="./images/xincrementalsearch10.png.pagespeed.ic.0YmDyyP_Vf.png" alt="Incrementation search">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.7. Find element based on current selection</h4>
+<div class="outline-text-4" id="text-1-14-20">
+<p>
+If you have selected an element in the editor you can use the Ctrl+K shortcut to
+search for the next occurrence of the selected text and Ctrl+Shift+K for the
+previous element.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.8. Annotation navigations</h4>
+<div class="outline-text-4" id="text-1-14-21">
+<p>
+You can also navigate via the annotation buttons, e.g. for jumping to the next error or warning in your source code.
+</p>
+
+<img src="./images/xnavigation_annotations10.png.pagespeed.ic.mtNFURt-2D.png" alt="Annotation navigation">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.8. Annotation navigations</h4>
+<div class="outline-text-4" id="text-1-14-22">
+<p>
+By pressing the buttons you can navigate to the related annotations. 
+</p>
+&nbsp;
+<p>
+You can also use the keyboard shortcut Ctrl+. (Ctrl plus the dot sign) for selecting the
+next annotation or Ctrl+, for selecting the previous annotation.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.8. Annotation navigations</h4>
+<div class="outline-text-4" id="text-1-14-23">
+<p>
+The following screenshot shows source code with two warnings and one error and
+you can navigate between the corresponding code via the annotation buttons.
+</p>
+
+<img src="./images/xannotationsnavigation30.png.pagespeed.ic.UxPPXQG5CR.png" alt="Moving in the source code">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.8. Annotation navigations</h4>
+<div class="outline-text-4" id="text-1-14-24">
+<p>
+Which annotations are relevant for navigation can be configured via the
+drop-down menu of the toolbar. This selection is highlighted in the following
+screenshot.
+</p>
+
+
+<img src="./images/xnavigation_annotations20.png.pagespeed.ic.45MKWQdCf0.png" alt="Annotation navigation">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.9. Show in Breadcrumb</h4>
+<div class="outline-text-4" id="text-1-14-25">
+<p>
+You can also activate the breadcrumb mode for the Java editor which allows you
+to navigate the source code directly from the Java editor.
+</p>
+
+&nbsp;
+<p>
+You can activate this mode via right-click in the editor and by selecting the Show in Breadcrumb entry.
+</p>
+
+<img src="./images/xbreadcrumb10.png.pagespeed.ic.zZqKWoCqRh.png" alt="Show in Breadcrumb">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.9. Show in Breadcrumb</h4>
+<div class="outline-text-4" id="text-1-14-26">
+<p>
+This allows you to navigate the source code from the editor as depicted in the following screenshot.
+</p>
+
+<img src="./images/xbreadcrumb20.png.pagespeed.ic.TtyDFs_TRr.png" alt="Breadcrumb view">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>13.9. Show in Breadcrumb</h4>
+<div class="outline-text-4" id="text-1-14-27">
+<p>
+To hide it again, right-click on a breakcrump entry and select Hide Breadcrumb.
+</p>
+
+<img src="./images/xbreadcrumb30.png.pagespeed.ic.9VUzDCwsfs.png" alt="Breadcrumb view">
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>13.10. Shortcuts</h4>
+<div class="outline-text-4" id="text-1-14-28">
+<p>
+There are a lot of shortcuts available for navigation. Open
+</p>
+<p class="fragment highlight-blue">
+Preferences → General → Keys 
+</p>
+
+<p>
+to find and redefine shortcuts at runtime.
+</p>
+</div>
+</section>
+</section>
+<section>
+
+<h3>14. Opening a resource</h3>
+<div class="outline-text-3" id="text-1-15">
+<ul class="org-ul">
+<li>14.1. Via Package Explorer view
+</li>
+<li>14.2. Open Resource dialog
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>14.1. Via Package Explorer view</h4>
+<div class="outline-text-4" id="text-1-15-1">
+<p>
+You can also navigate to non Java source files via the Package Explorer view and open a file via double-click.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>14.2. Open Resource dialog</h4>
+<div class="outline-text-4" id="text-1-15-2">
+<p>
+In addition to the Package Explorer view you can open any file in your projects via the Open Resource dialog which can be opened via the Ctrl+Shift+R shortcut. This shortcut opens a dialog in which you can enter the resource name to open it.
+</p>
+
+<img src="./images/xopenresourceeclipse10.png.pagespeed.ic.RULBd1oglc.png" alt="Open resources in Eclipse">
+</div>
+</section>
+</section>
+<section>
+
+<h3>15. Content Assist and Quick Fix</h3>
+<div class="outline-text-3" id="text-1-16">
+<ul class="org-ul">
+<li>15.1. Content assist
+</li>
+<li>15.2. Quick Fix
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>15.1. Content assist</h4>
+<div class="outline-text-4" id="text-1-16-1">
+<p>
+Content assist is a functionality in Eclipse which allows the developer to get context sensitive code completion in an editor upon user request.
+</p>
+
+<p>
+It can be invoked by pressing Ctrl+Space
+</p>
+
+<img src="./images/xcontentassists10.gif.pagespeed.ic.Jv5WVsmGfZ.png" alt="Content Assists">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>15.1. Content assist</h4>
+<div class="outline-text-4" id="text-1-16-2">
+<p>
+For example type syso in the editor of a Java source file and then press Ctrl+Space. This will replace syso with System.out.println("").
+</p>
+
+<p>
+If you have a reference to an object, for example the object person of the type Person and need to see its methods, type person. and press Ctrl+Space.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>15.2. Quick Fix</h4>
+<div class="outline-text-4" id="text-1-16-3">
+<p>
+Whenever Eclipse detects a problem, it will underline the problematic text in the editor. Select the underlined text and press Ctrl+1 to see proposals how to solve this problem. This functionality is called Quick Fix.
+</p>
+
+<p>
+For example type myBoolean = true; If myBoolean is not yet defined, Eclipse will highlight it as an error. Select the variable and press Ctrl+1, Eclipse will suggest creating a field or local variable.
+</p>
+
+<img src="./images/xquickfix10.png.pagespeed.ic.NafZ5uGlm-.png" alt="Using Quickfix Example">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>15.2. Quick Fix</h4>
+<div class="outline-text-4" id="text-1-16-4">
+<p>
+Quick Fix is extremely powerful. For example it allows you to create new local variables and fields as well as new methods and new classes. Or it can put try-catch statements around your exceptions. It can also assign a statement to a variable and much more.
+</p>
+
+<p>
+Quick Fix also gives several options for code changes on code which does not contain errors, e.g. it allows you to convert a local variable to a field.
+</p>
+</div>
+</section>
+</section>
+<section>
+
+<h3>16. Generating code</h3>
+<div class="outline-text-3" id="text-1-17">
+<ul class="org-ul">
+<li>16. Generating code
+</li>
+</ul>
+</div>
+</section>
+<section>
+<section>
+
+<h4>16. Generating code</h4>
+<div class="outline-text-4" id="text-1-17-1">
+<p>
+Eclipse has several possibilities to generate code for you. This can save
+significant time during development.
+</p>
+&nbsp;
+<p>
+For example Eclipse can override methods from superclasses and generate the
+toString(), hashcode() and equals() methods. It can also generate getter and
+setter methods for attributes of your Java class.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>16. Generating code</h4>
+<div class="outline-text-4" id="text-1-17-2">
+<p>
+You can find these options in the Source menu.
+</p>
+
+<img src="./images/xgenerate10.png.pagespeed.ic.gp32fK2XAb.png" alt="Code generation">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>16. Generating code</h4>
+<div class="outline-text-4" id="text-1-17-3">
+<p>
+To test the source generation, create the following class in your de.vogella.eclipse.ide.first project.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-java"><span style="color: #00ffff;">package</span> de.vogella.eclipse.ide.<span style="color: #7fffd4;">first</span>;
+
+<span style="color: #00ffff;">public</span> <span style="color: #00ffff;">class</span> <span style="color: #98fb98;">Person</span> {
+  <span style="color: #00ffff;">private</span> <span style="color: #98fb98;">String</span> <span style="color: #eedd82;">firstName</span>;
+  <span style="color: #00ffff;">private</span> <span style="color: #98fb98;">String</span> <span style="color: #eedd82;">lastName</span>;
+
+}
+</pre>
+</div>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>16. Generating code</h4>
+<div class="outline-text-4" id="text-1-17-4">
+<p>
+Select Source → Generate Constructor from Fields, mark both fields and press the OK button.
+</p>
+
+<img src="./images/xsourcegenerator10.png.pagespeed.ic.BTQ6zl3gTv.png" alt="Generating">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>16. Generating code</h4>
+<div class="outline-text-4" id="text-1-17-5">
+<p>
+Select Source → Generate Getter and Setter, select again both of your fields and then the OK button.
+</p>
+&nbsp;
+<p>
+Select Source → Generate toString()&#x2026;, mark again both fields and press the OK button.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>16. Generating code</h4>
+<div class="outline-text-4" id="text-1-17-6">
+<p>
+You created the following class:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-java"><span style="color: #00ffff;">package</span> de.vogella.eclipse.ide.<span style="color: #7fffd4;">first</span>;
+
+<span style="color: #00ffff;">public</span> <span style="color: #00ffff;">class</span> <span style="color: #98fb98;">Person</span> {
+  <span style="color: #00ffff;">private</span> <span style="color: #98fb98;">String</span> <span style="color: #eedd82;">firstName</span>;
+  <span style="color: #00ffff;">private</span> <span style="color: #98fb98;">String</span> <span style="color: #eedd82;">lastName</span>;
+
+  <span style="color: #00ffff;">public</span> Person(<span style="color: #98fb98;">String</span> <span style="color: #eedd82;">firstName</span>, <span style="color: #98fb98;">String</span> <span style="color: #eedd82;">lastName</span>) {
+    <span style="color: #00ffff;">super</span>();
+    <span style="color: #00ffff;">this</span>.firstName = firstName;
+    <span style="color: #00ffff;">this</span>.lastName = lastName;
+  }
+
+  <span style="color: #00ffff;">public</span> <span style="color: #98fb98;">String</span> <span style="color: #87cefa;">getFirstName</span>() {
+    <span style="color: #00ffff;">return</span> firstName;
+  }
+
+  <span style="color: #00ffff;">public</span> <span style="color: #98fb98;">void</span> <span style="color: #87cefa;">setFirstName</span>(<span style="color: #98fb98;">String</span> <span style="color: #eedd82;">firstName</span>) {
+    <span style="color: #00ffff;">this</span>.firstName = firstName;
+  }
+
+  <span style="color: #00ffff;">public</span> <span style="color: #98fb98;">String</span> <span style="color: #87cefa;">getLastName</span>() {
+    <span style="color: #00ffff;">return</span> lastName;
+  }
+
+  <span style="color: #00ffff;">public</span> <span style="color: #98fb98;">void</span> <span style="color: #87cefa;">setLastName</span>(<span style="color: #98fb98;">String</span> <span style="color: #eedd82;">lastName</span>) {
+    <span style="color: #00ffff;">this</span>.lastName = lastName;
+  }
+
+  <span style="color: #7fffd4;">@Override</span>
+  <span style="color: #00ffff;">public</span> <span style="color: #98fb98;">String</span> <span style="color: #87cefa;">toString</span>() {
+    <span style="color: #00ffff;">return</span> <span style="color: #ffa07a;">"Person [firstName="</span> + firstName + <span style="color: #ffa07a;">", lastName="</span> + lastName
+        + <span style="color: #ffa07a;">"]"</span>;
+  }
+
+}
+</pre>
+</div>
+</div>
+</section>
+</section>
+<section>
+
+<h3>17. Exercise: code generation and content assists</h3>
+<div class="outline-text-3" id="text-1-18">
+<ul class="org-ul">
+<li>17.1. Introduction
+</li>
+<li>17.2. Create project
+</li>
+<li>17.3. Create class
+</li>
+<li>17.4. Create instances
+</li>
+<li>17.5. Write a test class
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>17.1. Introduction</h4>
+<div class="outline-text-4" id="text-1-18-1">
+<p>
+In this exercise you practice the usage of code generation and the usage of the Content Assists functionality.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>17.2. Create project</h4>
+<div class="outline-text-4" id="text-1-18-2">
+<p>
+Create a project called com.vogella.ide.todo.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>17.3. Create class</h4>
+<div class="outline-text-4" id="text-1-18-3">
+<p>
+Create the com.vogella.ide.todo package and the following class.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-java"><span style="color: #00ffff;">package</span> com.vogella.ide.<span style="color: #7fffd4;">todo</span>;
+
+<span style="color: #00ffff;">import</span> <span style="color: #7fffd4;">java</span>.<span style="color: #7fffd4;">util</span>.<span style="color: #98fb98;">Date</span>;
+
+<span style="color: #00ffff;">public</span> <span style="color: #00ffff;">class</span> <span style="color: #98fb98;">Todo</span> {
+
+  <span style="color: #00ffff;">private</span> <span style="color: #98fb98;">long</span> <span style="color: #eedd82;">id</span>;
+  <span style="color: #00ffff;">private</span> <span style="color: #98fb98;">String</span> <span style="color: #eedd82;">summary</span> = <span style="color: #ffa07a;">""</span>;
+  <span style="color: #00ffff;">private</span> <span style="color: #98fb98;">String</span> <span style="color: #eedd82;">description</span> = <span style="color: #ffa07a;">""</span>;
+  <span style="color: #00ffff;">private</span> <span style="color: #98fb98;">boolean</span> <span style="color: #eedd82;">done</span> = <span style="color: #7fffd4;">false</span>;
+  <span style="color: #00ffff;">private</span> <span style="color: #98fb98;">Date</span> <span style="color: #eedd82;">dueDate</span>;
+
+}
+</pre>
+</div>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>17.3. Create class</h4>
+<div class="outline-text-4" id="text-1-18-4">
+<p>
+Select Source → Generate Constructor using Fields&#x2026; to generate a constructor using all fields.
+</p>
+
+<p>
+Use the Source → Generate Getter and Setter to create getters and setters for all fields.
+</p>
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>17.3. Create class</h4>
+<div class="outline-text-4" id="text-1-18-5">
+<p>
+The resulting class should look like the following listing.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-java"><span style="color: #00ffff;">package</span> com.vogella.ide.<span style="color: #7fffd4;">todo</span>;
+
+<span style="color: #00ffff;">import</span> <span style="color: #7fffd4;">java</span>.<span style="color: #7fffd4;">util</span>.<span style="color: #98fb98;">Date</span>;
+
+<span style="color: #00ffff;">public</span> <span style="color: #00ffff;">class</span> <span style="color: #98fb98;">Todo</span> {
+
+  <span style="color: #00ffff;">private</span> <span style="color: #98fb98;">long</span> <span style="color: #eedd82;">id</span>;
+  <span style="color: #00ffff;">private</span> <span style="color: #98fb98;">String</span> <span style="color: #eedd82;">summary</span> = <span style="color: #ffa07a;">""</span>;
+  <span style="color: #00ffff;">private</span> <span style="color: #98fb98;">String</span> <span style="color: #eedd82;">description</span> = <span style="color: #ffa07a;">""</span>;
+  <span style="color: #00ffff;">private</span> <span style="color: #98fb98;">boolean</span> <span style="color: #eedd82;">done</span> = <span style="color: #7fffd4;">false</span>;
+  <span style="color: #00ffff;">private</span> <span style="color: #98fb98;">Date</span> <span style="color: #eedd82;">dueDate</span>;
+
+  <span style="color: #00ffff;">public</span> Todo(<span style="color: #98fb98;">long</span> <span style="color: #eedd82;">id</span>, <span style="color: #98fb98;">String</span> <span style="color: #eedd82;">summary</span>, <span style="color: #98fb98;">String</span> <span style="color: #eedd82;">description</span>, <span style="color: #98fb98;">boolean</span> <span style="color: #eedd82;">done</span>,
+      <span style="color: #98fb98;">Date</span> <span style="color: #eedd82;">dueDate</span>) {
+    <span style="color: #00ffff;">this</span>.id = id;
+    <span style="color: #00ffff;">this</span>.summary = summary;
+    <span style="color: #00ffff;">this</span>.description = description;
+    <span style="color: #00ffff;">this</span>.done = done;
+    <span style="color: #00ffff;">this</span>.dueDate = dueDate;
+
+  }
+
+  <span style="color: #00ffff;">public</span> <span style="color: #98fb98;">long</span> <span style="color: #87cefa;">getId</span>() {
+    <span style="color: #00ffff;">return</span> id;
+  }
+
+  <span style="color: #00ffff;">public</span> <span style="color: #98fb98;">void</span> <span style="color: #87cefa;">setId</span>(<span style="color: #98fb98;">long</span> <span style="color: #eedd82;">id</span>) {
+    <span style="color: #00ffff;">this</span>.id = id;
+  }
+
+  <span style="color: #00ffff;">public</span> <span style="color: #98fb98;">String</span> <span style="color: #87cefa;">getSummary</span>() {
+    <span style="color: #00ffff;">return</span> summary;
+  }
+
+  <span style="color: #00ffff;">public</span> <span style="color: #98fb98;">void</span> <span style="color: #87cefa;">setSummary</span>(<span style="color: #98fb98;">String</span> <span style="color: #eedd82;">summary</span>) {
+    <span style="color: #00ffff;">this</span>.summary = summary;
+  }
+
+  <span style="color: #00ffff;">public</span> <span style="color: #98fb98;">String</span> <span style="color: #87cefa;">getDescription</span>() {
+    <span style="color: #00ffff;">return</span> description;
+  }
+
+  <span style="color: #00ffff;">public</span> <span style="color: #98fb98;">void</span> <span style="color: #87cefa;">setDescription</span>(<span style="color: #98fb98;">String</span> <span style="color: #eedd82;">description</span>) {
+    <span style="color: #00ffff;">this</span>.description = description;
+  }
+
+  <span style="color: #00ffff;">public</span> <span style="color: #98fb98;">boolean</span> <span style="color: #87cefa;">isDone</span>() {
+    <span style="color: #00ffff;">return</span> done;
+  }
+
+  <span style="color: #00ffff;">public</span> <span style="color: #98fb98;">void</span> <span style="color: #87cefa;">setDone</span>(<span style="color: #98fb98;">boolean</span> <span style="color: #eedd82;">done</span>) {
+    <span style="color: #00ffff;">this</span>.done = done;
+  }
+
+  <span style="color: #00ffff;">public</span> <span style="color: #98fb98;">Date</span> <span style="color: #87cefa;">getDueDate</span>() {
+    <span style="color: #00ffff;">return</span> dueDate;
+  }
+
+  <span style="color: #00ffff;">public</span> <span style="color: #98fb98;">void</span> <span style="color: #87cefa;">setDueDate</span>(<span style="color: #98fb98;">Date</span> <span style="color: #eedd82;">dueDate</span>) {
+    <span style="color: #00ffff;">this</span>.dueDate = dueDate;
+  }
+
+}
+</pre>
+</div>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>17.3. Create class</h4>
+<div class="outline-text-4" id="text-1-18-6">
+<p>
+Use Eclipse to generate a toString() method for the Todo class based on the id and summary field. This can be done via the Eclipse menu Source → Generate toString()&#x2026;.
+</p>
+
+<p>
+Also use Eclipse to generate a hashCode() and equals() method based on the id field. This can be done via the Eclipse menu Source → Generate hashCode() and equals()&#x2026;.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>17.4. Create instances</h4>
+<div class="outline-text-4" id="text-1-18-7">
+<p>
+Create a new class called TodoProvider. Create the following static method in your TodoProvider class.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-java"><span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Helper method to get a list </span>
+<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">of Todo objects</span>
+
+<span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Example data, change if you like</span>
+  <span style="color: #00ffff;">public</span> <span style="color: #00ffff;">static</span> <span style="color: #98fb98;">List</span>&lt;Todo&gt; createInitialModel() {
+    ArrayList&lt;Todo&gt; list = <span style="color: #00ffff;">new</span> <span style="color: #98fb98;">ArrayList</span>&lt;Todo&gt;();
+    list.add(createTodo(<span style="color: #ffa07a;">"SWT"</span>, <span style="color: #ffa07a;">"Learn Widgets"</span>));
+    list.add(createTodo(<span style="color: #ffa07a;">"JFace"</span>, <span style="color: #ffa07a;">"Especially Viewers!"</span>));
+    list.add(createTodo(<span style="color: #ffa07a;">"DI"</span>, <span style="color: #ffa07a;">"@Inject looks interesting"</span>));
+    list.add(createTodo(<span style="color: #ffa07a;">"OSGi"</span>, <span style="color: #ffa07a;">"Services"</span>));
+    list.add(createTodo(<span style="color: #ffa07a;">"Compatibility Layer"</span>,<span style="color: #ffa07a;">"Run Eclipse 3.x"</span>));
+    <span style="color: #00ffff;">return</span> list;
+  }
+
+  <span style="color: #00ffff;">private</span> <span style="color: #00ffff;">static</span> <span style="color: #98fb98;">Todo</span> <span style="color: #87cefa;">createTodo</span>(<span style="color: #98fb98;">String</span> <span style="color: #eedd82;">summary</span>, <span style="color: #98fb98;">String</span> <span style="color: #eedd82;">description</span>) {
+    <span style="color: #00ffff;">return</span> <span style="color: #00ffff;">new</span> <span style="color: #98fb98;">Todo</span>(current++, summary, description, <span style="color: #7fffd4;">false</span>, <span style="color: #00ffff;">new</span> <span style="color: #98fb98;">Date</span>());
+  }
+</pre>
+</div>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>17.5. Write a test class</h4>
+<div class="outline-text-4" id="text-1-18-8">
+<p>
+Write another TodoProviderTest class with a public static void main (String[] args) method.
+</p>
+
+<p>
+In your main method call the createInitialModel method and validate that the returned number of items is 5.
+</p>
+
+<p>
+If another number than 5 is returned, throw a RuntimeException. If the correct number is returned, write the String "Correct" to the Console view .
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>17.5. Write a test class</h4>
+<div class="outline-text-4" id="text-1-18-9">
+<p>
+Use Content assist to create the System.out.println() based on syso for you.
+</p>
+
+<img src="./images/xcontentassists10.png.pagespeed.ic.7IjJf_Bixi.png" alt="Content Assists Input">
+
+&nbsp;
+
+<img src="./images/xcontentassists20.png.pagespeed.ic.zKG4pj6OzI.png" alt="Content Assists Result">
+</div>
+</section>
+</section>
+<section>
+
+<h3>18. Refactoring</h3>
+<div class="outline-text-3" id="text-1-19">
+<ul class="org-ul">
+<li>18.1. Refactoring
+</li>
+<li>18.2. Refactoring in Eclipse
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>18.1. Refactoring</h4>
+<div class="outline-text-4" id="text-1-19-1">
+<p>
+Refactoring is the process of restructuring the code without changing its
+behavior. For example renaming a Java class or method is a refactoring activity.
+</p>
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>18.2. Refactoring in Eclipse</h4>
+<div class="outline-text-4" id="text-1-19-2">
+<p>
+Eclipse supports several refactoring activities, for example renaming or moving.
+</p>
+
+&nbsp;
+
+<p>
+For example to use the Rename refactoring, you can right-click on your class (in
+the editor or Package Explorer) and select Refactor → Rename to rename your
+class. Eclipse will make sure that all calls in your Workspace to your class or
+method are renamed.
+</p>
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>18.2. Refactoring in Eclipse</h4>
+<div class="outline-text-4" id="text-1-19-3">
+<p>
+The following screenshot shows how to call the Rename refactoring for a
+class. The cursor is positioned on the class and the context menu is activated
+via a right-click on the class.
+</p>
+
+<img src="./images/xrefactor10.png.pagespeed.ic.apjmai-ZyD.png" alt="Renaming a class">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>18.2. Refactoring in Eclipse</h4>
+<div class="outline-text-4" id="text-1-19-4">
+<p>
+The most important refactoring are listed in the following table.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border">
+<caption>Table 1. Refactoring</caption>
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Refactoring</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Rename</td>
+<td class="left">Rename a variable or class</td>
+</tr>
+
+<tr>
+<td class="left">Extract Method</td>
+<td class="left">Creates a method based on the selected code in the editor</td>
+</tr>
+
+<tr>
+<td class="left">Extract Constant</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>18.2. Refactoring in Eclipse</h4>
+<div class="outline-text-4" id="text-1-19-5">
+<p class="fragment highlight-green">
+Tip
+</p>
+<blockquote>
+<p>
+Lots of refactorings are also available via the Ctrl+1 shortcut (quick fix). Select a certain part of your code and press Ctrl+1 to see possible refactorings which are possible at the select position.
+</p>
+</blockquote>
+
+&nbsp;
+<p>
+Eclipse has many more refactorings. The available options depend on the
+selection in the Java editor. In most cases you should get an idea of the
+performed action by the naming of the refactoring operation.
+</p>
+</div>
+</section>
+
+</section>
+<section>
+
+<h3>19. Exercise:Refactoring</h3>
+<div class="outline-text-3" id="text-1-20">
+<ul class="org-ul">
+<li>19.1. Preparation
+</li>
+<li>19.2. Extract method
+</li>
+<li>19.3. Extract Constant
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>19.1. Preparation</h4>
+<div class="outline-text-4" id="text-1-20-1">
+<p>
+For the next examples change the MyFirstClass class to the following code.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-java"><span style="color: #00ffff;">package</span> de.vogella.eclipse.ide.<span style="color: #7fffd4;">first</span>;
+
+<span style="color: #00ffff;">public</span> <span style="color: #00ffff;">class</span> <span style="color: #98fb98;">MyFirstClass</span> {
+
+  <span style="color: #00ffff;">public</span> <span style="color: #00ffff;">static</span> <span style="color: #98fb98;">void</span> <span style="color: #87cefa;">main</span>(<span style="color: #98fb98;">String</span>[] <span style="color: #eedd82;">args</span>) {
+    System.out.println(<span style="color: #ffa07a;">"Hello Eclipse!"</span>);
+    <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">sum</span> = 0;
+    <span style="color: #00ffff;">for</span> (<span style="color: #98fb98;">int</span> <span style="color: #eedd82;">i</span> = 1; i &lt;= 100; i++) {
+      sum += i;
+    }
+    System.out.println(sum);
+  }
+}
+</pre>
+</div>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>19.2. Extract method</h4>
+<div class="outline-text-4" id="text-1-20-2">
+<p>
+A useful refactoring is to mark code and create a method from the selected
+code. To use this in this exercise, mark the coding of the "for" loop, right
+click on the selection and select Refactoring → Extract Method. Use calculateSum
+as the name of the new method.
+</p>
+
+<img src="./images/xrefactor20.png.pagespeed.ic.ZIMrELmHSO.png" alt="Extract Method refactoring">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>19.2. Extract method</h4>
+<div class="outline-text-4" id="text-1-20-3">
+<p>
+After this refactoring the class should look like the following code.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-java"><span style="color: #00ffff;">package</span> de.vogella.eclipse.ide.<span style="color: #7fffd4;">first</span>;
+
+<span style="color: #00ffff;">public</span> <span style="color: #00ffff;">class</span> <span style="color: #98fb98;">MyFirstClass</span> {
+
+  <span style="color: #00ffff;">public</span> <span style="color: #00ffff;">static</span> <span style="color: #98fb98;">void</span> <span style="color: #87cefa;">main</span>(<span style="color: #98fb98;">String</span>[] <span style="color: #eedd82;">args</span>) {
+    System.out.println(<span style="color: #ffa07a;">"Hello Eclipse!"</span>);
+    <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">sum</span> = 0;
+    sum = calculateSum(sum);
+    System.out.println(sum);
+  }
+
+  <span style="color: #00ffff;">private</span> <span style="color: #00ffff;">static</span> <span style="color: #98fb98;">int</span> <span style="color: #87cefa;">calculateSum</span>(<span style="color: #98fb98;">int</span> <span style="color: #eedd82;">sum</span>) {
+    <span style="color: #00ffff;">for</span> (<span style="color: #98fb98;">int</span> <span style="color: #eedd82;">i</span> = 1; i &lt;= 100; i++) {
+      sum += i;
+    }
+    <span style="color: #00ffff;">return</span> sum;
+  }
+}
+</pre>
+</div>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>19.3. Extract Constant</h4>
+<div class="outline-text-4" id="text-1-20-4">
+<p>
+You can also extract strings and create constants based on the strings. Mark for
+this example the Hello Eclipse! string in your source code, right-click on it
+and select Refactor → Extract Constant. Name your new constant "HELLO".
+</p>
+
+
+<img src="./images/xrefactor30.png.pagespeed.ic.gPQwKGyaAd.png" alt="Extract Constants">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>19.3. Extract Constant</h4>
+<div class="outline-text-4" id="text-1-20-5">
+<p>
+The string is now defined as a constant.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-java"><span style="color: #00ffff;">package</span> de.vogella.eclipse.ide.<span style="color: #7fffd4;">first</span>;
+
+<span style="color: #00ffff;">public</span> <span style="color: #00ffff;">class</span> <span style="color: #98fb98;">MyFirstClass</span> {
+
+  <span style="color: #00ffff;">private</span> <span style="color: #00ffff;">static</span> <span style="color: #00ffff;">final</span> <span style="color: #98fb98;">String</span> <span style="color: #eedd82;">HELLO</span> = <span style="color: #ffa07a;">"Hello Eclipse!"</span>;
+
+  <span style="color: #00ffff;">public</span> <span style="color: #00ffff;">static</span> <span style="color: #98fb98;">void</span> <span style="color: #87cefa;">main</span>(<span style="color: #98fb98;">String</span>[] <span style="color: #eedd82;">args</span>) {
+    System.out.println(HELLO);
+    <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">sum</span> = 0;
+    sum = calculateSum(sum);
+    System.out.println(sum);
+  }
+
+  <span style="color: #00ffff;">private</span> <span style="color: #00ffff;">static</span> <span style="color: #98fb98;">int</span> <span style="color: #87cefa;">calculateSum</span>(<span style="color: #98fb98;">int</span> <span style="color: #eedd82;">sum</span>) {
+    <span style="color: #00ffff;">for</span> (<span style="color: #98fb98;">int</span> <span style="color: #eedd82;">i</span> = 1; i &lt;= 100; i++) {
+      sum += i;
+    }
+    <span style="color: #00ffff;">return</span> sum;
+  }
+}
+</pre>
+</div>
+</div>
+</section>
+</section>
+<section>
+
+<h3>20. Eclipse Shortcuts</h3>
+<div class="outline-text-3" id="text-1-21">
+<p>
+Eclipse provides a lot of shortcuts to work efficiently with the IDE. 
+</p>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>20. Eclipse Shortcuts</h4>
+<div class="outline-text-4" id="text-1-21-1">
+<table border="2" cellspacing="0" cellpadding="15" rules="all" frame="border">
+<caption>Shortcuts</caption>
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Shortcut</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Ctrl + 3</td>
+<td class="left">Quick Access &lt;&#x2013; try this one at least!!</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left">Ctrl + Shift + R</td>
+<td class="left">Search dialog for resources, e.g. text files</td>
+</tr>
+
+<tr>
+<td class="left">Ctrl + Shift + T</td>
+<td class="left">Search dialog for Java Types</td>
+</tr>
+
+<tr>
+<td class="left">Ctrl + E</td>
+<td class="left">Search dialog to select an editor from the currently open editors</td>
+</tr>
+
+<tr>
+<td class="left">Ctrl + F8</td>
+<td class="left">Shortcut for switching perspectives</td>
+</tr>
+
+<tr>
+<td class="left">Ctrl + S</td>
+<td class="left">Saves current editor</td>
+</tr>
+
+<tr>
+<td class="left">Ctrl + 1</td>
+<td class="left">Quickfix; shows potential fixes for warnings, errors or shows possible actions</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>20. Eclipse Shortcuts</h4>
+<div class="outline-text-4" id="text-1-21-2">
+<table border="2" cellspacing="0" cellpadding="15" rules="all" frame="border">
+<caption>Shortcuts</caption>
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Shortcut</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">Ctrl + Space</td>
+<td class="left">Content assist/ code completion</td>
+</tr>
+
+<tr>
+<td class="left">Ctrl + Q</td>
+<td class="left">Goes to the last edited position</td>
+</tr>
+
+<tr>
+<td class="left">Ctrl+ D</td>
+<td class="left">Deletes current line in the editor</td>
+</tr>
+
+<tr>
+<td class="left">Ctrl + Shift + O</td>
+<td class="left">Adjusts the imports statements in the current Java source file</td>
+</tr>
+
+<tr>
+<td class="left">Ctrl + 2, L or F</td>
+<td class="left">Assign statement to new local variable or field</td>
+</tr>
+
+<tr>
+<td class="left">Ctrl + Shift + T</td>
+<td class="left">Open Type Dialog</td>
+</tr>
+
+<tr>
+<td class="left">Ctrl + O</td>
+<td class="left">Shows quick outline of a class</td>
+</tr>
+
+<tr>
+<td class="left">Ctrl + F11</td>
+<td class="left">Run last launched application</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+</section>
+<section>
+
+<h3>21. Using project dependencies</h3>
+<div class="outline-text-3" id="text-1-22">
+<p>
+You can define in Eclipse that a project is dependent on another project. For
+this select your project, right-click on it and select Properties.
+</p>
+&nbsp;
+<p>
+Select Java Build Path and the Projects tab.
+</p>
+
+<img src="./images/xprojectdependencies10.png.pagespeed.ic.B-4JAiOnYy.png" alt="Defining project dependencies">
+</div>
+</section>
+<section>
+
+<h3>21. Using project dependencies</h3>
+<div class="outline-text-3" id="text-1-23">
+<p>
+If you add a project to the build path of another project, you can use its classes in Eclipse.
+</p>
+&nbsp;
+
+<p class="fragment highlight-red">
+This only works within Eclipse, outside Eclipse you need to create Java
+libraries for the projects and add them to the classpath of your Java
+application.
+</p>
+</div>
+</section>
+<section>
+
+<h3>22. Using jars (libraries) in Eclipse</h3>
+<div class="outline-text-3" id="text-1-24">
+<ul class="org-ul">
+<li>22.1. Adding a Java library to the project classpath
+</li>
+<li>22.2. Attach source code to a Java library
+</li>
+<li>22.3. Add Javadoc for a JAR
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>22.1. Adding a Java library to the project classpath</h4>
+<div class="outline-text-4" id="text-1-24-1">
+<p>
+If the libraries should be distributed with your project you can store the JAR files directly in your project.
+</p>
+
+<p>
+For example you can create a new Java project de.vogella.eclipse.ide.jars. Then, create a new folder called lib by right-clicking on your project and selecting New → Folder.
+</p>
+
+<img src="./images/xjar10.png.pagespeed.ic.QfaUzb2b_3.png" alt="Creating a new folder">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>22.1. Adding a Java library to the project classpath</h4>
+<div class="outline-text-4" id="text-1-24-2">
+<p>
+From the menu select File → Import → General → File System. Select the Java
+library you want to import and select the lib folder as target. Alternatively,
+just copy and paste the jar file into the lib folder.
+</p>
+
+&nbsp;
+<p>
+You can add this library to your classpath, right-click on the JAR file and
+select Build Path → Add to Build Path.
+</p>
+&nbsp;
+<p>
+To manage your classpath, right-click on your project and select
+Properties. Under Java Build Path → Libraries select the Add JARs button.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>22.1. Adding a Java library to the project classpath</h4>
+<div class="outline-text-4" id="text-1-24-3">
+<p>
+The following example shows how the result would look like, if the junit-4.4.jar file had been added to the project.
+</p>
+
+<img src="./images/xexternaljars10.gif.pagespeed.ic.7Snooz6oxg.png" alt="Adding a jar to the current project">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>22.1. Adding a Java library to the project classpath</h4>
+<div class="outline-text-4" id="text-1-24-4">
+<p>
+After adding it to the classpath, Eclipse allows you to use the classes
+contained in the JAR file in the project . Outside Eclipse you still need to
+configure your classpath, e.g. via the MANIFEST.MF file.
+</p>
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>22.2. Attach source code to a Java library</h4>
+<div class="outline-text-4" id="text-1-24-5">
+<p>
+You can open any class by positioning the cursor on the class in an editor and
+pressing F3. Alternatively, you can press Ctrl+Shift+T. This will show a dialog
+in which you can enter the class name to open it.
+</p>
+&nbsp;
+
+<p>
+If the source code is not available, the editor will show the bytecode of that class.
+</p>
+&nbsp;
+
+<p>
+This happens for example if you open a class from a the standard Java library
+without attaching the source code to it.
+</p>
+
+&nbsp;
+
+<p>
+To see the source code of such a class, you can attach a source archive or
+source folder to a Java library. Afterwards the editor shows the source instead
+of the bytecode.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>22.2. Attach source code to a Java library</h4>
+<div class="outline-text-4" id="text-1-24-6">
+<p>
+Attaching the source code to a library also allows you to debug this source code.
+</p>
+&nbsp;
+
+<p>
+The Source Attachment dialog can be reached in the Java Build Path page of a
+project. To open this page right-click on a project and select Properties → Java
+Build Path. On the Libraries tab, expand the library's node, select the Source
+attachment attribute and press the Edit button.
+</p>
+&nbsp;
+
+
+<p>
+In the Location path field, enter the path of an archive or a folder containing the source.
+</p>
+
+&nbsp;
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>22.2. Attach source code to a Java library</h4>
+<div class="outline-text-4" id="text-1-24-7">
+<p>
+The following screenshot shows this setting for the standard Java library. If
+you have the Java Development Kit (JDK) installed, you should find the source in
+the JDK installation folder. The file is typically called src.zip.
+</p>
+
+<img src="./images/xadd_source_to_jar.jpg.pagespeed.ic.j6Hms91o4z.jpg" alt="Maintaining the location of the source attachment to an jar">
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>22.3. Add Javadoc for a JAR</h4>
+<div class="outline-text-4" id="text-1-24-8">
+<p>
+It is also possible to add Javadoc to a library which you use.
+</p>
+&nbsp;
+
+<p>
+Download the Javadoc of the JAR file and put it somewhere in your filesystem.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>22.3. Add Javadoc for a JAR</h4>
+<div class="outline-text-4" id="text-1-24-9">
+<p>
+To enter the location of the Javadoc, open the Java Build Path via a right-click on a project and select Properties → Java Build Path. On the Libraries tab expand the library's node, select the Javadoc location attribute and press the Edit button.
+</p>
+
+&nbsp;
+<p>
+Enter the location to the file which contains the Javadoc.
+</p>
+
+<img src="./images/xjavadoc10.png.pagespeed.ic.RkSimyHjos.png" alt="Enter the location to the Javadoc file for a jar file">
+</div>
+</section>
+</section>
+<section>
+
+<h3>23. Updates and installation of plug-ins</h3>
+<div class="outline-text-3" id="text-1-25">
+<p>
+23.1. Eclipse update manager
+23.2. Performing an update and install new features
+23.3. See the installed components
+23.4. Uninstalling components
+23.5. Restarting Eclipse
+</p>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>23.1. Eclipse update manager</h4>
+<div class="outline-text-4" id="text-1-25-1">
+<p>
+The Eclipse IDE contains a software component called Update Manager which allows you to install and update software components. Installable software components are called features and consist of plug-ins.
+</p>
+
+&nbsp;
+
+<p>
+These features are contained in so-called update sites or software sites. An update site contains installable software components and additional configuration files. It can be located on various locations e.g. on a webserver or on the local filesystem.
+</p>
+
+&nbsp;
+<p>
+The configuration files provide aggregated information about the software components in the update site. The update functionality in Eclipse uses this information to determine which software components are available in which version. This allows the Eclipse update functionality to download only components which are new or updated.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>23.2. Performing an update and install new features</h4>
+<div class="outline-text-4" id="text-1-25-2">
+<p class="fragment highlight-red">
+Warning
+</p>
+<blockquote>
+<p>
+If you are behind a network proxy, you have to configure your proxy via the Window → Preferences → General → Network Connection preference setting. Otherwise Eclipse may not able to reach the update sites.
+</p>
+</blockquote>
+
+<p>
+To update your Eclipse installation, select Help → Check for Updates. The system searches for updates of the already installed software components. If it finds updated components, it will ask you to approve the update.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>23.2. Performing an update and install new features</h4>
+<div class="outline-text-4" id="text-1-25-3">
+<p>
+To install a new functionality, select Help → Install New Software&#x2026;.
+</p>
+<img src="./images/xUpdateManager08.png.pagespeed.ic.T7d08x3OTh.png" alt="Selecting an update site in the update manager">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>23.2. Performing an update and install new features</h4>
+<div class="outline-text-4" id="text-1-25-4">
+<p>
+From the Work with list, select or enter an URL from which you would like to install new software components. Entering a new URL adds this URL automatically to the list of available update sites.
+</p>
+
+&nbsp;
+<p>
+To explicitly add a new update site, press the Add button and enter the new URL as well as a name for the new update site.
+</p>
+
+&nbsp;
+<p>
+The following update sites contain the official Eclipse components.
+</p>
+
+<pre class="example">
+* Eclipse 4.3 (Kepler release) http://download.eclipse.org/releases/kepler
+* Eclipse 4.2 (Juno release) http://download.eclipse.org/releases/juno
+</pre>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>23.2. Performing an update and install new features</h4>
+<div class="outline-text-4" id="text-1-25-5">
+<p>
+If you select a valid update site, Eclipse allows you to install the available components. Check the components which you want to install.
+</p>
+
+<img src="./images/xUpdateManager10.png.pagespeed.ic.XeF5BBTPMd.png" alt="Selecting an update site in the update manager">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>23.2. Performing an update and install new features</h4>
+<div class="outline-text-4" id="text-1-25-6">
+<p>
+If you can't find a certain component uncheck the Group items by category checkbox because not all available plug-ins are categorized. If they are not categorized, they will not be displayed, unless the grouping is disabled.
+</p>
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>23.3. See the installed components</h4>
+<div class="outline-text-4" id="text-1-25-7">
+<p>
+To see which components are installed use Help → About Eclipse SDK → Installation Details.
+</p>
+
+<img src="./images/xeclipse_installationdetails10.png.pagespeed.ic.j8C37cJeDa.png" alt="Installation details of Eclipse">
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>23.4. Uninstalling components</h4>
+<div class="outline-text-4" id="text-1-25-8">
+<p>
+If you select Help → About Eclipse SDK and then the Installation Details button, you can uninstall components from your Eclipse IDE.
+</p>
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>23.5. Restarting Eclipse</h4>
+<div class="outline-text-4" id="text-1-25-9">
+<p>
+After an update or an installation of a new software component you should restart Eclipse to make sure that the changes are applied.
+</p>
+</div>
+</section>
+</section>
+<section>
+
+<h3>24. Eclipse Marketplace</h3>
+<div class="outline-text-3" id="text-1-26">
+</div></section>
+<section>
+<section>
+
+<h4>24. Eclipse Marketplace</h4>
+<div class="outline-text-4" id="text-1-26-1">
+<p>
+Eclipse also contains a client which allows installing software components from
+the Eclipse Marketplace client. 
+</p>
+
+&nbsp;
+<p>
+The advantage of this client is that you can
+search for components, discover popular extensions and see descriptions and
+ratings.
+</p>
+&nbsp;
+<p>
+Compared to the update manager you do not have to know the URL for the software
+site which contains the installable software components.
+</p>
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>24. Eclipse Marketplace</h4>
+<div class="outline-text-4" id="text-1-26-2">
+<p>
+Not all Eclipse distributions contain the Marketplace client by default. 
+</p>
+&nbsp;
+<p>
+You may need to install the Marketplace client software component into Eclipse
+before you can use it. 
+</p>
+&nbsp;
+<p>
+The following screenshot shows how to install it from one of the official Eclipse update sites.
+</p>
+
+<img src="./images/xinstallmpc10.png.pagespeed.ic.huyinLgzUX.png" alt="Installing the MPC">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>24. Eclipse Marketplace</h4>
+<div class="outline-text-4" id="text-1-26-3">
+<p>
+To open the Eclipse Marketplace select Help → Eclipse Marketplace.
+</p>
+
+<img src="./images/xmarketclient10.png.pagespeed.ic.dZaQ_OcFui.png" alt="Showing the Eclipse Marketplace Client">
+
+
+<p>
+You can use the Find box to search for components. Pressing the Install button starts the installation process.
+</p>
+</div>
+</section>
+</section>
+<section>
+
+<h3>25. Advanced Eclipse Update manager options</h3>
+<div class="outline-text-3" id="text-1-27">
+<ul class="org-ul">
+<li>25.1. Manual installation of plug-ins (dropins folder)
+</li>
+<li>25.2. Exporting and importing the installed components
+</li>
+<li>25.3. Installing features via the command line 
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>25.1. Manual installation of plug-ins (dropins folder)</h4>
+<div class="outline-text-4" id="text-1-27-1">
+<p>
+Eclipse plug-ins are distributed as jar files. If you want to use an Eclipse
+plug-in directly or do not know the update site for it, you can place it in the
+dropins folder of your Eclipse installation directory. Eclipse monitors this
+directory and during a (re-)start of your IDE, the Eclipse update manager
+installs and removes plug-in based on the files contained in this directory.
+</p>
+
+&nbsp;
+
+<p>
+You should not modify the content of the Eclipse plugins directory directly. If
+you want to install plug-ins put them into the dropins folder, if you want to
+remove it delete the JAR from this folder.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>25.1. Manual installation of plug-ins (dropins folder)</h4>
+<div class="outline-text-4" id="text-1-27-2">
+<p>
+Plug-ins are typically distributed as jar files. To add a plug-in to your
+Eclipse installation, put the plug-in .jar file into the Eclipse dropins folder
+and restart Eclipse. Eclipse should detect the new plug-in and install it for
+you.
+</p>
+
+&nbsp;
+
+<p>
+If you remove plug-ins from the dropins folder and restart Eclipse these
+plug-ins are automatically removed from your Eclipse installation.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>25.2. Exporting and importing the installed components</h4>
+<div class="outline-text-4" id="text-1-27-3">
+<p>
+Eclipse allows you to export a file which describes the installed Eclipse
+components. During the export the user can select which components should be
+included into this description file.
+</p>
+&nbsp;
+<p>
+Other users can import this description file into their Eclipse installation and
+install the components based on this file.
+</p>
+
+&nbsp;
+<p>
+This way Eclipse installation can be kept in sync with each other.
+</p>
+&nbsp;
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>25.2. Exporting and importing the installed components</h4>
+<div class="outline-text-4" id="text-1-27-4">
+<p>
+To export a description file, select 
+</p>
+<p class="fragment highlight-blue">
+File → Export → Install → Installed Software Items to File 
+</p>
+
+<p>
+and select the components which should be included into your description file.
+</p>
+<img src="./images/xdescriptionfile10.png.pagespeed.ic.HCM4m1dgiB.png" alt="Exporting a description file for p2">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>25.2. Exporting and importing the installed components</h4>
+<div class="outline-text-4" id="text-1-27-5">
+<p>
+To install the described components in another Eclipse installation, open the
+exported file with 
+</p>
+<p class="fragment highlight-blue">
+File → Import → Install → Install Software Items from File
+</p>
+
+<p>
+and follow the wizard. The wizard allows you to specify the components which
+should be installed.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>25.3. Installing features via the command line</h4>
+<div class="outline-text-4" id="text-1-27-6">
+<p>
+The Eclipse update manager has a component called director which allows you to install new features via the command line.
+</p>
+&nbsp;
+<p>
+For example the following command will install the components EGit, Mylyn and
+EMF into an Eclipse instance. You need to start this command in the command line
+and it assumes that you are in a directory which contains your Eclipse
+installation in a folder called eclipse.
+</p>
+
+<pre class="example">
+eclipse/eclipse \
+-application org.eclipse.equinox.p2.director \
+-noSplash \
+-repository \
+http://download.eclipse.org/releases/kepler \
+-installIUs \
+org.eclipse.egit.feature.group,\
+org.eclipse.jgit.feature.group,\
+org.eclipse.emf.sdk.feature.group,\
+org.eclipse.mylyn_feature.feature.group,\
+org.eclipse.wst.xml_ui.feature.feature.group,\
+org.eclipse.mylyn.java_feature.feature.group,\
+org.eclipse.mylyn.pde_feature.feature.group
+</pre>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>25.3. Installing features via the command line</h4>
+<div class="outline-text-4" id="text-1-27-7">
+<p>
+The feature names which you need for this operation can be seen on the second
+page of the standard installation dialog of the Eclipse update manager.
+</p>
+
+<img src="./images/xeclipse_installcommandline10.png.pagespeed.ic.a4JmSJbj25.png" alt="Getting the feature name">
+</div>
+</section>
+</section>
+<section>
+
+<h3>26. Eclipse Java development preferences</h3>
+<div class="outline-text-3" id="text-1-28">
+<ul class="org-ul">
+<li>26.1. Configuring the Eclipse IDE
+</li>
+<li>26.2. Automatic placement of semicolon
+</li>
+<li>26.3. Auto escape text pasted into Strings
+</li>
+<li>26.4. Bracket highlighting
+</li>
+<li>26.5. Activate Save Actions
+</li>
+<li>26.6. Type Filters
+</li>
+<li>26.7. Completion overwrites and insert guessed method arguments
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>26.1. Configuring the Eclipse IDE</h4>
+<div class="outline-text-4" id="text-1-28-1">
+<p>
+The behavior of the Eclipse IDE can be controlled via the Preference
+settings. Select Window → Preferences to open the preference settings
+dialog. You can use the filter box to search for specific settings.
+</p>
+
+<img src="./images/xpreferencesettings17.png.pagespeed.ic.MdP1EgX08g.png" alt="Preference settings">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>26.1. Configuring the Eclipse IDE</h4>
+<div class="outline-text-4" id="text-1-28-2">
+<p>
+Correctly configuring Eclipse to your need can largely improve your
+productivity. Most of these preference settings are specific to your workspace.
+</p>
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>26.2. Automatic placement of semicolon</h4>
+<div class="outline-text-4" id="text-1-28-3">
+<p>
+Eclipse can make typing more efficient by placing semicolons at the correct position in your source code.
+</p>
+&nbsp;
+<p>
+In the Preference setting select Java → Editor → Typing. In the Automatically
+insert at correct position selection enable the Semicolons checkbox.
+</p>
+
+<img src="./images/xwayofworking10.png.pagespeed.ic.KRfzoyVpxD.png" alt="Type Assists which allow setting the semicolon to the right position">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>26.2. Automatic placement of semicolon</h4>
+<div class="outline-text-4" id="text-1-28-4">
+<p>
+Afterwards you can type a semicolon in the middle of your code and Eclipse will position it at the end of the current statement.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>26.3. Auto escape text pasted into Strings</h4>
+<div class="outline-text-4" id="text-1-28-5">
+<p>
+Eclipse allows to escape text automatically if it is pasted into a String literal. For example you can copy HTML code and paste it into a String in your Java source. Eclipse would escape the text automatically for you.
+</p>
+
+<p>
+Activate this setting via Window → Preferences → Java → Editor → Typing → In string literals → Escape text when pasting into string literal
+</p>
+
+<p>
+Now you can paste text that should be escaped. The following code snippet shows an example for the resulting code if you paste HTML code containing a link into a string literal.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-java"># paste &lt;a href=<span style="color: #ffa07a;">"tutorials.html"</span>&gt;Tutorials&lt;/a&gt;
+# between <span style="color: #ffa07a;">""</span> of String s = <span style="color: #ffa07a;">""</span>
+
+# results in:
+String s = <span style="color: #ffa07a;">"&lt;a href=\"tutorials.html\"&gt;Tutorials&lt;/a&gt;"</span>;
+</pre>
+</div>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>26.4. Bracket highlighting</h4>
+<div class="outline-text-4" id="text-1-28-6">
+<p>
+You can configure Eclipse to highlight the matching brackets of a code block in the source code editor.
+</p>
+
+<img src="./images/xjdtbrackets10.png.pagespeed.ic.Z6KTtBRDbB.png" alt="Highlight the enclosing brackets in JDT">
+
+<p>
+Before the change you would not see the enclosing brackets afterwards they will be slightly highlighted. This helps to see in which block you are.
+</p>
+
+<img src="./images/xjdtbrackets20.png.pagespeed.ic.Ek6t7sgJmz.png" alt="Without highlight the enclosing brackets in JDT">
+
+<br>
+
+<img src="./images/xjdtbrackets30.png.pagespeed.ic.TdKLOe0dFq.png" alt="With highlight the enclosing brackets in JDT">
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>26.5. Activate Save Actions</h4>
+<div class="outline-text-4" id="text-1-28-7">
+<p>
+Eclipse can format your source code and organize your import statements automatically on each save of the Java editor. This is useful as the Save (shortcut: Ctrl+S) is easy to reach.
+</p>
+
+<p>
+You can find this setting under Java → Editor → Save Actions.
+</p>
+
+<img src="./images/xwayofworking30.png.pagespeed.ic.g0pXb35oxp.png" alt="Save Actions">
+
+<p>
+Import statements will only be automatically created, if Eclipse finds only one valid import. If Eclipse determines more than one valid import, it will not add import statements automatically. In this case you still need to right-click in your editor and select Source → Organize Imports (shortcut: Shift+Ctrl+O).
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>26.6. Type Filters</h4>
+<div class="outline-text-4" id="text-1-28-8">
+<p>
+The Save Actions setting automatically adds required import statements to your source code if there is only one possible import.
+</p>
+
+<p>
+Alternatively or if there are several possible imports, you can use the Organize Imports (shortcut: <b>Ctrl+Shift+O</b>). If there are several alternatives, Eclipse suggests all available packages and the user has to select the right one.
+</p>
+
+<p>
+To following shows the available packages for the List class in the Organize Imports dialog.
+</p>
+
+<img src="./images/ximportpackages10.png.pagespeed.ic.ScsWCdBE3R.png" alt="Dialog for selecting the correct import statement">
+
+<p>
+If you never use certain packages, for example AWT or Swing, you can exclude these packages from Eclipse via the Window → Preferences → Java → Appearance → Type Filters setting.
+</p>
+
+<p>
+Press the Add packages buttons to add a specific package or the Add button to use wildcards. The setting in the following screenshot excludes all AWT packages from the possible imports and other Java search functionality in Eclipse.
+</p>
+
+<img src="./images/ximportpackages20.png.pagespeed.ic.dEaLN03mmX.png" alt="Filtering packages from the Eclipse import">
+
+<p>
+Please note that Eclipse shows (in its default configuration) only the packages that are used in the current workspace. If you want to exclude standard Java packages, you have to create at least one Java project.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>26.7. Completion overwrites and insert guessed method arguments</h4>
+<div class="outline-text-4" id="text-1-28-9">
+<p>
+Eclipse can override existing method calls, in case you trigger a code completion in an existing statement. Eclipse can also try to guess the correct actual parameters for a method call.
+</p>
+
+<img src="./images/xjdt_completion04.png.pagespeed.ic.cCMYzjGroz.png" alt="JDT completion">
+
+
+<p>
+With the first setting you can override methods in the middle of a statement via the Ctrl+Space code assists shortcut.
+</p>
+
+<img src="./images/xjdt_completion08.png.pagespeed.ic.0JQvhWCZx3.png" alt="Trigger code completion">
+
+<p>
+Without this setting you would get the following result, which results in a syntax error.
+</p>
+
+<img src="./images/xjdt_completion20.png.pagespeed.ic.EiLL5uIqQs.png" alt="JDT completion">
+
+<p>
+With this setting you get the following result.
+</p>
+
+<img src="./images/xjdt_completion10.png.pagespeed.ic.RuL-M2VmzX.png" alt="Result">
+</div>
+</section>
+</section>
+<section>
+
+<h3>27. Eclipse code checks</h3>
+<div class="outline-text-3" id="text-1-29">
+<ul class="org-ul">
+<li>27.1. JDT code checks
+</li>
+<li>27.2. Configuring the code settings
+</li>
+<li>27.3. Annotation based Null analysis
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>27.1. JDT code checks</h4>
+<div class="outline-text-4" id="text-1-29-1">
+<p>
+You can define how the Java compiler should react to certain common programming problems, e.g. you can define that an assignment of a variable which has no effect, e.g. x=x, causes an error in Eclipse.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>27.2. Configuring the code settings</h4>
+<div class="outline-text-4" id="text-1-29-2">
+<p>
+You can configure these checks in the Eclipse preferences settings via the Java → Compiler → Errors/Warnings entry.
+</p>
+
+<img src="./images/xeclipsecodequality10.png.pagespeed.ic.EJa-C43pL6.png" alt="Code settings">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>27.3. Annotation based Null analysis</h4>
+<div class="outline-text-4" id="text-1-29-3">
+<p>
+You can enable annotation based null checks in Eclipse via the setting highlighted in the following screenshot.
+</p>
+
+<img src="./images/xeclipsecodequality20.png.pagespeed.ic.A2tNfbnhqy.png" alt="Null annotations">
+
+<p>
+After enabling this setting you can use the @NonNull annotation on method parameters or variable definitions to indicate that these are not allowed to be NULL. You can also use the @Nullable annotation to define that a variable can be NULL.
+</p>
+</div>
+</section>
+</section>
+<section>
+
+<h3>28. More on preference settings</h3>
+<div class="outline-text-3" id="text-1-30">
+<ul class="org-ul">
+<li>28.1. Launch Configuration
+</li>
+<li>28.2. Configuring the editors for a file extension
+</li>
+<li>28.3. Export and import preference settings
+</li>
+<li>28.4. Preference settings per project
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>28.1. Launch Configuration</h4>
+<div class="outline-text-4" id="text-1-30-1">
+<p>
+Eclipse allows to start an application via the Run button in the menu or via the
+Ctrl+F11 shortcut. By default Eclipse will determine if the currently selected
+file is executable and try to start that. If is sometimes confusing, you can
+configure the Eclipse IDE to start always the last started program.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>28.1. Launch Configuration</h4>
+<div class="outline-text-4" id="text-1-30-2">
+<p>
+To configure that select Window → Preferences → Run/Debug → Launching and define that always the previous launched application should be launched.
+</p>
+
+<img src="./images/xandroideclipsesetup10.png.pagespeed.ic.btFa5ad5uK.png" alt="Setting the previous launched application">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>28.2. Configuring the editors for a file extension</h4>
+<div class="outline-text-4" id="text-1-30-3">
+<p>
+The Editors which are available to open a file can be configured via Window →
+Preferences → General → Editors → File Associations.
+</p>
+&nbsp;
+<p>
+The Default button in this preference dialog allows to set the default editor for a certain file extension, e.g. this is the editor which will be used by default if you open a new file with this extension.
+</p>
+&nbsp;
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>28.2. Configuring the editors for a file extension</h4>
+<div class="outline-text-4" id="text-1-30-4">
+<p>
+The other configured editors can be selected, if you right-click on a file and select Open With In the sub-menu you see the available editors. The available editors depend on your Eclipse installation.
+</p>
+
+<img src="./images/xopeneditor27.png.pagespeed.ic.S8dzWb4d3e.png" alt="Open With">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>28.2. Configuring the editors for a file extension</h4>
+<div class="outline-text-4" id="text-1-30-5">
+<p>
+Eclipse will remember the last editor you used to open a file and use this editor again the next time you open the file.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>28.3. Export and import preference settings</h4>
+<div class="outline-text-4" id="text-1-30-6">
+<p>
+You can export your preference settings from one workspace via 
+</p>
+<p class="fragment highlight-blue">
+File → Export → General → Preferences.
+</p>
+
+<p>
+Eclipse does allow to export some preference settings separately but for most of them you have to select the Export all flag.
+</p>
+
+<img src="./images/xeclipse_exportpreferences10.png.pagespeed.ic.OcCtU9nZYj.png" alt="Export your Eclipse preferences.">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>28.3. Export and import preference settings</h4>
+<div class="outline-text-4" id="text-1-30-7">
+<p>
+Similarly you can import them again into another workspace via 
+</p>
+<p class="fragment highlight-blue">
+File → Import → General → Preferences.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>28.4. Preference settings per project</h4>
+<div class="outline-text-4" id="text-1-30-8">
+<p>
+You can also configure certain preference settings on a project basis. To do
+this select your project, right-click on it and select Properties. For example
+on the Java Editor → Save Actions you can select the Enable project specific
+settings checkbox on configure the save action on a project basis.
+</p>
+
+<img src="./images/xpreferencesettingsperproject10.png.pagespeed.ic.ZV9tNkNecq.png" alt="Preference settings per project">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>28.4. Preference settings per project</h4>
+<div class="outline-text-4" id="text-1-30-9">
+<p>
+This creates a .settings folder which you can add to your version control system
+to ensure that every developer uses the same setting.
+</p>
+</div>
+</section>
+
+</section>
+<section>
+
+<h3>29. Setting default preference values</h3>
+<div class="outline-text-3" id="text-1-31">
+<ul class="org-ul">
+<li>29.1. plug_<sub>customization</sub>.ini
+</li>
+<li>29.2. Identifying preference setting values
+</li>
+<li>29.3. Workspace Mechanics for configuring preferences settings
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>29.1. plug_<sub>customization</sub>.ini</h4>
+<div class="outline-text-4" id="text-1-31-1">
+<p>
+You can specify default values for preferences via file which is typically called plug_<sub>customization</sub>.ini.
+</p>
+&nbsp;
+
+<p>
+In this file you can setup default values for preference settings. For example
+the following will setup a default type filter for the java.awt and javax.swing
+package.
+</p>
+&nbsp;
+
+<pre class="example">
+org.eclipse.jdt.ui/org.eclipse.jdt.ui.typefilter.enabled=java.awt.*;javax.swing.*;
+</pre>
+
+&nbsp;
+<p>
+You link to this file via your eclipse.ini file in your Eclipse installation directory.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>29.1. plug_<sub>customization</sub>.ini</h4>
+<div class="outline-text-4" id="text-1-31-2">
+<p>
+The following example eclipse.ini links to the file and it assumes that you
+created the plug_<sub>customization</sub>.ini file in the Eclipse installation directory.
+</p>
+
+<pre class="example">
+-pluginCustomization
+plugin_customization.ini
+-startup
+plugins/org.eclipse.equinox.launcher_1.3.0.v20120522-1813.jar
+--launcher.library
+plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.1.200.v20120522-1813
+-product
+org.eclipse.epp.package.rcp.product
+--launcher.defaultAction
+openFile
+-showsplash
+org.eclipse.platform
+--launcher.XXMaxPermSize
+256m
+--launcher.defaultAction
+openFile
+-vmargs
+-Dosgi.requiredJavaVersion=1.5
+-Dhelp.lucene.tokenizer=standard
+-XX:MaxPermSize=256m
+-Xms40m
+-Xmx512m
+</pre>
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>29.2. Identifying preference setting values</h4>
+<div class="outline-text-4" id="text-1-31-3">
+<p>
+To identify a key for a certain preference setting you can export existing preference settings via the following approach.
+</p>
+
+<ul class="org-ul">
+<li>start a new workspace
+</li>
+<li>change the preference
+</li>
+<li>export all preferences
+</li>
+<li>search the key in the exported file
+</li>
+</ul>
+
+<p class="fragment highlight-green">
+Note
+</p>
+<blockquote>
+<p>
+You need to remove the scope (e.g. <i>instance</i>) before copying it into the plug_<sub>customization</sub>.ini file.
+</p>
+</blockquote>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>29.3. Workspace Mechanics for configuring preferences settings</h4>
+<div class="outline-text-4" id="text-1-31-4">
+<p>
+If you need a consistent setup of preferences for a development team or for multiple Eclipse instances, you can checkout the Workspace Mechanics Open Source project which is hosted under the following URL:
+</p>
+
+<pre class="example">
+https://code.google.com/a/eclipselabs.org/p/workspacemechanic/
+</pre>
+</div>
+</section>
+</section>
+<section>
+
+<h3>30. Using and configuring templates and the code formatter</h3>
+<div class="outline-text-3" id="text-1-32">
+<ul class="org-ul">
+<li>30.1. Templates
+</li>
+<li>30.2. Code Formatter
+</li>
+<li>30.3. Code Templates
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>30.1. Templates</h4>
+<div class="outline-text-4" id="text-1-32-1">
+<p>
+In Eclipse you can create templates for code snippets. This code snippets can be activated via autocomplete (Ctrl+Space).
+</p>
+&nbsp;
+<p>
+For example, assume that you are frequently creating public void name(){} methods. You could define a template which creates the method body for you.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>30.1. Templates</h4>
+<div class="outline-text-4" id="text-1-32-2">
+<p>
+To create a template for this, select the menu Window → Preferences → Java → Editor → Templates.
+</p>
+
+<img src="./images/xtemplates10.gif.pagespeed.ic._TrBycPYos.png" alt="Maintaining code templates">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>30.1. Templates</h4>
+<div class="outline-text-4" id="text-1-32-3">
+<p>
+Press the New button. Create the template shown in the following screenshot.
+</p>
+
+<img src="./images/xtemplates30.gif.pagespeed.ic.Aoi6qTmHdw.png" alt="Creating a new code template">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>30.1. Templates</h4>
+<div class="outline-text-4" id="text-1-32-4">
+<p class="fragment highlight-red">
+${cursor} 
+</p>
+
+&nbsp;
+<p>
+indicates that the cursor should be placed at this position after applying the template.
+</p>
+&nbsp;
+<p>
+In this example the name npm is your keyword for code completion.
+</p>
+
+&nbsp;
+<p>
+Now every time you type npm in the Java editor and press Ctrl+Space the system
+will allow you to replace your keyword with your template.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>30.2. Code Formatter</h4>
+<div class="outline-text-4" id="text-1-32-5">
+<p>
+Eclipse allows you also to specify the rules for the code formatter. These rules
+are used by Eclipse to format your source code. This allows you for example to
+define the settings for the usage of whitespace or for line wrapping.
+</p>
+
+&nbsp;
+
+<p>
+You find the settings under Window → Preferences → Java → Code Style → Formatter.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>30.2. Code Formatter</h4>
+<div class="outline-text-4" id="text-1-32-6">
+<p>
+Press the New button to create a new set of formatting rules or press the Edit button to adjust an exising profile.
+</p>
+
+<img src="./images/xcodeformatter10.png.pagespeed.ic.gu_d-glq97.png" alt="Code formatter">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>30.3. Code Templates</h4>
+<div class="outline-text-4" id="text-1-32-7">
+<p>
+Eclipse can generate source code automatically. In several cases comments are added to the source code.
+</p>
+
+&nbsp;
+
+<p>
+Select Window → Preferences → Java → Code Style → Code Templates to change the code generation templates.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>30.3. Code Templates</h4>
+<div class="outline-text-4" id="text-1-32-8">
+<p>
+In the code tree you have the templates. Select for example Code → Method Body and press the Edit button to edit this template and to remove the "todo" comment.
+</p>
+
+<img src="./images/xcodetemplates10.png.pagespeed.ic.Tebz5_7-8e.png" alt="Removing the todos from the Java code templates">
+</div>
+</section>
+</section>
+<section>
+
+<h3>31. Eclipse command line configuration</h3>
+<div class="outline-text-3" id="text-1-33">
+<ul class="org-ul">
+<li>31.1. Eclipse memory settings
+</li>
+<li>31.2. Eclipse startup parameters
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>31.1. Eclipse memory settings</h4>
+<div class="outline-text-4" id="text-1-33-1">
+<p>
+Your Eclipse installation contains a file called eclipse.ini which allows you to
+configure the memory parameters for the Java virtual machine which runs the
+Eclipse IDE. For example the -Xmx parameter can be used to define how large the
+Java heap size can get. -Xms defines the initial heap size of the Java virtual
+machine.
+</p>
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>31.1. Eclipse memory settings</h4>
+<div class="outline-text-4" id="text-1-33-2">
+<p>
+The following listing shows an example eclipse.ini file. The parameters after
+-vmargs configure the Java virtual machine. On a modern machine assigning 1024
+MB or more to the Java virtual machine is good practice to run Eclipse faster.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">-startup
+plugins/org.eclipse.equinox.launcher_1.3.0.v20120522-1813.jar
+--launcher.library
+plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.1.200.v20120913-144807
+-showsplash
+org.eclipse.platform
+--launcher.XXMaxPermSize
+256m
+--launcher.defaultAction
+openFile
+-vmargs
+-Xms512m
+-Xmx1024m
+-XX:+UseParallelGC
+-XX:<span style="color: #eedd82;">PermSize</span>=256M
+-XX:<span style="color: #eedd82;">MaxPermSize</span>=512M
+</pre>
+</div>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>31.2. Eclipse startup parameters</h4>
+<div class="outline-text-4" id="text-1-33-3">
+<p>
+Eclipse allows you to configure it via startup parameters. This requires that
+you start Eclipse from the command line or that you configure your launcher
+links to include these parameters.
+</p>
+
+&nbsp;
+
+<p>
+The following table shows important parameters.
+</p>
+<table border="2" cellspacing="0" cellpadding="30" rules="all" frame="border">
+<caption>Workspace startup parameters</caption>
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Parameter</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">-data workspace_<sub>path</sub></td>
+<td class="left">Predefine the Eclipse workspace</td>
+</tr>
+
+<tr>
+<td class="left">-showLocation</td>
+<td class="left">Enables the display of the current workspace directory in the header of the running IDE</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>31.2. Eclipse startup parameters</h4>
+<div class="outline-text-4" id="text-1-33-4">
+<p>
+For example if you want to start Eclipse under Microsoft Windows using the c:\temp directory as workspace you can start Eclipse via the following command from the command line.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">c:\eclipse.exe -data <span style="color: #ffa07a;">"c:\temp"</span>
+</pre>
+</div>
+
+<p>
+Depending on your platform you may have to put the path name into double quotes.
+</p>
+
+<p class="fragment highlight-green">
+Note
+</p>
+<blockquote>
+<p>
+You find all available runtime options in the Eclipse help if you search for the "Eclipse runtime options" term.
+</p>
+</blockquote>
+</div>
+</section>
+</section>
+<section>
+
+<h3>32. Local history for files</h3>
+<div class="outline-text-3" id="text-1-34">
+<ul class="org-ul">
+<li>32.1. Local history
+</li>
+<li>32.2. Compare files based on local history
+</li>
+<li>32.3. Replace files based on local history
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>32.1. Local history</h4>
+<div class="outline-text-4" id="text-1-34-1">
+<p>
+Eclipse keeps a local history of files which have changed. Every time an
+editable file is saved, the Eclipse runtime updates the local history of that
+file and logs the changes that have been made. This local history can then be
+accessed and used to revert the file changes or to compare against a previous
+version.
+</p>
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>32.2. Compare files based on local history</h4>
+<div class="outline-text-4" id="text-1-34-2">
+<p>
+To compare the current version of a file with a local version stored by Eclipse,
+right-click on the file and select Compare With → Local History&#x2026; from the
+context menu.
+</p>
+
+&nbsp;
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>32.2. Compare files based on local history</h4>
+<div class="outline-text-4" id="text-1-34-3">
+<p>
+Eclipse opens the History view . If you double-click on an older version of the
+file, the Compare view shows the differences as depicted in the following
+screenshot.
+</p>
+
+<img src="./images/xlocalcompare10.png.pagespeed.ic.XtKy5SRRbK.png" alt="Local compare view">
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>32.3. Replace files based on local history</h4>
+<div class="outline-text-4" id="text-1-34-4">
+<p>
+You can replace files based on the local history. Right-click on the file and
+select Replace With → Local history&#x2026; to start this action.
+</p>
+</div>
+</section>
+
+</section>
+<section>
+
+<h3>33. Organizing your workspace</h3>
+<div class="outline-text-3" id="text-1-35">
+<ul class="org-ul">
+<li>33.1. Working sets and tasks
+</li>
+<li>33.2. Working sets
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>33.1. Working sets and tasks</h4>
+<div class="outline-text-4" id="text-1-35-1">
+<p>
+The Eclipse IDE allows you to organize your project into working sets so that
+you can hide certain resources.
+</p>
+</div>
+</section>
+
+
+</section>
+<section>
+<section>
+
+<h4>33.2. Working sets</h4>
+<div class="outline-text-4" id="text-1-35-2">
+<p>
+You will create more and more projects in your development career. Therefore the
+data in your workspace grows and it is hard to find the right information.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>33.2. Working sets</h4>
+<div class="outline-text-4" id="text-1-35-3">
+<p>
+You can use working sets to organize your displayed projects / data. To set up
+your working set select the Package Explorer → open the drop-down menu → Select
+Working Set&#x2026;
+</p>
+
+<img src="./images/xworkingset10.png.pagespeed.ic.1K6MS7khLR.png" alt="Showing the working set">
+<br>
+<img src="./images/xworkingset20.png.pagespeed.ic.HM0yjaJ4zG.png" alt="Creating new working sets">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>33.2. Working sets</h4>
+<div class="outline-text-4" id="text-1-35-4">
+<p>
+Press the New button on the following dialog to create a working set.
+</p>
+<img src="./images/xworkingset30.png.pagespeed.ic.KhNaYIF9ox.png" alt="Creating new working sets">
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>33.2. Working sets</h4>
+<div class="outline-text-4" id="text-1-35-5">
+<p>
+On the next dialog select Resource, press the Next button and select the projects you would like to see and give it a name.
+</p>
+
+<img src="./images/xworkingset40.png.pagespeed.ic.EGAIrVXiff.png" alt="Creating new working sets">
+<br>
+<img src="./images/xworkingset50.png.pagespeed.ic.tQsx6JBX-C.png" alt="Creating new working sets">
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>33.2. Working sets</h4>
+<div class="outline-text-4" id="text-1-35-6">
+<p>
+You can now filter the displayed files in the Package Explorer based on the created working set.
+</p>
+
+<img src="./images/xworkingset60.png.pagespeed.ic.o2XWLt6GLS.png" alt="Filtering resources for the working set">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>33.2. Working sets</h4>
+<div class="outline-text-4" id="text-1-35-7">
+<p class="fragment highlight-blue">
+Tip
+</p>
+<blockquote>
+<p>
+You can also use the working set to structure your projects in your
+workspace. For this select Working Sets from the context menu of the Package
+Explorer view.
+</p>
+</blockquote>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>33.2. Working sets</h4>
+<div class="outline-text-4" id="text-1-35-8">
+<img src="./images/xworkingset70.png.pagespeed.ic.BXqWxGuWMr.png" alt="Structure by working set">
+<br>
+<img src="./images/xworkingset80.png.pagespeed.ic.IHrkVcClaX.png" alt="Structure by working set">
+</div>
+</section>
+</section>
+<section>
+
+<h3>34. Tasks</h3>
+<div class="outline-text-3" id="text-1-36">
+<ul class="org-ul">
+<li>34.1. Task management
+</li>
+<li>34.2. Own tags
+</li>
+<li>34.3. Mylyn
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>34.1. Task management</h4>
+<div class="outline-text-4" id="text-1-36-1">
+<p>
+You can place markers in the code which you can later access via the Task view .
+</p>
+
+<p>
+You can use <b><i>/ TODO, /</i> FIXME or // XXX</b> tags in your code to add task reminders.
+</p>
+
+<p>
+This indicates a task for Eclipse. You find those in the Task view of Eclipse. Via double-clicking on the task you can navigate to the corresponding code.
+</p>
+
+<p class="fragment highlight-blue">
+You can open this view via Window → Show View → Tasks.
+</p>
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>34.1. Task management</h4>
+<div class="outline-text-4" id="text-1-36-2">
+<p>
+For example, add a TODO to your MyFirstClass class to see it in the Tasks view .
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-java"><span style="color: #00ffff;">package</span> de.vogella.eclipse.ide.<span style="color: #7fffd4;">first</span>;
+
+<span style="color: #00ffff;">public</span> <span style="color: #00ffff;">class</span> <span style="color: #98fb98;">MyFirstClass</span> {
+
+  <span style="color: #00ffff;">private</span> <span style="color: #00ffff;">static</span> <span style="color: #00ffff;">final</span> <span style="color: #98fb98;">String</span> <span style="color: #eedd82;">HELLO</span> = <span style="color: #ffa07a;">"Hello Eclipse!"</span>;
+
+  <span style="color: #00ffff;">public</span> <span style="color: #00ffff;">static</span> <span style="color: #98fb98;">void</span> <span style="color: #87cefa;">main</span>(<span style="color: #98fb98;">String</span>[] <span style="color: #eedd82;">args</span>) {
+    <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">TODO Provide user interface</span>
+    System.out.println(HELLO);
+    <span style="color: #98fb98;">int</span> <span style="color: #eedd82;">sum</span> = 0;
+    sum = calculateSum(sum);
+    System.out.println(sum);
+  }
+
+  <span style="color: #00ffff;">private</span> <span style="color: #00ffff;">static</span> <span style="color: #98fb98;">int</span> <span style="color: #87cefa;">calculateSum</span>(<span style="color: #98fb98;">int</span> <span style="color: #eedd82;">sum</span>) {
+    <span style="color: #00ffff;">for</span> (<span style="color: #98fb98;">int</span> <span style="color: #eedd82;">i</span> = 0; i &lt;= 100; i++) {
+      sum += i;
+    }
+    <span style="color: #00ffff;">return</span> sum;
+  }
+}
+</pre>
+</div>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>34.1. Task management</h4>
+<div class="outline-text-4" id="text-1-36-3">
+<p>
+Close the editor for the MyFirstClass class. If you now double-click on the tasks, the Java editor opens again and the TODO comment is selected.
+</p>
+
+<img src="./images/xtodo10.png.pagespeed.ic.YqwGwA5noG.png" alt="">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>34.1. Task management</h4>
+<div class="outline-text-4" id="text-1-36-4">
+<p class="fragment highlight-green">
+Tip
+</p>
+<blockquote>
+<p>
+The Task view shows only the tasks from the currently open projects. See Section 12.3, “Closing and opening projects”.
+</p>
+</blockquote>
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>34.2. Own tags</h4>
+<div class="outline-text-4" id="text-1-36-5">
+<p>
+You can also define your own tags in the Eclipse preferences via Window → Preferences → Java → Compiler → Task Tags.
+</p>
+
+<img src="./images/xtasktags10.png.pagespeed.ic.aF9fBlt8Nw.png" alt="Defining new tasks tags">
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>34.3. Mylyn</h4>
+<div class="outline-text-4" id="text-1-36-6">
+<p>
+A more advanced tasks management system is available with the Mylyn plug-in.
+</p>
+</div>
+</section>
+
+</section>
+<section>
+
+<h3>35. Eclipse online resources</h3>
+<div class="outline-text-3" id="text-1-37">
+<ul class="org-ul">
+<li>35.1. Online documentations
+</li>
+<li>35.2. Webresources
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>35.1. Online documentations</h4>
+<div class="outline-text-4" id="text-1-37-1">
+<p>
+The Eclipse help system is available from within your Eclipse installation as
+well as online.
+</p>
+&nbsp;
+<p>
+With your running Eclipse IDE you can access the online help via Help → Help
+Contents. This will start a new window which shows you the help topics for your
+currently installed components.
+</p>
+
+<img src="./images/xonlinehelp10.png.pagespeed.ic.8RBFiQmEyM.png" alt="Starting the Eclipse help">
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>35.1. Online documentations</h4>
+<div class="outline-text-4" id="text-1-37-2">
+<p>
+You find the online help for the current release of the Eclipse IDE under the
+following link: Eclipse online help . The online help is version dependent and
+contains the help for all Eclipse projects included in the selected release.
+</p>
+</div>
+</section>
+
+</section>
+<section>
+<section>
+
+<h4>35.2. Webresources</h4>
+<div class="outline-text-4" id="text-1-37-3">
+<p>
+The Eclipse homepage also contains a list of relevant resources about Eclipse
+and Eclipse programming. You find these resources under the following link:
+<a href="http://www.eclipse.org/resources/">Eclipse Resources</a>.
+</p>
+
+<p>
+You also find several tutorials about the Eclipse IDE on the following webpage:
+<a href="http://www.vogella.com/eclipse.html">vogella Eclipse IDE tutorials.</a>
+</p>
+</div>
+</section>
+
+</section>
+<section>
+
+<h3>36. Reporting Eclipse bugs and asking questions</h3>
+<div class="outline-text-3" id="text-1-38">
+<ul class="org-ul">
+<li>36.1. Asking (and answering) questions
+</li>
+<li>36.2. Eclipse Bugs
+</li>
+</ul>
+</div>
+
+</section>
+<section>
+<section>
+
+<h4>36.1. Asking (and answering) questions</h4>
+<div class="outline-text-4" id="text-1-38-1">
+<p>
+Due to the complexity and extensibility of Eclipse you will need additional
+resources to help you solve your specific problems. Fortunately the web contains
+several resources which can help you with your Eclipse problems.
+</p>
+
+&nbsp;
+
+<p>
+Currently the best places to ask questions are the <a href="http://eclipse.org/forums">Eclipse forums</a> and <a href="http://stackoverflow.com/">Stack Overflow</a>.
+</p>
+&nbsp;
+
+<p>
+The Eclipse forums offer several topic specific forums in which you can post and
+answer questions. To post questions in the Eclipse forums you need a valid user
+account in the Eclipse bug tracker. The advantage of the Eclipse forums is that,
+depending on the topic, developers of Eclipse projects (Eclipse committers) are
+also active there and might directly answer your question.
+</p>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>36.1. Asking (and answering) questions</h4>
+<div class="outline-text-4" id="text-1-38-2">
+<p>
+Stack Overflow also requires a user account and its community is also very
+active. Stack Overflow does not have separate forums for specific questions. In
+Stack Overflow you tag your questions with the relevant keyword, e.g. Eclipse
+and people search for them or subscribe to them.
+</p>
+
+&nbsp;
+<p>
+Both places are excellent places to ask questions. If you ask a question it is
+in general good advice to be polite and to give a good error description as this
+motivates people to give you high quality answers.
+</p>
+
+
+<p class="fragment highlight-red">
+Note
+</p>
+<blockquote>
+<p>
+Ensure that you search the forums and mailing lists for solutions for your problem since often somebody else already asked the same question earlier and the answer is already available.
+</p>
+</blockquote>
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>36.2. Eclipse Bugs</h4>
+<div class="outline-text-4" id="text-1-38-3">
+<p>
+Eclipse has a public bug tracker based on Bugzilla from Mozilla. Bugzilla is an Open Source project.
+</p>
+&nbsp;
+
+<p>
+This bugtracker can be found under <a href="https://bugs.eclipse.org/bugs/">https://bugs.eclipse.org/bugs/</a>. Here you can search for existing bugs and review them.
+</p>
+&nbsp;
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>36.2. Eclipse Bugs</h4>
+<div class="outline-text-4" id="text-1-38-4">
+<p>
+To participate actively in the Eclipse bugtracker you need to create a new account. This can be done by pressing the Open a New Account link.
+</p>
+
+<img src="./images/xbugzilla10.png.pagespeed.ic.IQcrkI-R3L.png" alt="Opening a account at Eclipse bugzilla">
+</div>
+</section>
+</section>
+<section>
+<section>
+
+<h4>36.2. Eclipse Bugs</h4>
+<div class="outline-text-4" id="text-1-38-5">
+<p>
+Once you have a user account, you can login to the Eclipse bug tracker. This
+allows you to comment on existing bugs and report new ones.
+</p>
+
+<p class="fragment highlight-red">
+Note
+</p>
+<blockquote>
+<p>
+The user for the Eclipse forum and the bug tracker is the same.
+</p>
+</blockquote>
+</div>
+</section>
+
+</section>
+<section>
+
+<h3>References</h3>
+<div class="outline-text-3" id="text-1-39">
+<p>
+This presentation can be found (except Celepar's details) in the link:
+</p>
+
+<ul class="org-ul">
+<li><a href="http://www.vogella.com/articles/Eclipse/article.html">http://www.vogella.com/articles/Eclipse/article.html</a>
+</li>
+</ul>
+</div>
+</section>
+<section>
+
+<h3>That's All Folks</h3>
+<div class="outline-text-3" id="text-1-40">
+<p>
+Good luck in your journey of learning Java!
+</p>
+</div>
+</section>
+</div>
+</div>
+<script src="./reveal.js/lib/js/head.min.js"></script>
+<script src="./reveal.js/js/reveal.min.js"></script>
+<script>
+
+        		// Full list of configuration options available here:
+        		// https://github.com/hakimel/reveal.js#configuration
+        		Reveal.initialize({
+        			controls: true,
+        			progress: true,
+        			history: false,
+        			center: false,
+
+        			theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        			transition: Reveal.getQueryHash().transition || 'page', // default/cube/page/concave/zoom/linear/fade/none
+
+        			// Optional libraries used to extend on reveal.js
+        			dependencies: [
+        				{ src: './reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+        				{ src: './reveal.js/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        				{ src: './reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        				{ src: './reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+        				{ src: './reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+        				{ src: './reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        				// { src: './reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+        				// { src: './reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        			]
+        		});
+</script>
+</body>
+</html>
